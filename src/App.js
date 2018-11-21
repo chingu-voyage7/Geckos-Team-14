@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import React, { Component } from "react";
+// import logo from './logo.svg';
+import "./App.scss";
+
+import List from "./Components/List/List";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <List />
+        {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
@@ -19,7 +22,7 @@ class App extends Component {
           >
             Learn React
           </a>
-        </header>
+        </header> */}
       </div>
     );
   }
