@@ -24,6 +24,13 @@
   color: $test-color;
 }
 
+.card--list {
+  transform: rotate(180deg);
+}
+.card--list > li {
+  transform: rotate(-180deg);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
