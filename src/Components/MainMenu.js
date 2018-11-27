@@ -1,9 +1,13 @@
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter, faFill, faBrush, faEllipsisH, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 const MainMenu = (props) => {
 
     return (
-        <div className="main-menu">
+        <div className="main-menu main-menu--show">
             <div className="main-menu__section">
                 <h2 className="main-menu__title">Menu</h2>
                 <button 
@@ -12,14 +16,15 @@ const MainMenu = (props) => {
                         e.preventDefault();
                         console.log("Closes Menu");
                     }}
-                    >X</button>
+                    ><FontAwesomeIcon icon={faTimes}/>
+                </button>
             </div>
             <div className="main-menu__section">
                 <ul className="options__list">
-                    <li className="option__item">Change Background</li>
-                    <li className="option__item">Filter Cards</li>
-                    <li className="option__item">Stickers</li>
-                    <li className="option__item">More</li>
+                    <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faBrush}/>Change Background</li>
+                    <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFilter}/>Filter Cards</li>
+                    <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFill}/>Stickers</li>
+                    <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faEllipsisH}/>More</li>
                 </ul>
             </div>
         </div>

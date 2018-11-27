@@ -3,13 +3,21 @@
     background-color: $light-gray;
     width: 340px;
     height: 500px;
-    padding: 0px 6px;
+    padding: 0px $menu-horizontal;
     position: absolute;
+    transition: 0.25s all;
+    top: 45px;
+    right: -50%;
+    z-index: 10;
+}
+
+.main-menu--show {
+    right: 0%;
 }
 
 .main-menu__section  {
     border-bottom: 1px solid $dark-gray;
-    padding: 12px 0px;
+    padding: $menu-vertical 0px;
 }
 
 .main-menu__title {
@@ -25,8 +33,8 @@
     color: $slate-gray;
     font-weight: bold;
     position: absolute;
-    top: 12px;
-    right: 6px;
+    top: $menu-vertical;
+    right: $menu-horizontal;
 }
 
 
@@ -39,7 +47,13 @@
 }
 
 .option__item {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    padding: 6px 0;
+    padding: $menu-horizontal 0;
+}
+
+.icon__item {
+    display: inline-block;
+    padding: 0px $icon-column;
+    color: $slate-gray;
 }
