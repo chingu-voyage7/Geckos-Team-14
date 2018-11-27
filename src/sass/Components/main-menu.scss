@@ -1,0 +1,45 @@
+.main-menu {
+    box-sizing: border-box;
+    background-color: $light-gray;
+    width: 340px;
+    height: 500px;
+    padding: 0px 6px;
+    position: absolute;
+}
+
+.main-menu__section  {
+    border-bottom: 1px solid $dark-gray;
+    padding: 12px 0px;
+}
+
+.main-menu__title {
+    padding: 0;
+    margin: 0;
+    font-size: 1.60rem;
+}
+
+.btn--close-menu {
+    border: none;
+    font-size: 2rem;
+    background: none;
+    color: $slate-gray;
+    font-weight: bold;
+    position: absolute;
+    top: 12px;
+    right: 6px;
+}
+
+
+
+.options__list {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.option__item {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 6px 0;
+}
