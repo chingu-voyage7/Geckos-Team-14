@@ -1,14 +1,21 @@
+.main-menu__wrapper {
+    z-index: 10;
+    overflow-x: hidden;
+    right: 0%;
+    position: absolute;
+    top: 45px;
+}
+
 .main-menu {
     box-sizing: border-box;
     background-color: $light-gray;
     width: 340px;
     height: 500px;
     padding: 0px $menu-horizontal;
-    position: absolute;
-    transition: 1s all;
-    top: 45px;
-    right: -100%;
-    z-index: 10;
+    position: relative;
+    transition: .45s all;
+    right: -110%;
+    
 }
 
 .main-menu--show {
