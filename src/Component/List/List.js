@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CardForm from "../Card/CardForm";
+import { Droppable } from 'react-beautiful-dnd';
 
 import uuid from "uuid";
 import Card from "../Card/Card";
@@ -99,13 +100,23 @@ class List extends Component {
             <h3 onClick={this.handleEditListTitle}>{title}</h3>
           )}
         </div>
+        
         {// if cards array is not empty, show cards and map over them
         cards.length ? (
-          <ul className="card-list">
-            {cards.map(card => (
-              <Card key={card.id} {...card} />
-            ))}
-          </ul>
+          <Droppable droppableId={id}>
+              {(provided) => (
+              <ul 
+                className="card-list"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {cards.map((card, index) => (
+                  <Card key={card.id} cardId={card.id} index={index} {...card} />
+                ))}
+                {provided.placeholder}
+              </ul>)}
+          
+        </Droppable>
         ) : (
           // else, dont' show
           ""

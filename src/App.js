@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DragDropContext } from 'react-beautiful-dnd';
 import "./App.scss";
 
 import List from "./Component/List/List";
@@ -35,21 +36,37 @@ class App extends Component {
     });
   };
 
+  onDragEnd = result => {
+    const { destination, source, draggableId } = result;
+
+    if(!destination) {
+      return;
+    }
+    if(
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+  }
+
   render() {
     const { lists } = this.state;
     return (
-      <div className="board">
-        {// map over lists array
-        lists.map(list => (
-          <List
-            key={list.id}
-            {...list}
-            editListTitle={this.editListTitle}
-            deleteList={this.deleteList}
-          />
-        ))}
-        <button onClick={this.addList}>+ Add List</button>
-      </div>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <div className="board">
+          {// map over lists array
+          lists.map(list => (
+            <List
+              key={list.id}
+              {...list}
+              editListTitle={this.editListTitle}
+              deleteList={this.deleteList}
+            />
+          ))}
+          <button onClick={this.addList}>+ Add List</button>
+        </div>
+      </DragDropContext>
     );
   }
 }
