@@ -1,71 +1,54 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.scss";
+
+import List from "./Component/List/List";
+
+// import Card from "./Component/Card/Card";
 
 // use uuid to generate random id's
 import uuid from "uuid";
 
 class App extends Component {
   state = {
-    cards: [],
-    toggleCardForm: false,
-    cardInputVal: ""
+    lists: []
   };
 
-  // CARD
-  handleToggleCardForm = () => {
-    this.setState({
-      toggleCardForm: !this.toggleCardForm
+  editListTitle = (id, title) => {
+    this.state.lists.map(list => {
+      if (list.id === id) {
+        list.title = title;
+      }
     });
-  };
-  handleCardInputValChange = e => {
-    this.setState({
-      cardInputVal: e.target.value
-    });
-  };
-  handleSubmitCardForm = e => {
-    // prevent form from submitting
-    e.preventDefault();
-    // if value is empty, alert user
-    if (!this.state.cardInputVal) {
-      alert("Please add a card");
-    } else {
-      const newCard = [
-        { id: uuid(), text: this.state.cardInputVal },
-        ...this.state.cards
-      ];
-      this.setState({
-        cards: newCard,
-        cardInputVal: "",
-        toggleCardForm: false
-      });
-    }
+    this.setState({ lists: this.state.lists });
   };
 
-  deleteCard = id => {
-    const filteredCards = this.state.cards.filter(card => card.id !== id);
+  deleteList = id => {
+    const newList = this.state.lists.filter(list => list.id !== id);
     this.setState({
-      cards: filteredCards
+      lists: newList
+    });
+  };
+
+  addList = () => {
+    this.setState({
+      lists: [...this.state.lists, { id: uuid(), title: "" }]
     });
   };
 
   render() {
+    const { lists } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="board">
+        {// map over lists array
+        lists.map(list => (
+          <List
+            key={list.id}
+            {...list}
+            editListTitle={this.editListTitle}
+            deleteList={this.deleteList}
+          />
+        ))}
+        <button onClick={this.addList}>+ Add List</button>
       </div>
     );
   }
