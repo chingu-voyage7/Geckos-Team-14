@@ -1,0 +1,32 @@
+/*** CHECKLIST ***/
+
+.checklist {
+/*** TEMP SETTING FOR TESTING/DEV PURPOSES***/
+width: 300px;
+background-color: $gray;
+}
+
+.checklist__items {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.checklist__item {
+    display: flex;
+    align-items: center;
+}
+
+.checklist__complete {
+    border: 1px solid $slate-gray;
+    width: 20px;
+    height: 20px;
+    margin: 0 $menu-horizontal;
+}
+
+.checklist__name {
+    font-size: $standard-text;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}

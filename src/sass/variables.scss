@@ -20,5 +20,19 @@ $icon-column: 12px;
 
 
 /*** SIZES ***/
+$standard-text: 1.4rem;
 $card-width: 270px; 
+
+/*** BUTTONS ***/
+.btn {
+    padding: $menu-horizontal $menu-vertical;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.btn--submit {
+    background-color: $green;
+    color: #fff;
+}
 
