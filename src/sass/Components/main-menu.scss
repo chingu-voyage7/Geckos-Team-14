@@ -1,0 +1,76 @@
+.main-menu__wrapper {
+    z-index: 10;
+    overflow-x: hidden;
+    right: 0%;
+    position: absolute;
+    top: 45px;
+}
+
+.main-menu {
+    box-sizing: border-box;
+    background-color: $light-gray;
+    width: 340px;
+    height: 500px;
+    padding: 0px $menu-horizontal;
+    position: relative;
+    transition: .45s all;
+    right: -110%;
+    
+}
+
+.main-menu--show {
+    right: 0%;
+}
+
+.main-menu__section  {
+    border-bottom: 1px solid $dark-gray;
+    padding: $menu-vertical 0px;
+}
+
+.main-menu__title {
+    padding: 0;
+    margin: 0;
+    font-size: 1.60rem;
+}
+
+.btn--close-menu {
+    border: none;
+    font-size: 2rem;
+    background: none;
+    color: $slate-gray;
+    font-weight: bold;
+    position: absolute;
+    top: $menu-vertical;
+    right: $menu-horizontal;
+}
+
+
+
+.options__list {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.option__item {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: $menu-horizontal 0;
+}
+
+.item__name {
+    padding: 0;
+    margin: 0;
+}
+
+.activity-menu__title {
+    text-align: left;
+    font-size: 1.4rem;
+}
+
+.icon__item {
+    display: inline-block;
+    color: $slate-gray;
+    padding: 0 $icon-column;
+}

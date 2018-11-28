@@ -3,9 +3,22 @@
 $gray:          #dcdfe3;
 $dark-blue:     #193345;
 $light-gray:    #eff1f2;
+$slate-gray:    #70848f;
+$dark-gray:     #ccd2d7;
+$menu-gray:     #e8ecee;
 $green:         #66a14f;
 $red:           #e65143;
+
+/*** TEST VARIABLES ***/
+$primary-color: $gray;
+$test-color: $green;
+
+/*** SPACING ****/
+$menu-vertical: 12px;
+$menu-horizontal: 8px;
+$icon-column: 12px;
 
 
 /*** SIZES ***/
 $card-width: 270px; 
+
