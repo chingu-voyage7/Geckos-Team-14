@@ -5,6 +5,11 @@ import "./App.scss";
 // use uuid to generate random id's
 import uuid from "uuid";
 
+import './App.scss';
+import BoardNav from './Components/BoardNav/BoardNav.js';
+import MainMenu from './Components/MainMenu.js';
+import TrelloNav from './Components/TrelloNav.js';
+
 class App extends Component {
   state = {
     cards: [],
@@ -52,10 +57,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MainMenu menuState={false}/>
+        <MainMenu menuState={false} />
+        <TrelloNav />
+        <BoardNav />
+        <header className="App-header">
+
+
+        </header>
       </div>
     );
   }
 }
 
 export default App;
+

@@ -1,0 +1,80 @@
+.board-menu {
+    position: absolute;
+    top: 5rem;
+    background-color: $white;
+    border-radius: .3rem;
+    width: 30rem;
+    height: 17rem;
+    padding: 0 12px 12px 12px;
+    color: $med-gray;
+    
+
+    &--header {
+        border-bottom: 1px solid $gray;
+        padding: 1.2rem 0;
+        
+    }
+
+    &--title {
+        text-align: center;
+        display: inline-block;
+        font-weight: 400;
+        width: 100%;
+    }
+
+    &--x {
+        position: absolute;
+        right: 1.2rem;
+        border: none;
+        color: $med-gray;
+        font-size: 1.5rem;
+    }
+
+    &--input {
+        width: 30rem;
+        height: 2rem;
+        padding: 1.5rem .8rem;
+        box-sizing: border-box;
+        font-size: 14px;
+        color: #17394d;
+        background-color: #ebeef0;
+        border: 1px solid #dfe3e6;
+        border-radius: .3rem;
+        margin: .4rem 0 2.5rem 0;
+
+        &:hover {
+            border: 1px solid $med-gray;
+        }
+    }
+
+}
+
+label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b808c;
+    margin: 1rem 0;
+}
+
+.button-green {
+    background-color: $light-green;
+    color: white;
+    width: 10rem;
+    height: 3.5rem;
+    border-radius: 3px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: .5rem;
+    border: none;
+    box-shadow: 0 1px 0 $dark-green;
+
+    &:hover {
+        background-color: $green;
+    }
+}
+
+form {
+    padding: 1.2rem 0;
+}
+
+
