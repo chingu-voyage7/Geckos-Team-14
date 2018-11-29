@@ -57,7 +57,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MainMenu menuState={false} />
         <TrelloNav />
         <BoardNav />
         <header className="App-header">

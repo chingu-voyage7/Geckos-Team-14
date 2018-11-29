@@ -1,10 +1,5 @@
 import React from "react";
 
-const Card = ({ id, text, deleteCard }) => (
-  <li>
-    {text}
-    <button onClick={() => deleteCard(id)} />
-  </li>
-);
+const Card = ({ text }) => <li>{text}</li>;
 
 export default Card;
