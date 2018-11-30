@@ -1,0 +1,27 @@
+.card--form {
+  padding: 0 8px 5px;
+}
+.card--form textarea {
+  width: 100%;
+  border: solid 1px $gray;
+  padding: 8px 5px;
+  border-radius: 3px;
+}
+.card--form button[type="submit"] {
+  background: $dark-green;
+  border: none;
+  color: $white;
+  padding: 8px 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.card--form .cancel-btn {
+  background: none;
+  border: none;
+  margin-left: 8px;
+  color: $slate-gray;
+  font-size: 16px;
+  padding: 5px;
+}
