@@ -80,7 +80,7 @@ class List extends Component {
       cardInputVal,
       toggleCardForm
     } = this.state;
-    const { id, title, editListTitle } = this.props;
+    const { id, title, editTitle } = this.props;
     return (
       <div className="list">
         <div className="list--title">
@@ -90,7 +90,7 @@ class List extends Component {
               <input
                 type="text"
                 value={title}
-                onChange={e => editListTitle(id, e.target.value)}
+                onChange={e => editTitle(id, e.target.value)}
               />
               {// if editing list title, no need to show "Add List" button
               !isEdit && <button>Add List</button>}
@@ -121,8 +121,8 @@ class List extends Component {
         )}
 
         {// if form is not visible, user can click "Add a card" to toggle form
-        !toggleCardForm && (
-          <p style={{ cursor: "pointer" }} onClick={this.handleToggleCardForm}>
+        submittedListTitle && !toggleCardForm && (
+          <p className="add-card-btn" onClick={this.handleToggleCardForm}>
             + <span>Add a card...</span>
           </p>
         )}
