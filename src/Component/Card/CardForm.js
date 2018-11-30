@@ -6,16 +6,17 @@ const CardForm = ({
   handleSubmitCardForm,
   handleToggleCardForm
 }) => (
-  <form onSubmit={handleSubmitCardForm}>
+  <form class="card--form" onSubmit={handleSubmitCardForm}>
     <textarea
-      cols="30"
-      rows="10"
+      rows="3"
       value={cardInputVal}
       onChange={handleCardInputValChange}
       placeholder="Enter a title for this card..."
     />
     <button type="submit">Add Card</button>
-    <button onClick={handleToggleCardForm}>X</button>
+    <button className="cancel-btn" onClick={handleToggleCardForm}>
+      X
+    </button>
   </form>
 );
 
