@@ -4,7 +4,7 @@
     background-color: $white;
     border-radius: .3rem;
     width: 30rem;
-    height: 17rem;
+    height: 18rem;
     padding: 0 12px 12px 12px;
     color: $med-gray;
     
@@ -31,16 +31,16 @@
     }
 
     &--input {
-        width: 30rem;
+        width: 100%;
         height: 2rem;
         padding: 1.5rem .8rem;
-        box-sizing: border-box;
+        
         font-size: 14px;
         color: #17394d;
         background-color: #ebeef0;
         border: 1px solid #dfe3e6;
         border-radius: .3rem;
-        margin: .4rem 0 2.5rem 0;
+        margin: .4rem 0 2rem 0;
 
         &:hover {
             border: 1px solid $med-gray;
