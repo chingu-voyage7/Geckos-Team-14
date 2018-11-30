@@ -5,63 +5,62 @@ import "./App.scss";
 // use uuid to generate random id's
 import uuid from "uuid";
 
-import './App.scss';
-import BoardNav from './Components/BoardNav/BoardNav.js';
-import MainMenu from './Components/MainMenu.js';
-import TrelloNav from './Components/TrelloNav.js';
+import "./App.scss";
+import BoardNav from "./Components/BoardNav/BoardNav.js";
+import MainMenu from "./Components/MainMenu.js";
+import TrelloNav from "./Components/TrelloNav.js";
+
+import List from "./Component/List/List";
 
 class App extends Component {
   state = {
-    cards: [],
-    toggleCardForm: false,
-    cardInputVal: ""
+    lists: []
   };
 
-  // CARD
-  handleToggleCardForm = () => {
-    this.setState({
-      toggleCardForm: !this.toggleCardForm
+  // edit list title
+  editTitle = (id, title) => {
+    const { lists } = this.state;
+    lists.map(list => {
+      if (list.id === id) {
+        list.title = title;
+      }
     });
-  };
-  handleCardInputValChange = e => {
-    this.setState({
-      cardInputVal: e.target.value
-    });
-  };
-  handleSubmitCardForm = e => {
-    // prevent form from submitting
-    e.preventDefault();
-    // if value is empty, alert user
-    if (!this.state.cardInputVal) {
-      alert("Please add a card");
-    } else {
-      const newCard = [
-        { id: uuid(), text: this.state.cardInputVal },
-        ...this.state.cards
-      ];
-      this.setState({
-        cards: newCard,
-        cardInputVal: "",
-        toggleCardForm: false
-      });
-    }
+    this.setState({ lists });
   };
 
-  deleteCard = id => {
-    const filteredCards = this.state.cards.filter(card => card.id !== id);
+  // WILL USE ON MODAL
+  // deleteList = id => {
+  //   const { lists } = this.state;
+  //   const newList = lists.filter(list => list.id !== id);
+  //   this.setState({
+  //     lists: newList
+  //   });
+  // };
+
+  addList = () => {
+    const { lists } = this.state;
     this.setState({
-      cards: filteredCards
+      lists: [...lists, { id: uuid(), title: "" }]
     });
   };
 
   render() {
+    const { lists } = this.state;
+    // if lists array is not empty, show and map over it. else, don't show
+    const listComponent = lists.length
+      ? lists.map(list => (
+          <List key={list.id} {...list} editTitle={this.editTitle} />
+        ))
+      : "";
     return (
       <div className="App">
         <TrelloNav />
         <BoardNav />
         <header className="App-header">
-
-
+          {listComponent}
+          <button className="add-list-btn" onClick={this.addList}>
+            + Add another list
+          </button>
         </header>
       </div>
     );
@@ -69,4 +68,3 @@ class App extends Component {
 }
 
 export default App;
-
