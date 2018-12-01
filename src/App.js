@@ -13,9 +13,37 @@ import TrelloNav from "./Components/TrelloNav.js";
 import List from "./Component/List/List";
 
 class App extends Component {
+  // state = {
+  //   lists: []
+  // };
   state = {
-    lists: []
-  };
+      cards: {
+        "task-1": { id: "task-1", content: "Take out the garbage" },
+        "task-2": { id: "task-2", content: "Watch my favorite show" },
+        "task-3": { id: "task-3", content: "Charge my phone" },
+        "task-4": { id: "task-4", content: "Cook dinner" },
+        "task-5": { id: "task-5", content: "Refactor Code" },
+        "task-6": { id: "task-6", content: "learn to code" }
+      },
+      lists: {
+        one: {
+          id: uuid(),
+          title: "To do",
+          taskIds: ["task-3", "task-4"]
+        },
+        two: {
+          id: uuid(),
+          title: "Done",
+          taskIds: ["task-1", "task-2"]
+        },
+        three: {
+          id: uuid(),
+          title: "Coding",
+          taskIds: ["task-5", "task-6"]
+        }
+      },
+      listOrder: ["one", "two", "three"]
+    };
 
   // edit list title
   editTitle = (id, title) => {
@@ -45,26 +73,50 @@ class App extends Component {
   };
 
   render() {
-    const { lists } = this.state;
-    // if lists array is not empty, show and map over it. else, don't show
-    const listComponent = lists.length
-      ? lists.map(list => (
-          <List key={list.id} {...list} editTitle={this.editTitle} />
-        ))
-      : "";
+    const { cards, lists, listOrder } = this.state;
+    // const { lists } = this.state;
+    // // if lists array is not empty, show and map over it. else, don't show
+    // const listComponent = lists.length
+    //   ? lists.map(list => (
+    //       <List key={list.id} {...list} editTitle={this.editTitle} />
+    //     ))
+    //     : "";
     return (
       <div className="App">
         <TrelloNav />
         <BoardNav />
         <header className="App-header">
-          {listComponent}
-          <button className="add-list-btn" onClick={this.addList}>
-            + Add another list
-          </button>
-        </header>
+           {listOrder && listOrder.map(key=> (
+             <List key={lists[key].id} {...lists[key]} 
+              cardList={lists[key].taskIds.map(taskName => cards[taskName])}/>
+           ))}
+         </header>
       </div>
     );
   }
+  
+
+//   render() {
+//     const { lists } = this.state;
+//     // if lists array is not empty, show and map over it. else, don't show
+//     const listComponent = lists.length
+//       ? lists.map(list => (
+//           <List key={list.id} {...list} editTitle={this.editTitle} />
+//         ))
+//       : "";
+//     return (
+//       <div className="App">
+//         <TrelloNav />
+//         <BoardNav />
+//         <header className="App-header">
+//           {listComponent}
+//           <button className="add-list-btn" onClick={this.addList}>
+//             + Add another list
+//           </button>
+//         </header>
+//       </div>
+//     );
+//   }
 }
 
 export default App;
