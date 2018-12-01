@@ -85,12 +85,12 @@ class App extends Component {
       <div className="App">
         <TrelloNav />
         <BoardNav />
-        <header className="App-header">
+        <div className="list-board">
            {listOrder && listOrder.map(key=> (
              <List key={lists[key].id} {...lists[key]} 
               cardList={lists[key].taskIds.map(taskName => cards[taskName])}/>
            ))}
-         </header>
+         </div>
       </div>
     );
   }
