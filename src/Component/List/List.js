@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Droppable } from 'react-beautiful-dnd';
 import CardForm from "../Card/CardForm";
 
 import Card from "../Card/Card";
@@ -93,11 +94,20 @@ class List extends Component {
         </div>
 
         {
-          <ul className="card-list">
-            {cardList.map(card => (
-              <Card key={card.id} content={card.content} />
-            ))}
-          </ul>
+          <Droppable droppableId={this.props.listId}>
+            {provided => (
+              <ul 
+                className="card-list"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {cardList.map((card, index)=> (
+                  <Card key={card.id} cardId={card.id} content={card.content} index={index} />
+                ))}
+                {provided.placeholder}
+              </ul>)
+          }
+          </Droppable>
         }
 
         {// if showCardForm is true, show form
