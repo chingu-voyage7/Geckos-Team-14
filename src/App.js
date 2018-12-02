@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext } from 'react-beautiful-dnd';
-<<<<<<< HEAD
 import logo from "./logo.svg";
-=======
->>>>>>> e043e9b54a0fe58c4180ecaf52a23782cdb5ad6a
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -115,7 +112,6 @@ class App extends Component {
     ) {
       return;
     }
-<<<<<<< HEAD
 
     const dropId = source.droppableId;
     const list = this.state.lists[dropId];
@@ -127,14 +123,12 @@ class App extends Component {
     this.setState({
       lists
     })
-=======
->>>>>>> e043e9b54a0fe58c4180ecaf52a23782cdb5ad6a
+
   }
 
   render() {
     const { lists, cards, listOrder } = this.state;
     return (
-<<<<<<< HEAD
       <div className="App">
         <TrelloNav />
         <BoardNav />
@@ -161,22 +155,7 @@ class App extends Component {
           </button>
         </header>
       </div>
-=======
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="board">
-          {// map over lists array
-          lists.map(list => (
-            <List
-              key={list.id}
-              {...list}
-              editListTitle={this.editListTitle}
-              deleteList={this.deleteList}
-            />
-          ))}
-          <button onClick={this.addList}>+ Add List</button>
-        </div>
-      </DragDropContext>
->>>>>>> e043e9b54a0fe58c4180ecaf52a23782cdb5ad6a
+
     );
   }
 }
