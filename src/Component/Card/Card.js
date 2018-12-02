@@ -1,10 +1,6 @@
 import React from "react";
 import { Draggable } from 'react-beautiful-dnd';
 
-//const Card = ({ content }) => <li className="card">{content}</li>;
-
-//export default Card;
-
 export default class Card extends React.Component {
     render() {
         return (

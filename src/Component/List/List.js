@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Droppable } from 'react-beautiful-dnd';
 import CardForm from "../Card/CardForm";
+import { Droppable } from 'react-beautiful-dnd';
 
 import Card from "../Card/Card";
 
@@ -92,15 +93,24 @@ class List extends Component {
             <h3 onClick={this.toggleTitleForm}>{title}</h3>
           )}
         </div>
+<<<<<<< HEAD
 
         {
           <Droppable droppableId={this.props.listId}>
             {provided => (
+=======
+        
+        {// if cards array is not empty, show cards and map over them
+        cards.length ? (
+          <Droppable droppableId={id}>
+              {(provided) => (
+>>>>>>> e043e9b54a0fe58c4180ecaf52a23782cdb5ad6a
               <ul 
                 className="card-list"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
+<<<<<<< HEAD
                 {cardList.map((card, index)=> (
                   <Card key={card.id} cardId={card.id} content={card.content} index={index} />
                 ))}
@@ -112,6 +122,21 @@ class List extends Component {
 
         {// if showCardForm is true, show form
         showCardForm && (
+=======
+                {cards.map((card, index) => (
+                  <Card key={card.id} cardId={card.id} index={index} {...card} />
+                ))}
+                {provided.placeholder}
+              </ul>)}
+          
+        </Droppable>
+        ) : (
+          // else, dont' show
+          ""
+        )}
+        {// if toggleCardForm is true, show form
+        toggleCardForm && (
+>>>>>>> e043e9b54a0fe58c4180ecaf52a23782cdb5ad6a
           <CardForm
             cardVal={cardVal}
             handleCardValChange={this.handleCardValChange}
