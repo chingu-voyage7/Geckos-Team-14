@@ -95,7 +95,12 @@ class List extends Component {
         {
           <ul className="card-list">
             {cardList.map(card => (
-              <Card key={card.id} content={card.content} />
+              <Card key={card.id} 
+              id={card.id}
+              content={card.content}  
+              deleteCard={this.props.deleteCard}
+              list={this.props.list}  
+              />
             ))}
           </ul>
         }
@@ -116,6 +121,15 @@ class List extends Component {
             + <span>Add a card...</span>
           </p>
         )}
+        <button
+          className="btn btn--delete-list"
+          onClick={e => {
+            e.preventDefault();
+            this.props.deleteList(id);
+          }}
+        >
+          Delete List
+        </button>
       </div>
     );
   }
