@@ -7,15 +7,19 @@ import uuid from "uuid";
 
 import "./App.scss";
 import BoardNav from "./Components/BoardNav/BoardNav.js";
-import MainMenu from "./Components/MainMenu.js";
+
 import TrelloNav from "./Components/TrelloNav.js";
 
 import List from "./Component/List/List";
+
+
 
 class App extends Component {
   state = {
     lists: []
   };
+
+  
 
   // edit list title
   editTitle = (id, title) => {
@@ -45,6 +49,7 @@ class App extends Component {
   };
 
   render() {
+    
     const { lists } = this.state;
     // if lists array is not empty, show and map over it. else, don't show
     const listComponent = lists.length
@@ -54,6 +59,7 @@ class App extends Component {
       : "";
     return (
       <div className="App">
+      
         <TrelloNav />
         <BoardNav />
         <header className="App-header">

@@ -4,6 +4,11 @@
     right: 0%;
     position: absolute;
     top: 45px;
+    display: block;
+
+    &--hide {
+        display: none;
+    }
 }
 
 .main-menu {
@@ -28,12 +33,16 @@
 }
 
 .main-menu__title {
-    padding: 0;
-    margin: 0;
+    
     font-size: 1.60rem;
+
+    font-weight: 700;
+    color: $dark-blue;
+    text-align: center;
+    
 }
 
-.btn--close-menu {
+.btn--close-menu  {
     border: none;
     font-size: 2rem;
     background: none;
@@ -44,6 +53,16 @@
     right: $menu-horizontal;
 }
 
+.main-menu-arrow {
+    border: none;
+    font-size: 2rem;
+    background: none;
+    color: $slate-gray;
+    font-weight: bold;
+    position: absolute;
+    top: $menu-vertical;
+    left: 2rem;
+}
 
 
 .options__list {
