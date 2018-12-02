@@ -1,5 +1,5 @@
 import React from "react";
 
-const Card = ({ text }) => <li className="card">{text}</li>;
+const Card = ({ content }) => <li className="card">{content}</li>;
 
 export default Card;
