@@ -16,54 +16,106 @@ import List from "./Component/List/List";
 
 class App extends Component {
   state = {
-    lists: []
+    cards: {},
+    lists: {},
+    listOrder: []
+  };
+
+  addList = () => {
+    const { lists } = this.state;
+    const listId = uuid().replace(/-/g, "");
+    const newList = Object.assign(lists, {
+      [listId]: {
+        id: listId,
+        title: "",
+        taskIds: []
+      }
+    });
+    this.setState({
+      lists: newList
+    });
+
+    // add the created list inside the listOrder array
+    for (let list in lists) {
+      this.setState({
+        listOrder: [...this.state.listOrder, list]
+      });
+    }
   };
 
   
 
   // edit list title
-  editTitle = (id, title) => {
+  handleTitleChange = (id, e) => {
     const { lists } = this.state;
-    lists.map(list => {
-      if (list.id === id) {
-        list.title = title;
+    for (let list in lists) {
+      if (lists[list].id == id) {
+        lists[list].title = e;
       }
+    }
+    this.setState({
+      lists: lists
     });
-    this.setState({ lists });
   };
 
-  // WILL USE ON MODAL
-  // deleteList = id => {
-  //   const { lists } = this.state;
-  //   const newList = lists.filter(list => list.id !== id);
-  //   this.setState({
-  //     lists: newList
-  //   });
-  // };
+  addCard = (id, e) => {
+    const { cards, lists } = this.state;
+    // generate card id
+    const cardId = uuid().replace(/-/g, "");
+    // make a new card
+    const newCard = {
+      [cardId]: {
+        id: cardId,
+        content: e
+      }
+    };
 
-  addList = () => {
-    const { lists } = this.state;
+    // add the new card inside the cards object
+    Object.assign(cards, newCard);
+
     this.setState({
-      lists: [...lists, { id: uuid(), title: "" }]
+      cards
+    });
+    // loop through lists object
+    for (let list in lists) {
+      if (lists.hasOwnProperty(list)) {
+        // check if id's are equal
+        if (lists[list].id === id) {
+          // loop through cards object
+          for (let card in newCard) {
+            // add card to taskIds array
+            lists[list].taskIds = [...lists[list].taskIds, card];
+          }
+        }
+      }
+    }
+    this.setState({
+      lists
     });
   };
 
   render() {
-    
-    const { lists } = this.state;
-    // if lists array is not empty, show and map over it. else, don't show
-    const listComponent = lists.length
-      ? lists.map(list => (
-          <List key={list.id} {...list} editTitle={this.editTitle} />
-        ))
-      : "";
+    const { lists, cards, listOrder } = this.state;
     return (
       <div className="App">
       
         <TrelloNav />
         <BoardNav />
         <header className="App-header">
-          {listComponent}
+          {listOrder.map(listId => {
+            const list = lists[listId];
+            const cardList = list.taskIds.map(id => cards[id]);
+            return (
+              <List
+                key={list.id}
+                list={list}
+                cardList={cardList}
+                handleTitleChange={this.handleTitleChange}
+                addCard={this.addCard}
+              />
+            );
+          })}
+
           <button className="add-list-btn" onClick={this.addList}>
             + Add another list
           </button>

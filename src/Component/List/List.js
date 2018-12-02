@@ -1,65 +1,62 @@
 import React, { Component } from "react";
 import CardForm from "../Card/CardForm";
 
-import uuid from "uuid";
 import Card from "../Card/Card";
 
 class List extends Component {
   state = {
     isEdit: false,
-    submittedListTitle: false,
-    cards: [],
-    toggleCardForm: false,
-    cardInputVal: ""
+    isSubmitted: false,
+    showCardForm: false,
+    cardVal: ""
   };
 
-  handleEditListTitle = () => {
+  toggleTitleForm = () => {
+    const { isEdit } = this.state;
     this.setState({
-      submittedListTitle: false,
-      isEdit: true
+      isEdit: !isEdit
     });
   };
 
-  handleSubmitListTitle = e => {
-    // prevent form from submitting
+  saveListTitle = e => {
     e.preventDefault();
-    // if value is empty, alert user
-    if (!this.props.title) {
-      alert("Please name your list");
-    } else {
+    // if empty alert user
+    if (!this.props.list.title) {
+      alert("List cannot be blank");
+    }
+    // else set isEdit to false
+    else {
       this.setState({
-        submittedListTitle: true,
-        isEdit: false
+        isEdit: false,
+        isSubmitted: true
       });
     }
   };
 
   // CARD
-  handleToggleCardForm = () => {
+  toggleCardForm = () => {
+    const { showCardForm } = this.state;
     this.setState({
-      toggleCardForm: !this.state.toggleCardForm
+      showCardForm: !showCardForm
     });
   };
-  handleCardInputValChange = e => {
+
+  handleCardValChange = e => {
     this.setState({
-      cardInputVal: e.target.value
+      cardVal: e.target.value
     });
   };
-  handleSubmitCardForm = e => {
-    // prevent form from submitting
+
+  addToCard = e => {
     e.preventDefault();
-    // if value is empty, alert user
-    if (!this.state.cardInputVal) {
-      alert("Please add a card");
+    const { cardVal } = this.state;
+    // if cardVal is empty, alert user
+    if (!cardVal) {
+      alert("please add a card");
     } else {
-      const newCard = [
-        { id: uuid(), text: this.state.cardInputVal },
-        ...this.state.cards
-      ];
+      this.props.addCard(this.props.list.id, cardVal);
       this.setState({
-        cards: newCard,
-        cardInputVal: "",
-        toggleCardForm: false
+        cardVal: ""
       });
     }
   };
@@ -73,56 +70,49 @@ class List extends Component {
   // };
 
   render() {
-    const {
-      isEdit,
-      submittedListTitle,
-      cards,
-      cardInputVal,
-      toggleCardForm
-    } = this.state;
-    const { id, title, editTitle } = this.props;
+    const { isEdit, isSubmitted, showCardForm, cardVal } = this.state;
+    const { id, title } = this.props.list;
+    const { handleTitleChange, cardList } = this.props;
     return (
       <div className="list">
         <div className="list--title">
           {// if form has not been submitted, show form. Also, show form if isEdit is true
-          !submittedListTitle || isEdit ? (
-            <form onSubmit={this.handleSubmitListTitle}>
+          !isSubmitted || isEdit ? (
+            <form onSubmit={this.saveListTitle}>
               <input
                 type="text"
                 value={title}
-                onChange={e => editTitle(id, e.target.value)}
+                onChange={e => handleTitleChange(id, e.target.value)}
               />
               {// if editing list title, no need to show "Add List" button
               !isEdit && <button>Add List</button>}
             </form>
           ) : (
-            <h3 onClick={this.handleEditListTitle}>{title}</h3>
+            <h3 onClick={this.toggleTitleForm}>{title}</h3>
           )}
         </div>
-        {// if cards array is not empty, show cards and map over them
-        cards.length ? (
+
+        {
           <ul className="card-list">
-            {cards.map(card => (
-              <Card key={card.id} {...card} />
+            {cardList.map(card => (
+              <Card key={card.id} content={card.content} />
             ))}
           </ul>
-        ) : (
-          // else, dont' show
-          ""
-        )}
-        {// if toggleCardForm is true, show form
-        toggleCardForm && (
+        }
+
+        {// if showCardForm is true, show form
+        showCardForm && (
           <CardForm
-            cardInputVal={cardInputVal}
-            handleCardInputValChange={this.handleCardInputValChange}
-            handleSubmitCardForm={this.handleSubmitCardForm}
-            handleToggleCardForm={this.handleToggleCardForm}
+            cardVal={cardVal}
+            handleCardValChange={this.handleCardValChange}
+            addToCard={this.addToCard}
+            toggleCardForm={this.toggleCardForm}
           />
         )}
 
-        {// if form is not visible, user can click "Add a card" to toggle form
-        submittedListTitle && !toggleCardForm && (
-          <p className="add-card-btn" onClick={this.handleToggleCardForm}>
+        {// if isSubmitted is true, user can click "Add a card" to toggle form
+        isSubmitted && !showCardForm && (
+          <p className="add-card-btn" onClick={this.toggleCardForm}>
             + <span>Add a card...</span>
           </p>
         )}
