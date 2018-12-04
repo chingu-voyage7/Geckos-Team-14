@@ -12,6 +12,7 @@ import TrelloNav from "./Components/TrelloNav.js";
 
 import List from "./Component/List/List";
 
+
 class App extends Component {
   state = {
     cards: {},
@@ -39,6 +40,35 @@ class App extends Component {
         listOrder: [...this.state.listOrder, list]
       });
     }
+  };
+
+  // const newTaskIds = list.taskIds.filter(task => task !== cardName);
+  //   const newCards = { ...this.state.cards };
+  //   delete newCards[cardName];
+  //   const list_copy = { ...this.state.lists };
+  //   for (let key in list_copy) {
+  //     if (list_copy[key].id === list.id) {
+  //       list_copy[key] = { ...list, taskIds: newTaskIds };
+  //     }
+  //   }
+  //   console.log(newCards, this.state.cards);
+  //   this.setState({ cards: newCards, lists: list_copy });
+
+  deleteList = id => {
+    const { cards, lists, listOrder } = this.state;
+    const taskIds = lists[id].taskIds;
+    const newCards = {...cards};
+    taskIds.forEach(taskId => delete newCards[taskId]);
+    const newLists = {...lists};
+    delete newLists[id];
+    let index = listOrder.indexOf(id);
+    const newListOrder = [...listOrder];
+    newListOrder.splice(index, 1);
+    this.setState({
+      cards: newCards,
+      lists: newLists,
+      listOrder : newListOrder
+    });
   };
 
   // edit list title
@@ -90,6 +120,19 @@ class App extends Component {
     });
   };
 
+  deleteCard = (cardName, list) => {
+    const newTaskIds = list.taskIds.filter(task => task !== cardName);
+    const newCards = { ...this.state.cards };
+    delete newCards[cardName];
+    const list_copy = { ...this.state.lists };
+    for (let key in list_copy) {
+      if (list_copy[key].id === list.id) {
+        list_copy[key] = { ...list, taskIds: newTaskIds };
+      }
+    }
+    this.setState({ cards: newCards, lists: list_copy });
+  };
+
   render() {
     const { lists, cards, listOrder } = this.state;
     return (
@@ -107,6 +150,8 @@ class App extends Component {
                 cardList={cardList}
                 handleTitleChange={this.handleTitleChange}
                 addCard={this.addCard}
+                deleteCard={this.deleteCard}
+                deleteList={this.deleteList}
               />
             );
           })}
