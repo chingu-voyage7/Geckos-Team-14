@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DragDropContext } from 'react-beautiful-dnd';
 import logo from "./logo.svg";
 import "./App.scss";
 
@@ -14,11 +15,18 @@ import List from "./Component/List/List";
 
 
 class App extends Component {
-  state = {
-    cards: {},
-    lists: {},
-    listOrder: []
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: {},
+      lists: {},
+      listOrder: []
+    };
+
+    this.onDragEnd = this.onDragEnd.bind(this);
+  }
+  
 
   addList = () => {
     const { lists } = this.state;
@@ -33,6 +41,7 @@ class App extends Component {
     this.setState({
       lists: newList
     });
+    console.log(lists);
 
     // add the created list inside the listOrder array
     for (let list in lists) {
@@ -40,6 +49,7 @@ class App extends Component {
         listOrder: [...this.state.listOrder, list]
       });
     }
+    console.log(lists);
   };
 
   // const newTaskIds = list.taskIds.filter(task => task !== cardName);
@@ -132,6 +142,31 @@ class App extends Component {
     }
     this.setState({ cards: newCards, lists: list_copy });
   };
+  onDragEnd = result => {
+    const { destination, source, draggableId } = result;
+
+    if(!destination) {
+      return;
+    }
+    if(
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const dropId = source.droppableId;
+    const list = this.state.lists[dropId];
+    var newCardIds = Array.from(list.taskIds);
+    newCardIds.splice(source.index, 1);
+    newCardIds.splice(destination.index, 0, draggableId);
+    let lists = this.state.lists;
+    lists[dropId].taskIds = newCardIds;
+    this.setState({
+      lists
+    })
+
+  }
 
   render() {
     const { lists, cards, listOrder } = this.state;
@@ -144,15 +179,18 @@ class App extends Component {
             const list = lists[listId];
             const cardList = list.taskIds.map(id => cards[id]);
             return (
-              <List
-                key={list.id}
-                list={list}
-                cardList={cardList}
-                handleTitleChange={this.handleTitleChange}
-                addCard={this.addCard}
-                deleteCard={this.deleteCard}
-                deleteList={this.deleteList}
-              />
+              <DragDropContext onDragEnd={this.onDragEnd}>
+                <List
+                  key={list.id}
+                  listId={list.id}
+                  list={list}
+                  cardList={cardList}
+                  handleTitleChange={this.handleTitleChange}
+                  addCard={this.addCard}
+                  deleteCard={this.deleteCard}
+                  deleteList={this.deleteList}
+                />
+              </DragDropContext>
             );
           })}
 
@@ -161,6 +199,7 @@ class App extends Component {
           </button>
         </header>
       </div>
+
     );
   }
 }
