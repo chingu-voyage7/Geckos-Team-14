@@ -1,0 +1,57 @@
+.list {
+  border-radius: 3px;
+  background: $gray;
+  width: 250px;
+  margin: 8px;
+}
+.list--title h3 {
+  color: $dark-blue;
+  font-size: 18px;
+  margin: 8px;
+  cursor: pointer;
+}
+.list form {
+  padding: 4px 8px 5px;
+}
+.list form input {
+  width: 100%;
+  padding: 7px 5px;
+  // margin: 0 8px;
+  border: solid 2px $gray;
+  border-radius: 3px;
+}
+
+.list form button {
+  background: $dark-green;
+  color: $white;
+  border: none;
+  padding: 8px 10px;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.add-list-btn {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  color: $white;
+  outline: none;
+}
+.add-list-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.add-card-btn {
+  font-size: 15px;
+  padding: 5px 8px;
+  color: $slate-gray;
+  cursor: pointer;
+}
+.add-card-btn:hover {
+  background: $dark-gray;
+}
+.add-card-btn:hover span {
+  text-decoration: underline !important;
+}

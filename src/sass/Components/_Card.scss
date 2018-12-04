@@ -1,0 +1,17 @@
+.card-list {
+  list-style: none;
+  // border: solid 1px red;
+  padding: 0 8px 5px;
+}
+.card {
+  background: $white;
+  color: $dark-blue;
+  font-size: 14px;
+  padding: 8px 5px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.card:hover {
+  background: $light-gray;
+  cursor: pointer;
+}

@@ -1,21 +1,22 @@
 import React from "react";
 
 const CardForm = ({
-  cardInputVal,
-  handleCardInputValChange,
-  handleSubmitCardForm,
-  handleToggleCardForm
+  cardVal,
+  handleCardValChange,
+  addToCard,
+  toggleCardForm
 }) => (
-  <form onSubmit={handleSubmitCardForm}>
+  <form className="card--form" onSubmit={addToCard}>
     <textarea
-      cols="30"
-      rows="10"
-      value={cardInputVal}
-      onChange={handleCardInputValChange}
+      rows="3"
+      value={cardVal}
+      onChange={handleCardValChange}
       placeholder="Enter a title for this card..."
     />
     <button type="submit">Add Card</button>
-    <button onClick={handleToggleCardForm}>X</button>
+    <button className="cancel-btn" onClick={toggleCardForm}>
+      X
+    </button>
   </form>
 );
 
