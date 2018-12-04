@@ -5,6 +5,7 @@
     position: absolute;
     top: 45px;
     display: block;
+    height: 100%;
 
     &--hide {
         display: none;
@@ -15,7 +16,7 @@
     box-sizing: border-box;
     background-color: $light-gray;
     width: 340px;
-    height: 500px;
+    height: 100vh;
     padding: 0px $menu-horizontal;
     position: relative;
     transition: .45s all;
@@ -59,10 +60,19 @@
     background: none;
     color: $slate-gray;
     font-weight: bold;
+    
     position: absolute;
     top: $menu-vertical;
-    left: 2rem;
+    
+    &-show {
+        left: 2rem;
+    }
+
+    &-hide {
+        left: -110%;
+    }
 }
+
 
 
 .options__list {

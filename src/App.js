@@ -11,6 +11,7 @@ import BoardNav from "./Components/BoardNav/BoardNav.js";
 import TrelloNav from "./Components/TrelloNav.js";
 
 import List from "./Component/List/List";
+import BackgroundSelection from "./Components/Background/BackgroundSelection";
 
 
 
@@ -18,7 +19,10 @@ class App extends Component {
   state = {
     cards: {},
     lists: {},
-    listOrder: []
+    listOrder: [],
+
+    backgroundSelection: 'blue',
+    updateBkImage: false,
   };
 
   addList = () => {
@@ -43,7 +47,7 @@ class App extends Component {
     }
   };
 
-  
+
 
   // edit list title
   handleTitleChange = (id, e) => {
@@ -95,10 +99,18 @@ class App extends Component {
   };
 
   render() {
+
+    let styleB = `backgroundColor: ${this.state.backgroundSelection}`;
+
     const { lists, cards, listOrder } = this.state;
     return (
-      <div className="App">
-      
+      <div className="App" style={{
+        updateBkImage? (
+          backgroundImage: { backgroundSelection }
+        ): (
+            backgroundColor: { backgroundSelection }
+          )}}>
+
         <TrelloNav />
         <BoardNav />
         <header className="App-header">
