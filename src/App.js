@@ -2,37 +2,34 @@ import React, { Component } from "react";
 import { DragDropContext } from 'react-beautiful-dnd';
 import logo from "./logo.svg";
 import "./App.scss";
-import MainMenu from './Component/MainMenu';
-import CheckList from './Component/Card/CheckList';
 
 // use uuid to generate random id's
 import uuid from "uuid";
 
 import "./App.scss";
-import BoardNav from "./Components/BoardNav/BoardNav.js";
-import MainMenu from "./Components/MainMenu.js";
-import TrelloNav from "./Components/TrelloNav.js";
+import BoardNav from "./Component/BoardNav/BoardNav.js";
+import MainMenu from "./Component/MainMenu.js";
+import TrelloNav from "./Component/TrelloNav.js";
 
 import List from "./Component/List/List";
 
 
 class App extends Component {
-<<<<<<< HEAD
-  state = {
-    cards: [],
-    toggleCardForm: false,
-    cardInputVal: "",
-    checkListItems: [{item:"Item1", complete:true}]
-  };
-=======
->>>>>>> staging
 
   constructor(props) {
     super(props);
     this.state = {
-      cards: {},
-      lists: {},
-      listOrder: []
+      cards: {'sample': {
+        id: 'sample',
+        content: 'Sample CheckList',
+        checkListItems: [{item:'Do Laundry', complete:false}, {item:'Clean shoes', complete:false}]
+      }},
+      lists: {'test': {
+        id: 'test',
+        title: 'Testing checklists',
+        taskIds:['sample']
+      }},
+      listOrder: ['test']
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -141,6 +138,25 @@ class App extends Component {
     });
   };
 
+  addCheckListItem = (id, checklist) => {
+    const editedCards = {...this.state.cards};
+    const editedCard = {...editedCards[id]};
+    console.log(editedCard.checkListItems, checklist);
+    editedCard.checkListItems = editedCard.checkListItems.map(item => item).concat([checklist]);
+    console.log(editedCards, this.state.cards);
+    //this.setState({ cards : editedCards});
+  }
+
+  onChangeCheckListItem = (id, CheckListItem) => {
+    const editedCard = {...this.state.cards[id]};
+    const itemToChange = editedCard.checkListItems.find(listItem => listItem.item === CheckListItem);
+    const editedListItem = {item: itemToChange.item, complete: !itemToChange.complete};
+    editedCard.checkListItems=editedCard.checkListItems.map(checkList => checkList.item !== editedListItem.item ? checkList : editedListItem )
+    this.setState(prevState => ({
+      cards: {...prevState.cards, editedCard}
+    }), ()=>console.log(this.state));
+  }
+
   deleteCard = (cardName, list) => {
     const newTaskIds = list.taskIds.filter(task => task !== cardName);
     const newCards = { ...this.state.cards };
@@ -179,32 +195,10 @@ class App extends Component {
 
   }
 
-  addCheckListItem = itemToAdd => {
-    if (itemToAdd) {
-      this.setState((prevState)=> ({checkListItems : [...prevState.checkListItems, {item: itemToAdd, complete:false}]}))
-    }
-  }
-
-  onChangeCheckListItem = itemClicked => {
-    const itemChanged = {item:itemClicked.item, complete:!itemClicked.complete}
-    itemClicked.complete = !itemClicked.complete;
-    this.setState((prevState) => ({
-      checkListItems: [...prevState.checkListItems.filter(item => item !== itemClicked), itemChanged]
-    }));
-  }
-
   render() {
     const { lists, cards, listOrder } = this.state;
     return (
       <div className="App">
-<<<<<<< HEAD
-        <MainMenu menuState={false}/>
-        <CheckList 
-          items={this.state.checkListItems}
-          onChangeCheckListItem={this.onChangeCheckListItem}
-          addCheckListItem={this.addCheckListItem}
-        />
-=======
         <TrelloNav />
         <BoardNav />
         <header className="App-header">
@@ -220,6 +214,8 @@ class App extends Component {
                   cardList={cardList}
                   handleTitleChange={this.handleTitleChange}
                   addCard={this.addCard}
+                  addCheckListItem={this.addCheckListItem}
+                  onChangeCheckListItem={this.onChangeCheckListItem}
                   deleteCard={this.deleteCard}
                   deleteList={this.deleteList}
                 />
@@ -231,7 +227,6 @@ class App extends Component {
             + Add another list
           </button>
         </header>
->>>>>>> staging
       </div>
 
     );

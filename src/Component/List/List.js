@@ -110,6 +110,9 @@ class List extends Component {
                     index={index}
                     deleteCard={this.props.deleteCard}
                     list={this.props.list}
+                    checkListItems={card.checkListItems}
+                    addCheckListItem={this.props.addCheckListItem}
+                    onChangeCheckListItem={this.props.onChangeCheckListItem}
                   />
                 ))}
                 {provided.placeholder}
