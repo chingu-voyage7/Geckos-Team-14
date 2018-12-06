@@ -1,12 +1,18 @@
 import React from "react";
 import { Draggable } from 'react-beautiful-dnd';
 import CheckList from './CheckList';
+import { faTextHeight } from "@fortawesome/free-solid-svg-icons";
 
 export default class Card extends React.Component {
     
-    addCheckListItem = itemToAdd => {
+    addCheckListItem = (itemToAdd) => {
         if (itemToAdd) {
-        this.props.addCheckListItem(this.props.cardId, itemToAdd);
+            const newCheckList = [...this.props.card.checkListItems, itemToAdd];
+            const editedCard = {
+                ...this.props.card,
+                checkListItems : newCheckList
+            }
+            this.props.editCard(this.props.cardId, editedCard);
         }
     }
 
@@ -27,12 +33,11 @@ export default class Card extends React.Component {
                         ref={provided.innerRef}
                     >
                       {content}
-                      {this.props.checkListItems && 
+                      {(this.props.card && this.props.card.checkListItems) && 
                         (<CheckList 
                             id={this.props.cardId}
-                            items={this.props.checkListItems}
+                            items={this.props.card.checkListItems}
                             addCheckListItem={this.addCheckListItem}
-                            onChangeCheckListItem={this.onChangeCheckListItem}
                         />)}
                       <button 
                         className="btn btn--delete-card"

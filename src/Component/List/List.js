@@ -108,11 +108,10 @@ class List extends Component {
                     cardId={card.id}
                     content={card.content}
                     index={index}
+                    card={card}
                     deleteCard={this.props.deleteCard}
                     list={this.props.list}
-                    checkListItems={card.checkListItems}
-                    addCheckListItem={this.props.addCheckListItem}
-                    onChangeCheckListItem={this.props.onChangeCheckListItem}
+                    editCard={this.props.editCard}
                   />
                 ))}
                 {provided.placeholder}

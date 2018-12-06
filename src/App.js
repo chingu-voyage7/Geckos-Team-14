@@ -138,23 +138,11 @@ class App extends Component {
     });
   };
 
-  addCheckListItem = (id, checklist) => {
-    const editedCards = {...this.state.cards};
-    const editedCard = {...editedCards[id]};
-    console.log(editedCard.checkListItems, checklist);
-    editedCard.checkListItems = editedCard.checkListItems.map(item => item).concat([checklist]);
-    console.log(editedCards, this.state.cards);
-    //this.setState({ cards : editedCards});
-  }
-
-  onChangeCheckListItem = (id, CheckListItem) => {
-    const editedCard = {...this.state.cards[id]};
-    const itemToChange = editedCard.checkListItems.find(listItem => listItem.item === CheckListItem);
-    const editedListItem = {item: itemToChange.item, complete: !itemToChange.complete};
-    editedCard.checkListItems=editedCard.checkListItems.map(checkList => checkList.item !== editedListItem.item ? checkList : editedListItem )
-    this.setState(prevState => ({
-      cards: {...prevState.cards, editedCard}
-    }), ()=>console.log(this.state));
+  editCard = (id, newCard) => {
+    console.log(id, newCard);
+    this.setState ((prevState) => ({
+      cards : {...prevState.cards, id:newCard}
+    })); 
   }
 
   deleteCard = (cardName, list) => {
@@ -214,8 +202,7 @@ class App extends Component {
                   cardList={cardList}
                   handleTitleChange={this.handleTitleChange}
                   addCard={this.addCard}
-                  addCheckListItem={this.addCheckListItem}
-                  onChangeCheckListItem={this.onChangeCheckListItem}
+                  editCard={this.editCard}
                   deleteCard={this.deleteCard}
                   deleteList={this.deleteList}
                 />

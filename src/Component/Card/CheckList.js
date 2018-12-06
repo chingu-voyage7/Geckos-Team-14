@@ -12,13 +12,12 @@ const CheckList = (props) => {
                         checklistItem={checklistItem}
                         item={checklistItem.item}
                         complete={checklistItem.complete}
-                        onChangeCheckListItem={()=> {props.onChangeCheckListItem(checklistItem.item)}}
                     />)
                 }
             </ul>
             <form onSubmit={(e)=>{
                 e.preventDefault();
-                props.addCheckListItem({item: e.target.elements.addItem.value, complete: false}, props.id);
+                props.addCheckListItem({item: e.target.elements.addItem.value, complete: false});
             }}>
                 <input type="text" name="addItem"/>
                 <button className="btn btn--submit">Add</button>
