@@ -7,10 +7,10 @@ const ListItem = (props) => {
                 type="checkbox" name="item" 
                 value={props.item} 
                 checked={props.complete} 
-                onChange={()=>props.onChangeCheckListItem(props.checklistItem)}
+                onChange={()=>props.onToggleCheckBox(props.index)}
                 className="checklist__complete"
            />
-           <p className="checklist__name">{props.item}</p>
+           <p className="checklist__name">{props.item} <button onClick={()=>props.onDeleteCheckListItem(props.index)}>X</button></p>
         </li>
     );
 }

@@ -27,3 +27,21 @@ button {
 button:disabled {
   cursor: default;
 }
+
+
+/*** BUTTONS ***/
+.btn {
+  padding: $menu-horizontal $menu-vertical;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn--submit {
+  background-color: $green;
+  color: #fff;
+}

@@ -138,11 +138,13 @@ class App extends Component {
     });
   };
 
-  editCard = (id, newCard) => {
-    console.log(id, newCard);
-    this.setState ((prevState) => ({
-      cards : {...prevState.cards, id:newCard}
-    })); 
+  editCard = (id, editedCard) => {
+    const cards = {...this.state.cards};
+    cards[id] = editedCard;
+    console.log(this.state, cards);
+    this.setState ({
+        cards 
+    }); 
   }
 
   deleteCard = (cardName, list) => {
