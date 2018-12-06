@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Droppable } from "react-beautiful-dnd";
 import CardForm from "../Card/CardForm";
 
 import Card from "../Card/Card";
@@ -93,11 +94,28 @@ class List extends Component {
         </div>
 
         {
-          <ul className="card-list">
-            {cardList.map(card => (
-              <Card key={card.id} content={card.content} />
-            ))}
-          </ul>
+
+          <Droppable droppableId={this.props.listId}>
+            {provided => (
+              <ul
+                className="card-list"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {cardList.map((card, index) => (
+                  <Card
+                    key={card.id}
+                    cardId={card.id}
+                    content={card.content}
+                    index={index}
+                    deleteCard={this.props.deleteCard}
+                    list={this.props.list}
+                  />
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
         }
 
         {// if showCardForm is true, show form
@@ -116,6 +134,15 @@ class List extends Component {
             + <span>Add a card...</span>
           </p>
         )}
+        <button
+          className="btn btn--delete-list"
+          onClick={e => {
+            e.preventDefault();
+            this.props.deleteList(id);
+          }}
+        >
+          Delete List
+        </button>
       </div>
     );
   }
