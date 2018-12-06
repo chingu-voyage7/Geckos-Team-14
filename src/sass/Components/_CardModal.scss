@@ -1,0 +1,56 @@
+.card-modal {
+  color: $dark-blue;
+  background: rgba(0,0,0,.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  &__content {
+    background: $gray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 85%;
+    border-radius: 4px;
+    padding: 10px;
+  }
+}
+
+.card-modal__content-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: $slate-gray;
+  }
+}
+
+.card-modal__content-row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.card-modal__content-col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+
+@media(min-width: 800px) {
+  .card-modal__content-col {
+    flex: 1;
+  }
+  .double-col {
+    flex: 3;
+  }
+}
