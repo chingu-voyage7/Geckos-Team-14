@@ -1,4 +1,4 @@
-.main-menu__wrapper {
+.main-menu__wrapper, .list-menu__wrapper {
     z-index: 10;
     overflow-x: hidden;
     right: 0%;
@@ -22,7 +22,7 @@
     right: 0%;
 }
 
-.main-menu__section  {
+.main-menu__section, .list-menu__section  {
     border-bottom: 1px solid $dark-gray;
     padding: $menu-vertical 0px;
 }

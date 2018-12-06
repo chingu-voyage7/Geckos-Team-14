@@ -12,7 +12,7 @@ import MainMenu from "./Components/MainMenu.js";
 import TrelloNav from "./Components/TrelloNav.js";
 
 import List from "./Component/List/List";
-
+import ListMenu from './Components/BoardNav/ListMenu';
 
 class App extends Component {
 
@@ -175,6 +175,7 @@ class App extends Component {
         <TrelloNav />
         <BoardNav />
         <header className="App-header">
+          <ListMenu />
           {listOrder.map(listId => {
             const list = lists[listId];
             const cardList = list.taskIds.map(id => cards[id]);
