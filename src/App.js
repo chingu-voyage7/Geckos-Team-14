@@ -21,8 +21,13 @@ class App extends Component {
     lists: {},
     listOrder: [],
 
-    backgroundSelection: 'blue',
+
+    backgroundColor: 'purple',
+    backgroundImage: 'url(https://cdn-images-1.medium.com/max/1600/1*mONNI1lG9VuiqovpnYqicA.jpeg)',
+
+
     updateBkImage: false,
+    updateBkColor: true,
   };
 
   addList = () => {
@@ -98,21 +103,30 @@ class App extends Component {
     });
   };
 
+  handleBackgroundChange(color, image) {
+    this.setState({
+    backgroundColor: color,
+    backgroundImage: image,
+    })
+  }
+
   render() {
 
-    let styleB = `backgroundColor: ${this.state.backgroundSelection}`;
+    // var backgroundColor = 'backgroundColor'
+    // var backgroundType = ''
+    // console.log(colorImage);
+    // var BackgroundStyle = this.state.updateBkColor ? ('backgroundColor:' + colorImage) : ('backgroundImage:' + colorImage)
+    // console.log(BackgroundStyle);
 
-    const { lists, cards, listOrder } = this.state;
+    const { lists, cards, listOrder, updateBkColor, backgroundColor, backgroundImage } = this.state;
     return (
-      <div className="App" style={{
-        updateBkImage? (
-          backgroundImage: { backgroundSelection }
-        ): (
-            backgroundColor: { backgroundSelection }
-          )}}>
-
+      <div className="App" style={{ backgroundColor, backgroundImage }}>
         <TrelloNav />
-        <BoardNav />
+        <BoardNav 
+          handleBackgroundChange={this.handleBackgroundChange}
+          backgroundColor={this.state.backgroundColor}
+          backgroundImage={this.state.backgroundImage}
+           />
         <header className="App-header">
           {listOrder.map(listId => {
             const list = lists[listId];

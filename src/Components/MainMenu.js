@@ -13,29 +13,45 @@ class MainMenu extends React.Component {
     state = {
         menuTitle: 'Menu',
         TypeMenuTitle: true,
-        
+
         changeBackground: false,
+
         selectOption: false,
+        imageMenu: false,
     }
 
-    toggleMenuControl = () => { this.state.selectOption ? this.toggleOptionsMenu() : this.toggleBackgroundMenu(); }
+    toggleMenuControl = () => {
+        if (this.state.selectOption || this.state.imageMenu) {
+            this.setState(() => ({
+                selectOption: false,
+                imageMenu: false
+            }))
+        } else this.toggleBackgroundMenu()
+    }
 
     //closes and opens the type menu
     toggleBackgroundMenu = () => {
-        //menu 0 = main; menu 1 = type; menu 2=option
         //arrow shows when type menu and option menus are open
-        
         this.setState((prevState) => ({
             changeBackground: !prevState.changeBackground,
         }))
         this.updateMenuTitle()
     }
 
-    //closes and opens the options menu
+    //closes and opens the color options menu
     toggleOptionsMenu = () => {
         this.setState((prevState) => ({
             selectOption: !prevState.selectOption,
-            
+
+        }))
+        // this.updateMenuTitle()
+    }
+
+    //closes and opens the image options menu
+    toggleImageMenu = () => {
+        this.setState((prevState) => ({
+            imageMenu: !prevState.selectOption,
+
         }))
         // this.updateMenuTitle()
     }
@@ -61,13 +77,24 @@ class MainMenu extends React.Component {
                     <BackgroundType
                         changeBackground={this.state.changeBackground}
                         toggleOptionsMenu={this.toggleOptionsMenu}
-                        selectOption={this.state.selectOption} />
+                        toggleImageMenu={this.toggleImageMenu}
+                        selectOption={this.state.selectOption}
+                        imageMenu={this.state.imageMenu}
+
+                        backgroundColor={this.props.backgroundColor}
+                        backgroundImage={this.props.backgroundImage}
+                        handleBackgroundChange={this.props.handleBackgroundChange} />
                     <div className="main-menu__section">
-                        <button 
-                            className="main-menu-arrow" 
-                            onClick={this.toggleMenuControl}>
-                            <i className="fas fa-arrow-left"></i>
+                        {this.state.changeBackground ? (
+                            <button
+                                className="main-menu-arrow"
+                                onClick={this.toggleMenuControl}>
+                                <i className="fas fa-arrow-left"></i>
                             </button>
+                        ) : ''
+                        }
+
+
                         <h2 className="main-menu__title">{this.state.menuTitle}</h2>
                         <button
                             className="btn--close-menu"

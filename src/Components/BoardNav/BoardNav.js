@@ -7,7 +7,7 @@ class BoardNav extends Component {
     BoardName: "Add Board Name",
     showNameMenu: false,
 
-    MMisOpen: true,
+    MMisOpen: false,
   };
 
   // -- handle main menu --
@@ -40,7 +40,14 @@ class BoardNav extends Component {
     const { showNameMenu, BoardName } = this.state;
     return (
       <div>
-        <MainMenu menuState={false} MMisOpen={this.state.MMisOpen} toggleCloseButton={this.toggleCloseButton} />
+        <MainMenu 
+          menuState={false} 
+          MMisOpen={this.state.MMisOpen} 
+          toggleCloseButton={this.toggleCloseButton}
+          
+          backgroundColor={this.props.backgroundColor}
+          backgroundImage={this.props.backgroundImage}
+          handleBackgroundChange={this.props.handleBackgroundChange} />
         <div className="board-nav">
           <button
             onClick={this.handleShowMenu}
