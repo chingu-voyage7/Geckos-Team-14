@@ -24,7 +24,7 @@ class MainMenu extends React.Component {
                     <div className="main-menu__section">
                         <h2 className="main-menu__title">Menu</h2>
                         <button 
-                            className="btn btn--close-menu"
+                            className="btn btn--close-menu btn--dark"
                             onClick={this.toggleCloseButton}
                             ><FontAwesomeIcon icon={faTimes}/>
                         </button>

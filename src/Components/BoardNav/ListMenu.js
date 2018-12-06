@@ -22,30 +22,30 @@ class ListMenu extends React.Component {
                     <div className="list-menu__section">
                         <h2 className="list-menu__title">List Actions</h2>
                         <button 
-                            className="btn btn--close-menu"
+                            className="btn btn--close-menu btn--dark"
                             onClick={this.toggleCloseButton}
                             ><FontAwesomeIcon icon={faTimes}/>
                         </button>
                     </div>
                     <div className="list-menu__section">
                         <ul className="options__list">
-                            <li className="option__item">Add Card<FontAwesomeIcon className="icon__item" icon={faEllipsisH}/></li>
-                            <li className="option__item">Copy List<FontAwesomeIcon className="icon__item" icon={faEllipsisH}/></li>
-                            <li className="option__item">Move List<FontAwesomeIcon className="icon__item" icon={faEllipsisH}/></li>
+                            <li className="option__item">Add Card</li>
+                            <li className="option__item">Copy List</li>
+                            <li className="option__item">Move List</li>
                             <li className="option__item">Watch</li>
                         </ul>
                     </div>
                     <div className="list-menu__section">
-                        <h3 className="activity-menu__title">Sort By<FontAwesomeIcon className="icon__item" icon={faEllipsisH}/></h3>
+                        <h3 className="activity-menu__title">Sort By</h3>
                     </div>
                     <div className="list-menu__section">
                         <h3 className="activity-menu__title">
                             Move All Cards in This List
-                            <FontAwesomeIcon className="icon__item" icon={faEllipsisH}/>
+                
                         </h3>
                         <h3 className="activity-menu__title">
                             Archive All Cards in This List
-                            <FontAwesomeIcon className="icon__item" icon={faEllipsisH}/>
+          
                         </h3>
                     </div>
                     <div className="list-menu__section">

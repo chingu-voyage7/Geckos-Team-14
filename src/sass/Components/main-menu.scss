@@ -6,7 +6,7 @@
     top: 45px;
 }
 
-.main-menu {
+.main-menu, .list-menu {
     box-sizing: border-box;
     background-color: $light-gray;
     width: 340px;
@@ -18,7 +18,10 @@
     
 }
 
-.main-menu--show {
+.list-menu {
+    color: #000;
+}
+.main-menu--show, .list-menu--show {
     right: 0%;
 }
 
@@ -33,6 +36,14 @@
     font-size: 1.60rem;
 }
 
+.list-menu__title {
+    padding: 0;
+    margin: 0;
+    color: $slate-gray;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
 .btn--close-menu {
     border: none;
     font-size: 2rem;
@@ -42,6 +53,10 @@
     position: absolute;
     top: $menu-vertical;
     right: $menu-horizontal;
+}
+
+.btn--dark {
+    color: $slate-gray;
 }
 
 
