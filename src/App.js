@@ -142,10 +142,10 @@ class App extends Component {
     });
   };
 
-  handleBackgroundChange(color, image) {
+  handleBackgroundChange = (backgroundColor, backgroundImage) => {
     this.setState({
-    backgroundColor: color,
-    backgroundImage: image,
+    backgroundColor: backgroundColor,
+    backgroundImage: backgroundImage,
     })
   }
   
@@ -201,8 +201,8 @@ class App extends Component {
         <TrelloNav />
         <BoardNav 
           handleBackgroundChange={this.handleBackgroundChange}
-          backgroundColor={this.state.backgroundColor}
-          backgroundImage={this.state.backgroundImage}
+          backgroundColor={backgroundColor}
+          backgroundImage={backgroundImage}
            />
         <header className="App-header">
           {listOrder.map(listId => {
