@@ -29,3 +29,13 @@ background-color: $gray;
     padding: 0;
     margin: 0;
 }
+
+.progress-bar {
+
+}
+
+.progress-bar__inner {
+    width: 0%;
+    background-color:$light-green;
+    transition: 0.5s all;
+}

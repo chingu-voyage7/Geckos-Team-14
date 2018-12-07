@@ -3,9 +3,16 @@ import ListItem from './ListItem';
 
 const CheckList = (props) => {
 
+    let tasksDone = props.items.reduce((acc, item)=> item.complete ? acc+1 : acc,0);
+    let progressPct = parseInt((tasksDone / props.items.length) * 100);
+    const percentageComplete = { width: `${progressPct}%` };
+
     return (
         <div className="checklist">
             <h2 className="checklist__title">CheckList Title</h2>
+            <div className="progress-bar">
+                <div class="progress-bar__inner" style={percentageComplete}>{progressPct}</div>
+            </div>
             <ul className="checklist__items">
                 {props.items && props.items.map((checklistItem, index) => <ListItem 
                         key={index}
