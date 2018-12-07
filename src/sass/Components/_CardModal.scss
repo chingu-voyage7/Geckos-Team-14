@@ -1,0 +1,101 @@
+.card-modal {
+  color: $dark-blue;
+  background: rgba(0,0,0,.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  &__content {
+    background: $menu-gray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 85%;
+    border-radius: 4px;
+    padding: 10px;
+  }
+}
+
+.card-modal__content-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: $slate-gray;
+  }
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.card-modal__content section {
+  padding: 8px;
+}
+.description__title {
+  margin-bottom: 10px;
+}
+
+.description__form-textarea {
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 8px;
+}
+
+.card-modal__content aside {
+  padding: 8px 0;
+  p {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+  button {
+    background: $gray;
+    text-align: left;
+    padding: 10px 8px;
+    margin: 8px 0px;
+    border: none;
+    border-radius: 3px;
+    i {
+      margin-right: 8px;
+      color: $slate-gray;
+    }
+    span {
+      color: $dark-blue;
+      font-weight: bold;
+    }
+    &:hover {
+      background: $dark-gray;
+    }
+  }
+} 
+
+@media(min-width: 800px) {
+  .col {
+    flex: 1;
+  }
+  .double-col {
+    flex: 3;
+  }
+  aside button {
+    width: 80%;
+  }
+}
