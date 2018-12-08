@@ -5,8 +5,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faFill, faBrush, faEllipsisH, faTimes, faTasks } from '@fortawesome/free-solid-svg-icons';
 
-// let menuTitle = ['Menu', 'Change Background']
-// let i = 0
 
 class MainMenu extends React.Component {
 
@@ -80,9 +78,6 @@ class MainMenu extends React.Component {
                         toggleImageMenu={this.toggleImageMenu}
                         selectOption={this.state.selectOption}
                         imageMenu={this.state.imageMenu}
-
-                        backgroundColor={this.props.backgroundColor}
-                        backgroundImage={this.props.backgroundImage}
                         handleBackgroundChange={this.props.handleBackgroundChange} />
                     <div className="main-menu__section">
                         {this.state.changeBackground ? (

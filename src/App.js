@@ -14,8 +14,17 @@ import TrelloNav from "./Components/TrelloNav.js";
 import List from "./Component/List/List";
 import BackgroundSelection from "./Components/Background/BackgroundSelection";
 
-
-
+import Scene1 from './Components/Background/images/scene1.jpg';
+import Scene2 from './Components/Background/images/scene2.jpg';
+import Scene3 from './Components/Background/images/scene3.jpg';
+import Scene4 from './Components/Background/images/scene4.jpg';
+import Scene5 from './Components/Background/images/scene5.jpg';
+import Scene6 from './Components/Background/images/scene6.jpg';
+import Scene7 from './Components/Background/images/scene7.jpg';
+import Scene8 from './Components/Background/images/scene8.jpg';
+import Scene9 from './Components/Background/images/scene9.jpg';
+import Dragon from './sass/images/dragon.jpg';
+import { faImages } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
 
@@ -26,17 +35,37 @@ class App extends Component {
       lists: {},
       listOrder: [],
 
-    backgroundColor: 'purple',
-    backgroundImage: 'url(https://cdn-images-1.medium.com/max/1600/1*mONNI1lG9VuiqovpnYqicA.jpeg)',
+      styleType: '',
+      type: 'Images',
+      backgroundColor: '',
+      backgroundImage: Dragon,
 
 
-    updateBkImage: false,
-    updateBkColor: true,
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
   }
-  
+
+
+  // handleBackgroundChange = (backgroundColor, backgroundImage) => {
+  //   let styleType;
+  //   if (this.state.type === 'Colors') {
+  //     styleType = `backgroundColor: ${backgroundColor}`
+  //   } else if (this.state.type === 'Images') {
+  //     styleType = `backgroundImage: ${backgroundImage}`
+  //   }
+  //   this.setState({ styleType })
+  // }
+
+  handleBackgroundChange = (backgroundColor, backgroundImage) => {
+    // let styleType;
+    // if (type === 'Colors') {
+    //   styleType = `backgroundColor: ${backgroundColor}`
+    // } else if (type === 'Images') {
+    //   styleType = `backgroundImage: ${backgroundImage}`
+    // }
+    this.setState({ backgroundColor, backgroundImage })
+  }
 
   addList = () => {
     const { lists } = this.state;
@@ -77,9 +106,9 @@ class App extends Component {
   deleteList = id => {
     const { cards, lists, listOrder } = this.state;
     const taskIds = lists[id].taskIds;
-    const newCards = {...cards};
+    const newCards = { ...cards };
     taskIds.forEach(taskId => delete newCards[taskId]);
-    const newLists = {...lists};
+    const newLists = { ...lists };
     delete newLists[id];
     let index = listOrder.indexOf(id);
     const newListOrder = [...listOrder];
@@ -87,11 +116,9 @@ class App extends Component {
     this.setState({
       cards: newCards,
       lists: newLists,
-      listOrder : newListOrder
+      listOrder: newListOrder
     });
   };
-
-
 
   // edit list title
   handleTitleChange = (id, e) => {
@@ -142,13 +169,8 @@ class App extends Component {
     });
   };
 
-  handleBackgroundChange = (backgroundColor, backgroundImage) => {
-    this.setState({
-    backgroundColor: backgroundColor,
-    backgroundImage: backgroundImage,
-    })
-  }
   
+
   deleteCard = (cardName, list) => {
     const newTaskIds = list.taskIds.filter(task => task !== cardName);
     const newCards = { ...this.state.cards };
@@ -164,10 +186,10 @@ class App extends Component {
   onDragEnd = result => {
     const { destination, source, draggableId } = result;
 
-    if(!destination) {
+    if (!destination) {
       return;
     }
-    if(
+    if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
@@ -189,21 +211,15 @@ class App extends Component {
 
   render() {
 
-    // var backgroundColor = 'backgroundColor'
-    // var backgroundType = ''
-    // console.log(colorImage);
-    // var BackgroundStyle = this.state.updateBkColor ? ('backgroundColor:' + colorImage) : ('backgroundImage:' + colorImage)
-    // console.log(BackgroundStyle);
+    
 
-    const { lists, cards, listOrder, updateBkColor, backgroundColor, backgroundImage } = this.state;
+    const { lists, cards, listOrder, backgroundColor, backgroundImage } = this.state;
     return (
-      <div className="App" style={{ backgroundColor, backgroundImage }}>
+      <div className="App" style={{ backgroundColor, backgroundImage: `url(${backgroundImage})` }}>
         <TrelloNav />
-        <BoardNav 
+        <BoardNav
           handleBackgroundChange={this.handleBackgroundChange}
-          backgroundColor={backgroundColor}
-          backgroundImage={backgroundImage}
-           />
+        />
         <header className="App-header">
           {listOrder.map(listId => {
             const list = lists[listId];

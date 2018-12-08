@@ -44,9 +44,6 @@ class BoardNav extends Component {
           menuState={false} 
           MMisOpen={this.state.MMisOpen} 
           toggleCloseButton={this.toggleCloseButton}
-          
-          backgroundColor={this.props.backgroundColor}
-          backgroundImage={this.props.backgroundImage}
           handleBackgroundChange={this.props.handleBackgroundChange} />
         <div className="board-nav">
           <button

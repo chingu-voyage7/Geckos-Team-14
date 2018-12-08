@@ -34,8 +34,7 @@ class BackgroundType extends Component {
                 imageMenu={this.props.imageMenu}
                 
                 type={this.state.type}
-                backgroundColor={this.props.backgroundColor}
-                backgroundImage={this.props.backgroundImage}
+               
                 handleBackgroundChange={this.props.handleBackgroundChange}
                 />    
             <div className="background-types">
