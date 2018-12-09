@@ -1,9 +1,15 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Draggable } from 'react-beautiful-dnd';
 import CheckList from './CheckList';
 import { faTextHeight } from "@fortawesome/free-solid-svg-icons";
 
+import CardModal from "../CardModal/CardModal"
+
 export default class Card extends React.Component {
+
+    state = {
+        isModalOpen: false
+    }
     
     addCheckListItem = (itemToAdd) => {
         if (itemToAdd) {
@@ -17,8 +23,7 @@ export default class Card extends React.Component {
     }
 
     onChangeCheckListItem = itemClicked => {
-      console.log(itemClicked);
-    this.props.onChangeCheckListItem(this.props.cardId, itemClicked);
+        this.props.onChangeCheckListItem(this.props.cardId, itemClicked);
     }
 
     onDeleteCheckListItem = index => {
@@ -43,37 +48,43 @@ export default class Card extends React.Component {
         }
       this.props.editCard(this.props.cardId, editedCard);
       console.log(editedCheckList);
-  }
-    
-  render() {
-      const { content, deleteCard, cardId, list} = this.props;
+    }
+
+    toggleModal = () => {
+        const { isModalOpen } = this.state
+        this.setState({
+            isModalOpen: !isModalOpen
+        })
+    }
+
+    render() {
+        const { isModalOpen } = this.state
+        const { content, deleteCard, cardId, list } = this.props;
         return (
-            <Draggable draggableId={this.props.cardId} index={this.props.index}>
-                {provided => (
-                    <li 
-                        className="card"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                    >
-                      {content}
-                      {(this.props.card && this.props.card.checkListItems) && 
-                        (<CheckList 
-                            id={this.props.cardId}
-                            items={this.props.card.checkListItems}
-                            addCheckListItem={this.addCheckListItem}
-                            onToggleCheckBox={this.onToggleCheckBox}
-                            onDeleteCheckListItem={this.onDeleteCheckListItem}
-                        />)}
-                      <button 
-                        className="btn btn--delete-card"
-                        onClick={() => deleteCard(cardId, list)}
-                      >
-                        X
+            <Fragment>
+                <Draggable draggableId={this.props.cardId} index={this.props.index}>
+                    {provided => (
+
+                        <li
+                            className="card"
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                            onClick={this.toggleModal}
+                        >
+                            {content}
+                            <button
+                                className="btn btn--delete-card"
+                                onClick={() => deleteCard(cardId, list)}
+                            >
+                                X
                       </button>
-                    </li>
-                )}
-            </Draggable>
+                        </li>
+
+                    )}
+                </Draggable>
+                <CardModal content={content} toggleModal={this.toggleModal} isModalOpen={isModalOpen} />
+            </Fragment>
         )
     }
 }
