@@ -36,218 +36,237 @@ class App extends Component {
       listOrder: [],
 
       styleType: '',
-      type: 'Images',
-      backgroundColor: '',
-      backgroundImage: Dragon,
-
+      backgroundType: '',
 
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
   }
 
-
-  // handleBackgroundChange = (backgroundColor, backgroundImage) => {
-  //   let styleType;
-  //   if (this.state.type === 'Colors') {
-  //     styleType = `backgroundColor: ${backgroundColor}`
-  //   } else if (this.state.type === 'Images') {
-  //     styleType = `backgroundImage: ${backgroundImage}`
-  //   }
-  //   this.setState({ styleType })
-  // }
-
-  handleBackgroundChange = (backgroundColor, backgroundImage) => {
-    // let styleType;
-    // if (type === 'Colors') {
-    //   styleType = `backgroundColor: ${backgroundColor}`
-    // } else if (type === 'Images') {
-    //   styleType = `backgroundImage: ${backgroundImage}`
-    // }
-    this.setState({ backgroundColor, backgroundImage })
+  handleBackgroundColor = () => {
+    this.setState({
+      backgroundType: 'Colors'
+    })
   }
 
-  addList = () => {
-    const { lists } = this.state;
-    const listId = uuid().replace(/-/g, "");
-    const newList = Object.assign(lists, {
-      [listId]: {
-        id: listId,
-        title: "",
-        taskIds: []
-      }
-    });
+  handleBackgroundImage = () => {
     this.setState({
-      lists: newList
-    });
-    console.log(lists);
+      backgroundType: 'Images'
+    })
+  }
 
-    // add the created list inside the listOrder array
-    for (let list in lists) {
-      this.setState({
-        listOrder: [...this.state.listOrder, list]
-      });
+  handleBackgroundChange = (newBackground) => {
+    let styleType;
+    if (this.state.backgroundType === 'Colors') {
+      
+    styleType = { backgroundColor: `${newBackground}` }
+  
+    } else {     
+        styleType = { backgroundImage: `url(${newBackground})` }
+  }
+    console.log(styleType)
+    this.setState({
+      styleType
+    })
+
+console.log(this.state.styleType);
+  }
+
+
+
+
+
+
+// handleBackgroundChange = (backgroundColor, backgroundImage) => {
+
+//   this.setState({ backgroundColor, backgroundImage })
+// }
+
+addList = () => {
+  const { lists } = this.state;
+  const listId = uuid().replace(/-/g, "");
+  const newList = Object.assign(lists, {
+    [listId]: {
+      id: listId,
+      title: "",
+      taskIds: []
     }
-    console.log(lists);
-  };
+  });
+  this.setState({
+    lists: newList
+  });
+  console.log(lists);
 
-  // const newTaskIds = list.taskIds.filter(task => task !== cardName);
-  //   const newCards = { ...this.state.cards };
-  //   delete newCards[cardName];
-  //   const list_copy = { ...this.state.lists };
-  //   for (let key in list_copy) {
-  //     if (list_copy[key].id === list.id) {
-  //       list_copy[key] = { ...list, taskIds: newTaskIds };
-  //     }
-  //   }
-  //   console.log(newCards, this.state.cards);
-  //   this.setState({ cards: newCards, lists: list_copy });
-
-  deleteList = id => {
-    const { cards, lists, listOrder } = this.state;
-    const taskIds = lists[id].taskIds;
-    const newCards = { ...cards };
-    taskIds.forEach(taskId => delete newCards[taskId]);
-    const newLists = { ...lists };
-    delete newLists[id];
-    let index = listOrder.indexOf(id);
-    const newListOrder = [...listOrder];
-    newListOrder.splice(index, 1);
+  // add the created list inside the listOrder array
+  for (let list in lists) {
     this.setState({
-      cards: newCards,
-      lists: newLists,
-      listOrder: newListOrder
+      listOrder: [...this.state.listOrder, list]
     });
-  };
+  }
+  console.log(lists);
+};
 
-  // edit list title
-  handleTitleChange = (id, e) => {
-    const { lists } = this.state;
-    for (let list in lists) {
-      if (lists[list].id == id) {
-        lists[list].title = e;
-      }
+// const newTaskIds = list.taskIds.filter(task => task !== cardName);
+//   const newCards = { ...this.state.cards };
+//   delete newCards[cardName];
+//   const list_copy = { ...this.state.lists };
+//   for (let key in list_copy) {
+//     if (list_copy[key].id === list.id) {
+//       list_copy[key] = { ...list, taskIds: newTaskIds };
+//     }
+//   }
+//   console.log(newCards, this.state.cards);
+//   this.setState({ cards: newCards, lists: list_copy });
+
+deleteList = id => {
+  const { cards, lists, listOrder } = this.state;
+  const taskIds = lists[id].taskIds;
+  const newCards = { ...cards };
+  taskIds.forEach(taskId => delete newCards[taskId]);
+  const newLists = { ...lists };
+  delete newLists[id];
+  let index = listOrder.indexOf(id);
+  const newListOrder = [...listOrder];
+  newListOrder.splice(index, 1);
+  this.setState({
+    cards: newCards,
+    lists: newLists,
+    listOrder: newListOrder
+  });
+};
+
+// edit list title
+handleTitleChange = (id, e) => {
+  const { lists } = this.state;
+  for (let list in lists) {
+    if (lists[list].id == id) {
+      lists[list].title = e;
     }
-    this.setState({
-      lists: lists
-    });
+  }
+  this.setState({
+    lists: lists
+  });
+};
+
+addCard = (id, e) => {
+  const { cards, lists } = this.state;
+  // generate card id
+  const cardId = uuid().replace(/-/g, "");
+  // make a new card
+  const newCard = {
+    [cardId]: {
+      id: cardId,
+      content: e
+    }
   };
 
-  addCard = (id, e) => {
-    const { cards, lists } = this.state;
-    // generate card id
-    const cardId = uuid().replace(/-/g, "");
-    // make a new card
-    const newCard = {
-      [cardId]: {
-        id: cardId,
-        content: e
-      }
-    };
+  // add the new card inside the cards object
+  Object.assign(cards, newCard);
 
-    // add the new card inside the cards object
-    Object.assign(cards, newCard);
-
-    this.setState({
-      cards
-    });
-    // loop through lists object
-    for (let list in lists) {
-      if (lists.hasOwnProperty(list)) {
-        // check if id's are equal
-        if (lists[list].id === id) {
-          // loop through cards object
-          for (let card in newCard) {
-            // add card to taskIds array
-            lists[list].taskIds = [...lists[list].taskIds, card];
-          }
+  this.setState({
+    cards
+  });
+  // loop through lists object
+  for (let list in lists) {
+    if (lists.hasOwnProperty(list)) {
+      // check if id's are equal
+      if (lists[list].id === id) {
+        // loop through cards object
+        for (let card in newCard) {
+          // add card to taskIds array
+          lists[list].taskIds = [...lists[list].taskIds, card];
         }
       }
     }
-    this.setState({
-      lists
-    });
-  };
+  }
+  this.setState({
+    lists
+  });
+};
 
-  
 
-  deleteCard = (cardName, list) => {
-    const newTaskIds = list.taskIds.filter(task => task !== cardName);
-    const newCards = { ...this.state.cards };
-    delete newCards[cardName];
-    const list_copy = { ...this.state.lists };
-    for (let key in list_copy) {
-      if (list_copy[key].id === list.id) {
-        list_copy[key] = { ...list, taskIds: newTaskIds };
-      }
+
+deleteCard = (cardName, list) => {
+  const newTaskIds = list.taskIds.filter(task => task !== cardName);
+  const newCards = { ...this.state.cards };
+  delete newCards[cardName];
+  const list_copy = { ...this.state.lists };
+  for (let key in list_copy) {
+    if (list_copy[key].id === list.id) {
+      list_copy[key] = { ...list, taskIds: newTaskIds };
     }
-    this.setState({ cards: newCards, lists: list_copy });
-  };
-  onDragEnd = result => {
-    const { destination, source, draggableId } = result;
+  }
+  this.setState({ cards: newCards, lists: list_copy });
+};
+onDragEnd = result => {
+  const { destination, source, draggableId } = result;
 
-    if (!destination) {
-      return;
-    }
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
-    }
-
-    const dropId = source.droppableId;
-    const list = this.state.lists[dropId];
-    var newCardIds = Array.from(list.taskIds);
-    newCardIds.splice(source.index, 1);
-    newCardIds.splice(destination.index, 0, draggableId);
-    let lists = this.state.lists;
-    lists[dropId].taskIds = newCardIds;
-    this.setState({
-      lists
-    })
-
+  if (!destination) {
+    return;
+  }
+  if (
+    destination.droppableId === source.droppableId &&
+    destination.index === source.index
+  ) {
+    return;
   }
 
-  render() {
+  const dropId = source.droppableId;
+  const list = this.state.lists[dropId];
+  var newCardIds = Array.from(list.taskIds);
+  newCardIds.splice(source.index, 1);
+  newCardIds.splice(destination.index, 0, draggableId);
+  let lists = this.state.lists;
+  lists[dropId].taskIds = newCardIds;
+  this.setState({
+    lists
+  })
 
-    
+}
 
-    const { lists, cards, listOrder, backgroundColor, backgroundImage } = this.state;
-    return (
-      <div className="App" style={{ backgroundColor, backgroundImage: `url(${backgroundImage})` }}>
-        <TrelloNav />
-        <BoardNav
-          handleBackgroundChange={this.handleBackgroundChange}
-        />
-        <header className="App-header">
-          {listOrder.map(listId => {
-            const list = lists[listId];
-            const cardList = list.taskIds.map(id => cards[id]);
-            return (
-              <DragDropContext onDragEnd={this.onDragEnd}>
-                <List
-                  key={list.id}
-                  listId={list.id}
-                  list={list}
-                  cardList={cardList}
-                  handleTitleChange={this.handleTitleChange}
-                  addCard={this.addCard}
-                  deleteCard={this.deleteCard}
-                  deleteList={this.deleteList}
-                />
-              </DragDropContext>
-            );
-          })}
+render() {
 
-          <button className="add-list-btn" onClick={this.addList}>
-            + Add another list
+
+
+  const { lists, cards, listOrder, styleType } = this.state;
+  return (
+    <div className="App" style={{ styleType }}>
+      <TrelloNav />
+      <BoardNav
+        handleBackgroundChange={this.handleBackgroundChange}
+        handleBackgroundColor={this.handleBackgroundColor}
+        handleBackgroundImage={this.handleBackgroundImage}
+      />
+      <header className="App-header">
+        {listOrder.map(listId => {
+          const list = lists[listId];
+          const cardList = list.taskIds.map(id => cards[id]);
+          return (
+            <DragDropContext onDragEnd={this.onDragEnd}>
+              <List
+                key={list.id}
+                listId={list.id}
+                list={list}
+                cardList={cardList}
+                handleTitleChange={this.handleTitleChange}
+                addCard={this.addCard}
+                deleteCard={this.deleteCard}
+                deleteList={this.deleteList}
+              />
+            </DragDropContext>
+          );
+        })}
+
+        <button className="add-list-btn" onClick={this.addList}>
+          + Add another list
           </button>
-        </header>
-      </div>
+      </header>
+    </div>
 
-    );
-  }
+  );
+}
 }
 
 export default App;
+
+// <div className="App" style={{ backgroundColor, backgroundImage: `url(${backgroundImage})` }}></div>

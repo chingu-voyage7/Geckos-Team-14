@@ -4,36 +4,28 @@ import Scene3 from './images/scene3.jpg';
 
 class BackgroundType extends Component {
     state = {
-        type: 'Colors',
+        
     };
 
-    handleColorMenu = () => {   
-        this.props.toggleOptionsMenu()
-        this.setState({
-            type: 'Colors'
-        })  
-        
+    handleColorMenu = () => {    
+        this.props.toggleOptionsMenu();
     }
     
     handleImageMenu = () => {
-        this.props.toggleImageMenu()
-        this.setState({
-            type: 'Images'
-        }) 
-        
+        this.props.toggleImageMenu(); 
     }
 
     
 
     render() {
-        console.log(this.state.type)
+    
         return (
             <div className={this.props.changeBackground ? "background-menu-main background-menu-main-show" : "background-menu-main background-menu-main-hide"}>
             <BackgroundSelection 
                 selectOption={this.props.selectOption} 
                 imageMenu={this.props.imageMenu}
                 
-                type={this.state.type}
+                backgroundType={this.state.backgroundType}
                
                 handleBackgroundChange={this.props.handleBackgroundChange}
                 />    
