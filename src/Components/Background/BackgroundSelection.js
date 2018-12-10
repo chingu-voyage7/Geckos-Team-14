@@ -20,29 +20,14 @@ class BackgroundSelection extends Component {
 
     };
 
-    // setBackground = (backgroundColor, backgroundImage) => {
 
-    //     if (backgroundImage) {
-    //         backgroundColor = false;
-    //         return backgroundColor;
-    //     }
-    //     this.props.handleBackgroundChange(backgroundColor, backgroundImage)
-    // }
-
-    setBackground = (newBackground) => {
-
-        // if (backgroundImage) {
-        //     backgroundColor = false;
-        //     return backgroundColor;
-        // }
-        this.props.handleBackgroundChange(newBackground)
-    }
+    setBackground = (newBackground) => { this.props.handleBackgroundChange(newBackground)}
 
     render() {
 
         return (
             <div>
-                <div className={(this.props.selectOption) ? "background-options-main background-options-main-show" : "background-options-main background-options-main-hide"}>
+                <div className={(this.props.colorMenu) ? "background-options-main background-options-main-show" : "background-options-main background-options-main-hide"}>
                     {backgrounds.Colors.map((newBackground) =>
                         <div className="background-options" key={newBackground}>
                             <div className="background-option--wrapper">
@@ -83,7 +68,7 @@ class BackgroundSelection extends Component {
 
 export default BackgroundSelection;
 
-// <div className={(this.props.selectOption) ? "background-options-main background-options-main-show" : "background-options-main background-options-main-hide"}>
+// <div className={(this.props.colorMenu) ? "background-options-main background-options-main-show" : "background-options-main background-options-main-hide"}>
 // {backgrounds.Colors.map((backgroundColor) =>
 //     <div className="background-options" key={backgroundColor}>
 //         <div className="background-option--wrapper">

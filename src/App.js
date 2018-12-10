@@ -14,15 +14,6 @@ import TrelloNav from "./Components/TrelloNav.js";
 import List from "./Component/List/List";
 import BackgroundSelection from "./Components/Background/BackgroundSelection";
 
-import Scene1 from './Components/Background/images/scene1.jpg';
-import Scene2 from './Components/Background/images/scene2.jpg';
-import Scene3 from './Components/Background/images/scene3.jpg';
-import Scene4 from './Components/Background/images/scene4.jpg';
-import Scene5 from './Components/Background/images/scene5.jpg';
-import Scene6 from './Components/Background/images/scene6.jpg';
-import Scene7 from './Components/Background/images/scene7.jpg';
-import Scene8 from './Components/Background/images/scene8.jpg';
-import Scene9 from './Components/Background/images/scene9.jpg';
 import Dragon from './sass/images/dragon.jpg';
 import { faImages } from "@fortawesome/free-solid-svg-icons";
 
@@ -35,7 +26,7 @@ class App extends Component {
       lists: {},
       listOrder: [],
 
-      styleType: '',
+      styleType: { backgroundImage: `url(${Dragon})` },
       backgroundType: '',
 
     };
@@ -43,44 +34,15 @@ class App extends Component {
     this.onDragEnd = this.onDragEnd.bind(this);
   }
 
-  handleBackgroundColor = () => {
-    this.setState({
-      backgroundType: 'Colors'
-    })
-  }
+  handleBackgroundColor = () => { this.setState({ backgroundType: 'Colors' }) }
 
-  handleBackgroundImage = () => {
-    this.setState({
-      backgroundType: 'Images'
-    })
-  }
+  handleBackgroundImage = () => { this.setState({ backgroundType: 'Images' }) }
 
   handleBackgroundChange = (newBackground) => {
-    let styleType;
-    if (this.state.backgroundType === 'Colors') {
-      
-    styleType = { backgroundColor: `${newBackground}` }
-  
-    } else {     
-        styleType = { backgroundImage: `url(${newBackground})` }
-  }
-    console.log(styleType)
-    this.setState({
-      styleType
-    })
+     let styleType = ((this.state.backgroundType === 'Colors') ? { backgroundColor: `${newBackground}` } : { backgroundImage: `url(${newBackground})` })
+     this.setState({ styleType })
+    }
 
-console.log(this.state.styleType);
-  }
-
-
-
-
-
-
-// handleBackgroundChange = (backgroundColor, backgroundImage) => {
-
-//   this.setState({ backgroundColor, backgroundImage })
-// }
 
 addList = () => {
   const { lists } = this.state;
@@ -230,7 +192,7 @@ render() {
 
   const { lists, cards, listOrder, styleType } = this.state;
   return (
-    <div className="App" style={{ styleType }}>
+    <div className="App" style={ styleType }>
       <TrelloNav />
       <BoardNav
         handleBackgroundChange={this.handleBackgroundChange}
@@ -268,5 +230,3 @@ render() {
 }
 
 export default App;
-
-// <div className="App" style={{ backgroundColor, backgroundImage: `url(${backgroundImage})` }}></div>

@@ -22,11 +22,9 @@ class BackgroundType extends Component {
         return (
             <div className={this.props.changeBackground ? "background-menu-main background-menu-main-show" : "background-menu-main background-menu-main-hide"}>
             <BackgroundSelection 
-                selectOption={this.props.selectOption} 
+                colorMenu={this.props.colorMenu} 
                 imageMenu={this.props.imageMenu}
-                
                 backgroundType={this.state.backgroundType}
-               
                 handleBackgroundChange={this.props.handleBackgroundChange}
                 />    
             <div className="background-types">

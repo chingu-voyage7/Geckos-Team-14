@@ -14,14 +14,14 @@ class MainMenu extends React.Component {
 
         changeBackground: false,
 
-        selectOption: false,
+        colorMenu: false,
         imageMenu: false,
     }
 
     toggleMenuControl = () => {
-        if (this.state.selectOption || this.state.imageMenu) {
+        if (this.state.colorMenu || this.state.imageMenu) {
             this.setState(() => ({
-                selectOption: false,
+                colorMenu: false,
                 imageMenu: false
             }))
         } else this.toggleBackgroundMenu()
@@ -39,8 +39,7 @@ class MainMenu extends React.Component {
     //closes and opens the color options menu
     toggleOptionsMenu = () => {
         this.setState((prevState) => ({
-            selectOption: !prevState.selectOption,
-
+            colorMenu: !prevState.colorMenu,
         }))
         this.props.handleBackgroundColor();  
         // this.updateMenuTitle()
@@ -49,8 +48,7 @@ class MainMenu extends React.Component {
     //closes and opens the image options menu
     toggleImageMenu = () => {
         this.setState((prevState) => ({
-            imageMenu: !prevState.selectOption,
-
+            imageMenu: !prevState.colorMenu,
         }))
         this.props.handleBackgroundImage(); 
         // this.updateMenuTitle()
@@ -78,7 +76,7 @@ class MainMenu extends React.Component {
                         changeBackground={this.state.changeBackground}
                         toggleOptionsMenu={this.toggleOptionsMenu}
                         toggleImageMenu={this.toggleImageMenu}
-                        selectOption={this.state.selectOption}
+                        colorMenu={this.state.colorMenu}
                         imageMenu={this.state.imageMenu}
                         
                         handleBackgroundChange={this.props.handleBackgroundChange}
