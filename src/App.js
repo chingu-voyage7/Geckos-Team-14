@@ -7,12 +7,12 @@ import "./App.scss";
 import uuid from "uuid";
 
 import "./App.scss";
-import BoardNav from "./Components/BoardNav/BoardNav.js";
-
-import TrelloNav from "./Components/TrelloNav.js";
+import BoardNav from "./Component/BoardNav/BoardNav.js";
+import MainMenu from "./Component/MainMenu.js";
+import TrelloNav from "./Component/TrelloNav.js";
 
 import List from "./Component/List/List";
-import BackgroundSelection from "./Components/Background/BackgroundSelection";
+import BackgroundSelection from "./Component/Background/BackgroundSelection";
 
 import Dragon from './sass/images/dragon.jpg';
 import { faImages } from "@fortawesome/free-solid-svg-icons";
@@ -22,13 +22,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: {},
-      lists: {},
-      listOrder: [],
-
       styleType: { backgroundImage: `url(${Dragon})` },
       backgroundType: '',
 
+      cards: {'sample': {
+        id: 'sample',
+        content: 'Sample CheckList',
+        checkListItems: [{item:'Do Laundry', complete:false}, {item:'Clean shoes', complete:false}]
+      }},
+      lists: {'test': {
+        id: 'test',
+        title: 'Testing checklists',
+        taskIds:['sample']
+      }},
+      listOrder: ['test']
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -122,29 +129,57 @@ addCard = (id, e) => {
     }
   };
 
-  // add the new card inside the cards object
-  Object.assign(cards, newCard);
+ // add the new card inside the cards object
+ Object.assign(cards, newCard);
 
-  this.setState({
-    cards
-  });
-  // loop through lists object
-  for (let list in lists) {
-    if (lists.hasOwnProperty(list)) {
-      // check if id's are equal
-      if (lists[list].id === id) {
-        // loop through cards object
-        for (let card in newCard) {
-          // add card to taskIds array
-          lists[list].taskIds = [...lists[list].taskIds, card];
-        }
+ this.setState({
+  cards
+});
+
+// loop through lists object
+for (let list in lists) {
+  if (lists.hasOwnProperty(list)) {
+    // check if id's are equal
+    if (lists[list].id === id) {
+      // loop through cards object
+      for (let card in newCard) {
+        // add card to taskIds array
+        lists[list].taskIds = [...lists[list].taskIds, card];
       }
     }
   }
-  this.setState({
-    lists
-  });
+}
+this.setState({
+  lists
+});
 };
+
+  editCard = (id, editedCard) => {
+    const cards = {...this.state.cards};
+    cards[id] = editedCard;
+    console.log(this.state, cards);
+    this.setState ({
+        cards 
+    }); 
+  }
+
+//   deleteCard = (cardName, list) => {
+//     const newTaskIds = list.taskIds.filter(task => task !== cardName);
+//     const newCards = { ...this.state.cards };
+//     delete newCards[cardName];
+//     const list_copy = { ...this.state.lists };
+//     for (let key in list_copy) {
+//       if (list_copy[key].id === list.id) {
+//         list_copy[key] = { ...list, taskIds: newTaskIds };
+//       }
+//     }
+//     this.setState({ cards: newCards, lists: list_copy });
+//   };
+
+//   this.setState({
+//     lists
+//   });
+// };
 
 
 
@@ -188,39 +223,37 @@ onDragEnd = result => {
 
 render() {
 
-
-
-  const { lists, cards, listOrder, styleType } = this.state;
-  return (
-    <div className="App" style={ styleType }>
-      <TrelloNav />
-      <BoardNav
+    const { lists, cards, listOrder, styleType } = this.state;
+    return (
+      <div className="App" style={ styleType }>
+        <TrelloNav />
+        <BoardNav 
         handleBackgroundChange={this.handleBackgroundChange}
         handleBackgroundColor={this.handleBackgroundColor}
-        handleBackgroundImage={this.handleBackgroundImage}
-      />
-      <header className="App-header">
-        {listOrder.map(listId => {
-          const list = lists[listId];
-          const cardList = list.taskIds.map(id => cards[id]);
-          return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
-              <List
-                key={list.id}
-                listId={list.id}
-                list={list}
-                cardList={cardList}
-                handleTitleChange={this.handleTitleChange}
-                addCard={this.addCard}
-                deleteCard={this.deleteCard}
-                deleteList={this.deleteList}
-              />
-            </DragDropContext>
-          );
-        })}
+        handleBackgroundImage={this.handleBackgroundImage}/>
+        <header className="App-header">
+          {listOrder.map(listId => {
+            const list = lists[listId];
+            const cardList = list.taskIds.map(id => cards[id]);
+            return (
+              <DragDropContext onDragEnd={this.onDragEnd}>
+                <List
+                  key={list.id}
+                  listId={list.id}
+                  list={list}
+                  cardList={cardList}
+                  handleTitleChange={this.handleTitleChange}
+                  addCard={this.addCard}
+                  editCard={this.editCard}
+                  deleteCard={this.deleteCard}
+                  deleteList={this.deleteList}
+                />
+              </DragDropContext>
+            );
+          })}
 
-        <button className="add-list-btn" onClick={this.addList}>
-          + Add another list
+          <button className="add-list-btn" onClick={this.addList}>
+            + Add another list
           </button>
       </header>
     </div>

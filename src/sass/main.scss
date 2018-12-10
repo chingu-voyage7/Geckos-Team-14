@@ -1,5 +1,5 @@
-@import "./base.scss";
 @import "./variables.scss";
+@import "./base.scss";
 @import "./Components/main-menu.scss";
 
 @import "./Components/BackgroundType.scss";
@@ -9,5 +9,7 @@
 @import "./components/TrelloNav.scss";
 @import "./Components/List.scss";
 @import "./Components/CardForm.scss";
+@import "./Components/Card.scss";
+@import "./Components/checklist.scss";
 @import "./Components/CardModal.scss";
 @import "./Components/Card.scss";
