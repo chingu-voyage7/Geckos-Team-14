@@ -1,7 +1,12 @@
 import React, { Fragment } from "react";
 import { Draggable } from 'react-beautiful-dnd';
-
+import styled from 'styled-components';
 import CardModal from "../CardModal/CardModal"
+
+const Container = styled.li`
+     background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
+
+`;
 
 export default class Card extends React.Component {
     state = {
@@ -21,14 +26,14 @@ export default class Card extends React.Component {
         return (
             <Fragment>
                 <Draggable draggableId={this.props.cardId} index={this.props.index}>
-                    {provided => (
-
-                        <li
+                    {(provided, snapshot) => (
+                        <Container
                             className="card"
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
                             onClick={this.toggleModal}
+                            isDragging={snapshot.isDragging}
                         >
                             {content}
                             <button
@@ -37,9 +42,10 @@ export default class Card extends React.Component {
                             >
                                 X
                       </button>
-                        </li>
-
+                        {/* </li> */}
+                        </Container>
                     )}
+                    
                 </Draggable>
                 <CardModal content={content} toggleModal={this.toggleModal} isModalOpen={isModalOpen} />
             </Fragment>

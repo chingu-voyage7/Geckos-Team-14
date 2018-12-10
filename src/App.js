@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import logo from "./logo.svg";
 import "./App.scss";
 
@@ -41,7 +41,7 @@ class App extends Component {
     this.setState({
       lists: newList
     });
-    console.log(lists);
+    // console.log(lists);
 
     // add the created list inside the listOrder array
     for (let list in lists) {
@@ -49,7 +49,7 @@ class App extends Component {
         listOrder: [...this.state.listOrder, list]
       });
     }
-    console.log(lists);
+    // console.log(lists);
   };
 
   // const newTaskIds = list.taskIds.filter(task => task !== cardName);
@@ -142,8 +142,12 @@ class App extends Component {
     }
     this.setState({ cards: newCards, lists: list_copy });
   };
+  // onDragStart = () => {
+  //   document.text.style.color = 'orange';
+  // }
+
   onDragEnd = result => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
     if(!destination) {
       return;
@@ -155,18 +159,83 @@ class App extends Component {
       return;
     }
 
-    const dropId = source.droppableId;
-    const list = this.state.lists[dropId];
-    var newCardIds = Array.from(list.taskIds);
-    newCardIds.splice(source.index, 1);
-    newCardIds.splice(destination.index, 0, draggableId);
-    let lists = this.state.lists;
-    lists[dropId].taskIds = newCardIds;
-    this.setState({
-      lists
-    })
+    if(type === 'column') {
+      const newListOrder = Array.from(this.state.listOrder);
+      newListOrder.splice(source.index, 1);
+      newListOrder.splice(destination.index, 0, draggableId);
 
-  }
+      const newState = {
+        ...this.state,
+        listOrder: newListOrder,
+      };
+      this.setState(newState);
+      return;
+    }
+
+    const home = this.state.lists[source.droppableId];
+    const foreign = this.state.lists[destination.droppableId];
+
+    if(home === foreign) {
+      const newCardIds = Array.from(home.taskIds);
+      newCardIds.splice(source.index, 1);
+      newCardIds.splice(destination.index, 0, draggableId);
+
+      const newList = {
+        ...home,
+        taskIds: newCardIds,
+      }
+
+      const newState = {
+        ...this.state,
+        lists: {
+          ...this.state.lists,
+          [newList.id]: newList,
+        },
+      };
+
+      this.setState(newState);
+      return;
+    }
+
+    // Moving from one list to another
+    const homeTaskIds = Array.from(home.taskIds);
+    homeTaskIds.splice(source.index, 1);
+
+    const newHome = {
+      ...home,
+      taskIds: homeTaskIds,
+    };
+
+    const foreignTaskIds = Array.from(foreign.taskIds);
+    foreignTaskIds.splice(destination.index, 0, draggableId);
+
+    const newForeign = {
+      ...foreign,
+      taskIds: foreignTaskIds,
+    };
+
+    const newState = {
+      ...this.state,
+      lists: {
+        [newHome.id]: newHome,
+        [newForeign.id]: newForeign,
+      },
+    };
+
+    this.setState(newState);
+
+    // const dropId = source.droppableId;
+    // const list = this.state.lists[dropId];
+    // var newCardIds = Array.from(list.taskIds);
+    // newCardIds.splice(source.index, 1);
+    // newCardIds.splice(destination.index, 0, draggableId);
+    // let lists = this.state.lists;
+    // lists[dropId].taskIds = newCardIds;
+    // this.setState({
+    //   lists
+    // })
+
+}
 
   render() {
     const { lists, cards, listOrder } = this.state;
@@ -174,30 +243,53 @@ class App extends Component {
       <div className="App">
         <TrelloNav />
         <BoardNav />
-        <header className="App-header">
-          {listOrder.map(listId => {
+        <DragDropContext 
+                onDragEnd={this.onDragEnd}
+              >
+        <div className="App-header">
+          {listOrder.map((listId, index) => {
             const list = lists[listId];
             const cardList = list.taskIds.map(id => cards[id]);
+            console.log(list);
+            console.log(cardList);
+            console.log(lists);
+            console.log(listId);
             return (
-              <DragDropContext onDragEnd={this.onDragEnd}>
-                <List
+                <Droppable
+                  droppableId="all-columns"
+                  direction="horizontal"  
+                  type="column"
                   key={list.id}
-                  listId={list.id}
-                  list={list}
-                  cardList={cardList}
-                  handleTitleChange={this.handleTitleChange}
-                  addCard={this.addCard}
-                  deleteCard={this.deleteCard}
-                  deleteList={this.deleteList}
-                />
-              </DragDropContext>
+                >
+                  {(provided) => (
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                    {provided.placeholder}
+                    <List
+                      key={list.id}
+                      listId={list.id}
+                      list={list}
+                      cardList={cardList}
+                      handleTitleChange={this.handleTitleChange}
+                      addCard={this.addCard}
+                      deleteCard={this.deleteCard}
+                      deleteList={this.deleteList}
+                      index={index}
+                    />
+                    </div>
+                    
+                  )}
+                </Droppable>
             );
           })}
 
           <button className="add-list-btn" onClick={this.addList}>
             + Add another list
           </button>
-        </header>
+        </div>
+        </DragDropContext>
       </div>
 
     );
