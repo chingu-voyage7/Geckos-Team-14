@@ -7,9 +7,9 @@ import "./App.scss";
 import uuid from "uuid";
 
 import "./App.scss";
-import BoardNav from "./Components/BoardNav/BoardNav.js";
-import MainMenu from "./Components/MainMenu.js";
-import TrelloNav from "./Components/TrelloNav.js";
+import BoardNav from "./Component/BoardNav/BoardNav.js";
+import MainMenu from "./Component/MainMenu.js";
+import TrelloNav from "./Component/TrelloNav.js";
 
 import List from "./Component/List/List";
 
@@ -19,9 +19,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: {},
-      lists: {},
-      listOrder: []
+      cards: {'sample': {
+        id: 'sample',
+        content: 'Sample CheckList',
+        checkListItems: [{item:'Do Laundry', complete:false}, {item:'Clean shoes', complete:false}]
+      }},
+      lists: {'test': {
+        id: 'test',
+        title: 'Testing checklists',
+        taskIds:['sample']
+      }},
+      listOrder: ['test']
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -130,6 +138,15 @@ class App extends Component {
     });
   };
 
+  editCard = (id, editedCard) => {
+    const cards = {...this.state.cards};
+    cards[id] = editedCard;
+    console.log(this.state, cards);
+    this.setState ({
+        cards 
+    }); 
+  }
+
   deleteCard = (cardName, list) => {
     const newTaskIds = list.taskIds.filter(task => task !== cardName);
     const newCards = { ...this.state.cards };
@@ -187,6 +204,7 @@ class App extends Component {
                   cardList={cardList}
                   handleTitleChange={this.handleTitleChange}
                   addCard={this.addCard}
+                  editCard={this.editCard}
                   deleteCard={this.deleteCard}
                   deleteList={this.deleteList}
                 />
