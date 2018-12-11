@@ -2,6 +2,7 @@ import React from 'react';
 import BackgroundType from './Background/BackgroundType.js';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+// import { library, config } from '@fortawesome/fontawesome-svg-core'; config.autoAddCss = false;
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faFill, faBrush, faEllipsisH, faTimes, faTasks } from '@fortawesome/free-solid-svg-icons';
 
@@ -29,44 +30,51 @@ class MainMenu extends React.Component {
 
     //closes and opens the type menu
     toggleBackgroundMenu = () => {
+        // this.updateMenuTitle()
         //arrow shows when type menu and option menus are open
         this.setState((prevState) => ({
             changeBackground: !prevState.changeBackground,
         }))
-        this.updateMenuTitle()
+        
     }
 
     //closes and opens the color options menu
     toggleOptionsMenu = () => {
+        // this.updateMenuTitle()
         this.setState((prevState) => ({
             colorMenu: !prevState.colorMenu,
         }))
         this.props.handleBackgroundColor();  
-        // this.updateMenuTitle()
+        
     }
 
     //closes and opens the image options menu
     toggleImageMenu = () => {
+        // this.updateMenuTitle()
         this.setState((prevState) => ({
             imageMenu: !prevState.colorMenu,
         }))
         this.props.handleBackgroundImage(); 
-        // this.updateMenuTitle()
+        
     }
 
-    updateMenuTitle() {
-        if (this.state.menuTitle === 'Main') {
-            this.setState({
-                menuTitle: 'Change Background'
-            })
-        } else if (this.state.menuTitle === 'Change Background') {
-            this.setState({
-                menuTitle: 'Colors'
-            })
-        }
-    }
+    // updateMenuTitle() {
+    //     if (this.state.colorMenu) {
+    //         this.setState({
+    //             menuTitle: 'Colors'
+    //         })
+    //     } else if (this.state.imageMenu) {
+    //         this.setState({
+    //             menuTitle: 'Photos'
+    //         })
+    //     } else if (this.state.changeBackground) {
+    //         this.setState({
+    //             menuTitle: 'Change Background'
+    //         })
+    //     }
+    // }
 
-
+   
 
     render = () => {
         return (
@@ -104,10 +112,10 @@ class MainMenu extends React.Component {
 
                     <div className="main-menu__section">
                         <ul className="options__list">
-                            <li className="option__item" onClick={this.toggleBackgroundMenu}><FontAwesomeIcon className="icon__item" icon={faBrush} />Change Background</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFilter} />Filter Cards</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFill} />Stickers</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faEllipsisH} />More</li>
+                            <li className="option__item" onClick={this.toggleBackgroundMenu}><FontAwesomeIcon className="icon__item" icon={faBrush} size="sm" />Change Background</li>
+                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFilter} size="sm" />Filter Cards</li>
+                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFill} size="sm" />Stickers</li>
+                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faEllipsisH} size="sm" />More</li>
                         </ul>
                     </div>
                     <div className="main-menu__section">

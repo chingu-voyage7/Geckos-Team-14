@@ -21,7 +21,7 @@
     position: relative;
     transition: .45s all;
     right: -110%;
-    
+    color: $dark-blue
 }
 
 .main-menu--show {
@@ -77,15 +77,18 @@
 
 .options__list {
     text-align: left;
-    margin: 0;
-    padding: 0;
     list-style: none;
+    cursor: pointer;
 }
 
 .option__item {
     font-size: 1.4rem;
     font-weight: bold;
     padding: $menu-horizontal 0;
+    border-radius: 3px;
+    &:hover {
+        background-color: #6b808c3f;
+    }
 }
 
 .item__name {
