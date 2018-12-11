@@ -17,6 +17,7 @@
     padding: .8rem;
     position: relative;
     
+    
     &--title {
         font-size: 1.8rem;
         font-weight: 700;
@@ -27,6 +28,12 @@
         font-size: 1.4rem;
         text-decoration: underline;
         padding-right: .8rem;
+        transition: all 5s ease-in;
+
+    }
+
+    &-wrapper {
+        transition: all 5s ease-in;
     }
     
 }

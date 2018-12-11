@@ -39,7 +39,7 @@ class BoardNav extends Component {
   render() {
     const { showNameMenu, BoardName } = this.state;
     return (
-      <div>
+      <div className="board-nav-wrapper">
         <MainMenu 
           menuState={false} 
           MMisOpen={this.state.MMisOpen} 

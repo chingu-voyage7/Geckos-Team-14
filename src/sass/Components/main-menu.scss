@@ -6,6 +6,7 @@
     top: 45px;
     display: block;
     height: 100%;
+    transition: all .45s ease-in;
 
     &--hide {
         display: none;
@@ -19,18 +20,21 @@
     height: 100vh;
     padding: 0px $menu-horizontal;
     position: relative;
-    transition: .45s all;
+    transition: all .45s ease-in;
+    
     right: -110%;
     color: $dark-blue
 }
 
 .main-menu--show {
     right: 0%;
+    
 }
 
 .main-menu__section  {
     border-bottom: 1px solid $dark-gray;
     padding: $menu-vertical 0px;
+    margin: 0 .5rem;
 }
 
 .main-menu__title {
@@ -45,24 +49,33 @@
 
 .btn--close-menu  {
     border: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background: none;
     color: $slate-gray;
     font-weight: bold;
     position: absolute;
     top: $menu-vertical;
     right: $menu-horizontal;
+
+    &:hover {
+        color: $dark-blue
+    }
 }
 
 .main-menu-arrow {
     border: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background: none;
     color: $slate-gray;
     font-weight: bold;
     
     position: absolute;
     top: $menu-vertical;
+    transition: .25s all;
+
+    &:hover {
+        color: $dark-blue
+    }
     
     &-show {
         left: 2rem;
