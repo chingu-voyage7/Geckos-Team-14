@@ -246,7 +246,17 @@ class App extends Component {
         <DragDropContext 
                 onDragEnd={this.onDragEnd}
               >
-        <div className="App-header">
+              <Droppable
+                  droppableId="all-columns"
+                  direction="horizontal"  
+                  type="column"
+                  key={lists.id}
+                >
+                  {(provided) => (
+        <div className="App-header"
+        {...provided.droppableProps}
+        ref={provided.innerRef}
+        >
           {listOrder.map((listId, index) => {
             const list = lists[listId];
             const cardList = list.taskIds.map(id => cards[id]);
@@ -255,18 +265,18 @@ class App extends Component {
             console.log(lists);
             console.log(listId);
             return (
-                <Droppable
-                  droppableId="all-columns"
-                  direction="horizontal"  
-                  type="column"
-                  key={list.id}
-                >
-                  {(provided) => (
-                    <div
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
-                    {provided.placeholder}
+                // <Droppable
+                //   droppableId="all-columns"
+                //   direction="horizontal"  
+                //   type="column"
+                //   key={list.id}
+                // >
+                //   {(provided) => (
+                    // <div
+                    //   {...provided.droppableProps}
+                    //   ref={provided.innerRef}
+                    // >
+                    // {provided.placeholder}
                     <List
                       key={list.id}
                       listId={list.id}
@@ -277,11 +287,13 @@ class App extends Component {
                       deleteCard={this.deleteCard}
                       deleteList={this.deleteList}
                       index={index}
-                    />
-                    </div>
+                    >
+                    {provided.placeholder}
+                    </List>
+                    // </div>
                     
-                  )}
-                </Droppable>
+                  // )}
+                // </Droppable>
             );
           })}
 
@@ -289,6 +301,8 @@ class App extends Component {
             + Add another list
           </button>
         </div>
+        )}
+        </Droppable>
         </DragDropContext>
       </div>
 
