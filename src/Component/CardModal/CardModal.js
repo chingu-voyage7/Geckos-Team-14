@@ -3,22 +3,20 @@ import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import '../CardModal/datepicker.css';
+import moment from 'moment';
 
 export default class CardModal extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            createdAt : '',
             calendarFocused: false
         }
     }
 
     onDateChange = (createdAt) => {
-        console.log(createdAt);
-        if (createdAt) {
-            this.setState(()=> ({ createdAt }));
-        }
+        const editedCard = {...this.props.card, dueDate:createdAt};
+        this.props.editCard(this.props.card.id, editedCard);
     }
 
     onCalendarFocusChange = ({ focused }) => {
@@ -26,19 +24,23 @@ export default class CardModal extends Component {
     }
 
     render () {
-
-        const { content, isModalOpen, toggleModal } = this.props;
+        const currentDate = moment();
+        const { card, isModalOpen, toggleModal } = this.props;
         return (
             <div className="card-modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
             <div className="card-modal__content">
                 <div className="card-modal__content-title">
-                    <h4>{content}</h4>
+                    <h4>{card.content}</h4>
                     <button onClick={toggleModal}>x</button>
                 </div>
                 <div className="card__details">
-                    {this.props.dueDate && (
-                        <h3>this.props.dueDate</h3>
-                    )}
+                    {card.dueDate && (
+                    <div className="card__due-date">
+                        <h3 className="due-date__title">Due Date</h3>
+                        <p className={(card.dueDate > currentDate ? "due-date__date" : "due-date__date due-date__date--overdue")}>
+                            {moment(card.dueDate).format('MMM Do YYYY')}
+                        </p>
+                    </div>)}
                 </div>
                 <div className="row">
                     <section className="col double-col">
@@ -62,6 +64,7 @@ export default class CardModal extends Component {
                         focused={this.state.calendarFocused}
                         onFocusChange={this.onCalendarFocusChange}
                         numberOfMonths={1}
+                        isOutsideRange={()=> false}
                         />
                         <p>actions</p>
                         <button><i className="fa fa-trash"></i> <span>Delete</span></button>

@@ -87,18 +87,41 @@
     }
   }
 }
- 
-.DateInput_input {
-  background: $gray;
-  text-align: left;
-  padding: 10px 8px;
-  margin: 8px 0px;
-  border: none;
+
+/*** CARD DETAILS ****/
+.card__details {
+  display: flex;
+}
+
+.card__due-date {
   border-radius: 3px;
-  &:hover {
-    background: $dark-gray;
+  width: 20%;
+  min-width: 110px;
+}
+
+.due-date {
+  
+  &__title {
+    color: $slate-gray;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+
+  &__date {
+    background-color: $gray;
+    font-size: 1.4rem;
+    padding: 4px 8px;
+
+    &--overdue {
+      color: $gray;
+      background-color: $red;
+    }
   }
 }
+
+
 
 @media(min-width: 800px) {
   .col {

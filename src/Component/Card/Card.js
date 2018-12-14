@@ -59,7 +59,7 @@ export default class Card extends React.Component {
 
     render() {
         const { isModalOpen } = this.state
-        const { content, deleteCard, cardId, list } = this.props;
+        const { content, editCard, deleteCard, cardId, list, card } = this.props;
         return (
             <Fragment>
                 <Draggable draggableId={this.props.cardId} index={this.props.index}>
@@ -83,7 +83,7 @@ export default class Card extends React.Component {
 
                     )}
                 </Draggable>
-                <CardModal content={content} toggleModal={this.toggleModal} isModalOpen={isModalOpen} />
+                <CardModal card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} editCard={editCard}/>
             </Fragment>
         )
     }
