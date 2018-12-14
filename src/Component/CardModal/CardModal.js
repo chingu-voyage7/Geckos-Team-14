@@ -15,6 +15,7 @@ export default class CardModal extends Component {
     }
 
     onDateChange = (createdAt) => {
+        console.log(createdAt);
         if (createdAt) {
             this.setState(()=> ({ createdAt }));
         }
@@ -33,6 +34,11 @@ export default class CardModal extends Component {
                 <div className="card-modal__content-title">
                     <h4>{content}</h4>
                     <button onClick={toggleModal}>x</button>
+                </div>
+                <div className="card__details">
+                    {this.props.dueDate && (
+                        <h3>this.props.dueDate</h3>
+                    )}
                 </div>
                 <div className="row">
                     <section className="col double-col">
