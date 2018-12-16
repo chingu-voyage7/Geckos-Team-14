@@ -1,15 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  // font-family: Helvetica Neue, Arial,Helvetica,sans-serif;
+  text-align: left;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button:disabled {
-    cursor: default;
+  cursor: default;
+}
+
+
+/*** BUTTONS ***/
+.btn {
+  padding: $menu-horizontal $menu-vertical;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn--submit {
+  background-color: $green;
+  color: #fff;
 }

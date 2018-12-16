@@ -1,7 +1,10 @@
 @import './sass/main.scss';
 
 .App {
-  text-align: center;
+
+  text-align: left;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .App-logo {
@@ -10,7 +13,7 @@
 }
 
 .App-header {
-  background-color: $primary-color;
+  // background-color: $primary-color;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -21,7 +24,7 @@
 }
 
 .App-link {
-  color: $test-color;
+  // color: $test-color;
 }
 
 @keyframes App-logo-spin {
@@ -31,4 +34,5 @@
   to {
     transform: rotate(360deg);
   }
+
 }
