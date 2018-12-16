@@ -1,16 +1,25 @@
 .main-menu__wrapper {
     z-index: 10;
     overflow-x: hidden;
-    right: 0%;
+    
     position: absolute;
     top: 45px;
     display: block;
+    right: 0%;
     height: 100%;
-    transition: all .45s ease-in;
+    
+    transition: 5s all !important;
+    
+    // transition: all .45s ease-in;
+   
+        
+    
 
     &--hide {
         display: none;
+        right: -110%;
     }
+
 }
 
 .main-menu {
@@ -20,16 +29,21 @@
     height: 100vh;
     padding: 0px $menu-horizontal;
     position: relative;
-    transition: all .45s ease-in;
+    color: $dark-blue;
+    transition: transform 5s !important;
+
+    &--show {
+        right: 0%; 
+    }
     
-    right: -110%;
-    color: $dark-blue
+    &--hide {
+        
+        transform: translateX(-110%); 
+    }
 }
 
-.main-menu--show {
-    right: 0%;
-    
-}
+
+
 
 .main-menu__section  {
     border-bottom: 1px solid $dark-gray;
@@ -97,7 +111,8 @@
 .option__item {
     font-size: 1.4rem;
     font-weight: bold;
-    padding: $menu-horizontal 0;
+    padding: .6rem .3rem;
+    line-height: 1.8rem;
     border-radius: 3px;
     &:hover {
         background-color: #6b808c3f;
@@ -112,10 +127,22 @@
 .activity-menu__title {
     text-align: left;
     font-size: 1.4rem;
+    width: 100%;
+    border-radius: .3rem;
+    font-weight: bold;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #6b808c3f;
+    }
 }
 
 .icon__item {
-    display: inline-block;
+    padding: .6rem .3rem;
+}
+
+.menu-icon {
     color: $slate-gray;
-    padding: 0 $icon-column;
+    padding: .5rem;
+    margin-right: .5rem;
 }

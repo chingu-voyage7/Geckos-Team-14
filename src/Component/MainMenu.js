@@ -79,7 +79,7 @@ class MainMenu extends React.Component {
     render = () => {
         return (
             <div className={this.props.MMisOpen ? "main-menu__wrapper" : "main-menu__wrapper--hide"}>
-                <div className={this.props.MMisOpen ? "main-menu main-menu--show" : "main-menu "}>
+                <div className={this.props.MMisOpen ? "main-menu main-menu--show" : "main-menu main-menu--hide "}>
                     <BackgroundType
                         changeBackground={this.state.changeBackground}
                         toggleOptionsMenu={this.toggleOptionsMenu}
@@ -118,14 +118,14 @@ class MainMenu extends React.Component {
 
                     <div className="main-menu__section">
                         <ul className="options__list">
-                            <li className="option__item" onClick={this.toggleBackgroundMenu}><FontAwesomeIcon className="icon__item" icon={faBrush} size="sm" />Change Background</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFilter} size="sm" />Filter Cards</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFill} size="sm" />Stickers</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faEllipsisH} size="sm" />More</li>
+                            <li className="option__item icon__item" onClick={this.toggleBackgroundMenu}><i class="fas fa-brush menu-icon"></i>Change Background</li>
+                            <li className="option__item icon__item"><i class="fas fa-filter menu-icon"></i>Filter Cards</li>
+                            <li className="option__item icon__item"><i class="fas fa-fill menu-icon"></i>Stickers</li>
+                            <li className="option__item icon__item"><i class="fas fa-ellipsis-h menu-icon"></i>More</li>
                         </ul>
                     </div>
                     <div className="main-menu__section">
-                        <h3 className="activity-menu__title"><FontAwesomeIcon className="icon__item" icon={faTasks} />Activity</h3>
+                        <h3 className="activity-menu__title icon__item"><i class="fas fa-tasks menu-icon"></i>Activity</h3>
                     </div>
 
                 </div>

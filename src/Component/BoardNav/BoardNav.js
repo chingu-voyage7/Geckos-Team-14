@@ -15,9 +15,9 @@ class BoardNav extends Component {
   toggleCloseButton = (e) => {
     e.preventDefault();
     this.setState((prevState) => ({
-        MMisOpen : !prevState.MMisOpen
+      MMisOpen: !prevState.MMisOpen
     }))
-}
+  }
 
   // -- update name menu --
   handleShowMenu = () => {
@@ -30,30 +30,39 @@ class BoardNav extends Component {
   handleNameSubmit = e => {
     e.preventDefault();
     const newName = e.target.elements.name.value
-    this.setState({
-      BoardName: newName,
-      showNameMenu: false,
-    });
+    const inputLength = newName.length;
+    if (inputLength !== 0) {
+      this.setState({
+        BoardName: newName,
+        showNameMenu: false,
+      });
+    }
   }
 
   render() {
     const { showNameMenu, BoardName } = this.state;
     return (
       <div className="board-nav-wrapper">
-        <MainMenu 
-          menuState={false} 
-          MMisOpen={this.state.MMisOpen} 
+        <MainMenu
+          menuState={false}
+          MMisOpen={this.state.MMisOpen}
           toggleCloseButton={this.toggleCloseButton}
           handleBackgroundChange={this.props.handleBackgroundChange}
           handleBackgroundColor={this.props.handleBackgroundColor}
           handleBackgroundImage={this.props.handleBackgroundImage}
-           />
+        />
         <div className="board-nav">
-          <button
-            onClick={this.handleShowMenu}
-            className="btn board-nav--title">
-            {BoardName}
-          </button>
+          <div className="menu-wrapper">
+            <button
+              onClick={this.handleShowMenu}
+              className="btn board-nav--title">
+              {BoardName}
+            </button>
+            <button 
+              className="btn board-star">
+              <i class="far fa-star"></i>
+            </button>
+          </div>
           <button className="btn board-nav--menu" onClick={this.toggleCloseButton}><i className="fas fa-ellipsis-h"></i>Show Menu</button>
           {
             showNameMenu && (
