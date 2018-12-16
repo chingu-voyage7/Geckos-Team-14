@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import CardForm from "../Card/CardForm";
-import styled from 'styled-components';
 import Card from "../Card/Card";
-
-const Container = styled.ul`
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : '')};
-  flex-grow: 1;
-  min-height: 55px;
-`;
 
 class List extends Component {
   state = {
@@ -108,18 +101,18 @@ class List extends Component {
             <h3 onClick={this.toggleTitleForm}>{title}</h3>
           )}
         </div>
+        {provided.placeholder}
 
         {
               <Droppable 
                 droppableId={this.props.listId}
                 type="task"
               >
-                {(provided, snapshot) => (
-                  <Container
+                {(provided) => (
+                  <ul
                     className="card-list"
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    isDraggingOver={snapshot.isDraggingOver}
                   >
                     {provided.placeholder}
                     {cardList.map((card, index) => (
@@ -135,7 +128,7 @@ class List extends Component {
                       </Card>
                     ))}
                   {/* </ul> */}
-                  </Container>
+                  </ul>
                 )}
               </Droppable>          
         }

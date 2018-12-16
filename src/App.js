@@ -23,8 +23,6 @@ class App extends Component {
       lists: {},
       listOrder: []
     };
-
-    this.onDragEnd = this.onDragEnd.bind(this);
   }
   
 
@@ -142,9 +140,6 @@ class App extends Component {
     }
     this.setState({ cards: newCards, lists: list_copy });
   };
-  // onDragStart = () => {
-  //   document.text.style.color = 'orange';
-  // }
 
   onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
@@ -217,24 +212,13 @@ class App extends Component {
     const newState = {
       ...this.state,
       lists: {
+        ...this.state.lists,
         [newHome.id]: newHome,
         [newForeign.id]: newForeign,
       },
     };
 
     this.setState(newState);
-
-    // const dropId = source.droppableId;
-    // const list = this.state.lists[dropId];
-    // var newCardIds = Array.from(list.taskIds);
-    // newCardIds.splice(source.index, 1);
-    // newCardIds.splice(destination.index, 0, draggableId);
-    // let lists = this.state.lists;
-    // lists[dropId].taskIds = newCardIds;
-    // this.setState({
-    //   lists
-    // })
-
 }
 
   render() {
@@ -244,39 +228,23 @@ class App extends Component {
         <TrelloNav />
         <BoardNav />
         <DragDropContext 
-                onDragEnd={this.onDragEnd}
-              >
-              <Droppable
-                  droppableId="all-columns"
-                  direction="horizontal"  
-                  type="column"
-                  key={lists.id}
-                >
-                  {(provided) => (
-        <div className="App-header"
-        {...provided.droppableProps}
-        ref={provided.innerRef}
+          onDragEnd={this.onDragEnd}
         >
-          {listOrder.map((listId, index) => {
-            const list = lists[listId];
-            const cardList = list.taskIds.map(id => cards[id]);
-            console.log(list);
-            console.log(cardList);
-            console.log(lists);
-            console.log(listId);
-            return (
-                // <Droppable
-                //   droppableId="all-columns"
-                //   direction="horizontal"  
-                //   type="column"
-                //   key={list.id}
-                // >
-                //   {(provided) => (
-                    // <div
-                    //   {...provided.droppableProps}
-                    //   ref={provided.innerRef}
-                    // >
-                    // {provided.placeholder}
+          <Droppable
+            droppableId="all-columns"
+            direction="horizontal"  
+            type="column"
+            key={lists.id}
+          >
+            {(provided) => (
+              <div className="App-header"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              >
+                {listOrder.map((listId, index) => {
+                  const list = lists[listId];
+                  const cardList = list.taskIds.map(id => cards[id]);
+                  return (
                     <List
                       key={list.id}
                       listId={list.id}
@@ -288,14 +256,10 @@ class App extends Component {
                       deleteList={this.deleteList}
                       index={index}
                     >
-                    {provided.placeholder}
+                      {provided.placeholder}
                     </List>
-                    // </div>
-                    
-                  // )}
-                // </Droppable>
-            );
-          })}
+                  );
+                })}
 
           <button className="add-list-btn" onClick={this.addList}>
             + Add another list
