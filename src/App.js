@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { DragDropContext } from 'react-beautiful-dnd';
-import logo from "./logo.svg";
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -8,14 +7,14 @@ import uuid from "uuid";
 
 import "./App.scss";
 import BoardNav from "./Component/BoardNav/BoardNav.js";
-import MainMenu from "./Component/MainMenu.js";
+//import MainMenu from "./Component/MainMenu.js";
 import TrelloNav from "./Component/TrelloNav.js";
 
 import List from "./Component/List/List";
-import BackgroundSelection from "./Component/Background/BackgroundSelection";
+//import BackgroundSelection from "./Component/Background/BackgroundSelection";
 
 import Dragon from './sass/images/dragon.jpg';
-import { faImages } from "@fortawesome/free-solid-svg-icons";
+//import { faImages } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
 
@@ -27,6 +26,7 @@ class App extends Component {
 
       cards: {'sample': {
         id: 'sample',
+        dueDate: '',
         content: 'Sample CheckList',
         checkListItems: [{item:'Do Laundry', complete:false}, {item:'Clean shoes', complete:false}]
       }},
@@ -157,7 +157,6 @@ this.setState({
   editCard = (id, editedCard) => {
     const cards = {...this.state.cards};
     cards[id] = editedCard;
-    console.log(this.state, cards);
     this.setState ({
         cards 
     }); 
