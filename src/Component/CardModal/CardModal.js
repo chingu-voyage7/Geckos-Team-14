@@ -60,7 +60,6 @@ export default class CardModal extends Component {
             checkListItems : editedCheckList
             }
         this.props.editCard(this.props.cardId, editedCard);
-        console.log(editedCheckList);
         }
 
     render () {
