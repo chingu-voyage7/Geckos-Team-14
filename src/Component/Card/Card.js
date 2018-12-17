@@ -10,13 +10,13 @@ export default class Card extends React.Component {
     state = {
         isModalOpen: false
     }
-    
+
     addCheckListItem = (itemToAdd) => {
         if (itemToAdd) {
             const newCheckList = [...this.props.card.checkListItems, itemToAdd];
             const editedCard = {
                 ...this.props.card,
-                checkListItems : newCheckList
+                checkListItems: newCheckList
             }
             this.props.editCard(this.props.cardId, editedCard);
         }
@@ -29,25 +29,25 @@ export default class Card extends React.Component {
     onDeleteCheckListItem = index => {
         const editedCheckList = this.props.card.checkListItems.filter((item, currIndex) => currIndex !== index);
         const editedCard = {
-          ...this.props.card,
-          checkListItems : editedCheckList
-          }
+            ...this.props.card,
+            checkListItems: editedCheckList
+        }
         this.props.editCard(this.props.cardId, editedCard);
-        console.log(editedCheckList); 
+        console.log(editedCheckList);
     }
 
-  onToggleCheckBox = index => {
-      const toggledCheckListItem = this.props.card.checkListItems[index];
-      const editedCheckListItem = {item: toggledCheckListItem.item, complete: !toggledCheckListItem.complete};
-      const editedCheckList = this.props.card.checkListItems.map((item, currIndex) =>{
-          return (currIndex === index ? editedCheckListItem : item);
-      });
-      const editedCard = {
-        ...this.props.card,
-        checkListItems : editedCheckList
+    onToggleCheckBox = index => {
+        const toggledCheckListItem = this.props.card.checkListItems[index];
+        const editedCheckListItem = { item: toggledCheckListItem.item, complete: !toggledCheckListItem.complete };
+        const editedCheckList = this.props.card.checkListItems.map((item, currIndex) => {
+            return (currIndex === index ? editedCheckListItem : item);
+        });
+        const editedCard = {
+            ...this.props.card,
+            checkListItems: editedCheckList
         }
-      this.props.editCard(this.props.cardId, editedCard);
-      console.log(editedCheckList);
+        this.props.editCard(this.props.cardId, editedCard);
+        console.log(editedCheckList);
     }
 
     toggleModal = () => {
@@ -59,7 +59,7 @@ export default class Card extends React.Component {
 
     render() {
         const { isModalOpen } = this.state
-        const { content, editCard, deleteCard, cardId, list, card } = this.props;
+        const { content, editCard, deleteCard, cardId, list, card, addCardDescription } = this.props;
         return (
             <Fragment>
                 <Draggable draggableId={this.props.cardId} index={this.props.index}>
@@ -83,7 +83,7 @@ export default class Card extends React.Component {
 
                     )}
                 </Draggable>
-                <CardModal card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} editCard={editCard}/>
+                <CardModal card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
             </Fragment>
         )
     }
