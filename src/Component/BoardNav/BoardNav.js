@@ -8,6 +8,7 @@ class BoardNav extends Component {
     showNameMenu: false,
 
     MMisOpen: false,
+    starColor: 'white',
   };
 
   // -- handle main menu --
@@ -31,13 +32,21 @@ class BoardNav extends Component {
     e.preventDefault();
     const newName = e.target.elements.name.value
     const inputLength = newName.length;
-    if (inputLength !== 0) {
+    if (inputLength === 0) {
+      alert('please enter a name')
+    } else if (inputLength !== 0) {
       this.setState({
         BoardName: newName,
         showNameMenu: false,
       });
-    }
+    } 
   }
+
+  toggleYellow = () => {
+    this.setState((prevState) => ({
+      starColor: (prevState.starColor === '#f2d600' ? 'white' : '#f2d600')
+    }));
+  };
 
   render() {
     const { showNameMenu, BoardName } = this.state;
@@ -59,7 +68,7 @@ class BoardNav extends Component {
               {BoardName}
             </button>
             <button 
-              className="btn board-star">
+              className="btn board-star" onClick={this.toggleYellow} style={{color: `${this.state.starColor}`}}>
               <i class="far fa-star"></i>
             </button>
           </div>

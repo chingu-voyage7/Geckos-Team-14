@@ -6,11 +6,12 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faFill, faBrush, faEllipsisH, faTimes, faTasks } from '@fortawesome/free-solid-svg-icons';
 
+const menuTitles = ['Menu', 'Change Background', ['Colors', 'Photos']];
 
 class MainMenu extends React.Component {
 
     state = {
-        menuTitle: 'Menu',
+        menuTitle: menuTitles[0],
         TypeMenuTitle: true,
 
         changeBackground: false,
@@ -30,50 +31,37 @@ class MainMenu extends React.Component {
 
     //closes and opens the type menu
     toggleBackgroundMenu = () => {
-        
+
         //arrow shows when type menu and option menus are open
         this.setState((prevState) => ({
             changeBackground: !prevState.changeBackground,
+            menuTitle: prevState.changeBackground ? 'Menu' : 'Change Background'
         }))
-        
     }
 
     //closes and opens the color options menu
     toggleOptionsMenu = () => {
-        
         this.setState((prevState) => ({
             colorMenu: !prevState.colorMenu,
+            menuTitle: !prevState.colorMenu ? 'Colors' : 'Change Background'
         }))
         this.props.handleBackgroundColor();
-        
+
     }
 
     //closes and opens the image options menu
     toggleImageMenu = () => {
-        
+
         this.setState((prevState) => ({
             imageMenu: !prevState.colorMenu,
+            menuTitle: !prevState.imageMenu ? 'Photos' : 'Change Background'
         }))
         this.props.handleBackgroundImage();
-        
     }
 
-    // updateMenuTitle() {
-    //     if (this.state.menuTitle === 'Menu') {
-    //         this.setState({
-    //             menuTitle: 'Change Background'
-    //         })
-    //     } else if (this.state.menuTitle === 'Change Background') {
-    //         this.setState({
-    //             menuTitle: 'Colors'
-    //         })
-    //     } else if (!this.state.imageMenu) {
-    //         this.setState({
-    //             menuTitle: 'Photos'
-    //         })
-    //     } 
-    // }
-
+    // updateMenuTitle = () => {
+       
+    // };
 
 
     render = () => {
