@@ -4,6 +4,7 @@ import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import '../CardModal/datepicker.css';
 import moment from 'moment';
+import CheckList from '../Card/CheckList';
 
 export default class CardModal extends Component {
 
@@ -22,6 +23,45 @@ export default class CardModal extends Component {
     onCalendarFocusChange = ({ focused }) => {
         this.setState(() => ({ calendarFocused : focused }));
     }
+
+    addCheckListItem = (itemToAdd) => {
+        if (itemToAdd) {
+            const newCheckList = [...this.props.card.checkListItems, itemToAdd];
+            const editedCard = {
+                ...this.props.card,
+                checkListItems : newCheckList
+            }
+            this.props.editCard(this.props.cardId, editedCard);
+        }
+    }
+
+    onChangeCheckListItem = itemClicked => {
+        this.props.onChangeCheckListItem(this.props.cardId, itemClicked);
+    }
+
+    onDeleteCheckListItem = index => {
+        const editedCheckList = this.props.card.checkListItems.filter((item, currIndex) => currIndex !== index);
+        const editedCard = {
+          ...this.props.card,
+          checkListItems : editedCheckList
+          }
+        this.props.editCard(this.props.cardId, editedCard);
+        console.log(editedCheckList); 
+    }
+
+    onToggleCheckBox = index => {
+        const toggledCheckListItem = this.props.card.checkListItems[index];
+        const editedCheckListItem = {item: toggledCheckListItem.item, complete: !toggledCheckListItem.complete};
+        const editedCheckList = this.props.card.checkListItems.map((item, currIndex) =>{
+            return (currIndex === index ? editedCheckListItem : item);
+        });
+        const editedCard = {
+            ...this.props.card,
+            checkListItems : editedCheckList
+            }
+        this.props.editCard(this.props.cardId, editedCard);
+        console.log(editedCheckList);
+        }
 
     render () {
         const currentDate = moment();
@@ -52,6 +92,14 @@ export default class CardModal extends Component {
                                     className="description__form-textarea"></textarea>
                             </form>
                         </div>
+                        {card.checkListItems && (
+                            <CheckList 
+                                items={card.checkListItems} 
+                                onToggleCheckBox={this.onToggleCheckBox} 
+                                addCheckListItem={this.addCheckListItem}
+                                onDeleteCheckListItem={this.onDeleteCheckListItem}
+                            />
+                        )}
                     </section>
                     <aside className="col">
                         <p>add to card</p>
