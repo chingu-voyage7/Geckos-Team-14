@@ -63,6 +63,7 @@ export default class CardModal extends Component {
                         onDateChange={this.onDateChange}
                         focused={this.state.calendarFocused}
                         onFocusChange={this.onCalendarFocusChange}
+                        hideKeyboardShortcutsPanel={true}
                         numberOfMonths={1}
                         isOutsideRange={()=> false}
                         />
