@@ -4,7 +4,7 @@ import BackgroundType from './Background/BackgroundType.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { library, config } from '@fortawesome/fontawesome-svg-core'; config.autoAddCss = false;
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faFill, faBrush, faEllipsisH, faTimes, faTasks } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const menuTitles = ['Menu', 'Change Background', ['Colors', 'Photos']];
 
@@ -106,14 +106,14 @@ class MainMenu extends React.Component {
 
                     <div className="main-menu__section">
                         <ul className="options__list">
-                            <li className="option__item icon__item" onClick={this.toggleBackgroundMenu}><i class="fas fa-brush menu-icon"></i>Change Background</li>
-                            <li className="option__item icon__item"><i class="fas fa-filter menu-icon"></i>Filter Cards</li>
-                            <li className="option__item icon__item"><i class="fas fa-fill menu-icon"></i>Stickers</li>
-                            <li className="option__item icon__item"><i class="fas fa-ellipsis-h menu-icon"></i>More</li>
+                            <li className="option__item icon__item" onClick={this.toggleBackgroundMenu}><i className="fas fa-brush menu-icon"></i>Change Background</li>
+                            <li className="option__item icon__item"><i className="fas fa-filter menu-icon"></i>Filter Cards</li>
+                            <li className="option__item icon__item"><i className="fas fa-fill menu-icon"></i>Stickers</li>
+                            <li className="option__item icon__item"><i className="fas fa-ellipsis-h menu-icon"></i>More</li>
                         </ul>
                     </div>
                     <div className="main-menu__section">
-                        <h3 className="activity-menu__title icon__item"><i class="fas fa-tasks menu-icon"></i>Activity</h3>
+                        <h3 className="activity-menu__title icon__item"><i className="fas fa-tasks menu-icon"></i>Activity</h3>
                     </div>
 
                 </div>

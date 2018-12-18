@@ -69,7 +69,7 @@ class BoardNav extends Component {
             </button>
             <button 
               className="btn board-star" onClick={this.toggleYellow} style={{color: `${this.state.starColor}`}}>
-              <i class="far fa-star"></i>
+              <i className="far fa-star"></i>
             </button>
           </div>
           <button className="btn board-nav--menu" onClick={this.toggleCloseButton}><i className="fas fa-ellipsis-h"></i>Show Menu</button>
