@@ -33,7 +33,7 @@ const CheckList = (props) => {
                 }
             }}>
                 <input type="text" name="addItem"/>
-                <button className="btn btn--submit btn--full">Add CheckList Item</button>
+                <button className="btn btn--submit">Add CheckList Item</button>
             </form>
         </div>
     );

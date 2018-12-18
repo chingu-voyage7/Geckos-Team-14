@@ -5,6 +5,10 @@
 background-color: $gray;
 }
 
+.checklist__title {
+    font-size: $standard-text;
+}
+
 .checklist__items {
     list-style: none;
     padding: 0;
