@@ -9,10 +9,12 @@ import Scene6 from './images/scene6.jpg';
 import Scene7 from './images/scene7.jpg';
 import Scene8 from './images/scene8.jpg';
 import Scene9 from './images/scene9.jpg';
+import Dragon from './images/dragon.jpg';
+import Sunset from './images/sunset.jpg';
 
 let backgrounds = {
     Colors: ['#3D348B', '#7678ED', '#F7B801', '#F18701', '#F35B04', '#119DA4', '#19647E'],
-    Images: [Scene1, Scene2, Scene3, Scene4, Scene5, Scene6, Scene7, Scene8, Scene9],
+    Images: [Scene1, Scene2, Scene3, Scene4, Scene5, Scene6, Scene7, Scene8, Scene9, Dragon, Sunset],
 }
 
 class BackgroundSelection extends Component {

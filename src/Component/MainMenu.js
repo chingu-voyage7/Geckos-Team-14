@@ -4,13 +4,14 @@ import BackgroundType from './Background/BackgroundType.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { library, config } from '@fortawesome/fontawesome-svg-core'; config.autoAddCss = false;
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faFill, faBrush, faEllipsisH, faTimes, faTasks } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
+const menuTitles = ['Menu', 'Change Background', ['Colors', 'Photos']];
 
 class MainMenu extends React.Component {
 
     state = {
-        menuTitle: 'Menu',
+        menuTitle: menuTitles[0],
         TypeMenuTitle: true,
 
         changeBackground: false,
@@ -30,56 +31,43 @@ class MainMenu extends React.Component {
 
     //closes and opens the type menu
     toggleBackgroundMenu = () => {
-        
+
         //arrow shows when type menu and option menus are open
         this.setState((prevState) => ({
             changeBackground: !prevState.changeBackground,
+            menuTitle: prevState.changeBackground ? 'Menu' : 'Change Background'
         }))
-        
     }
 
     //closes and opens the color options menu
     toggleOptionsMenu = () => {
-        
         this.setState((prevState) => ({
             colorMenu: !prevState.colorMenu,
+            menuTitle: !prevState.colorMenu ? 'Colors' : 'Change Background'
         }))
         this.props.handleBackgroundColor();
-        
+
     }
 
     //closes and opens the image options menu
     toggleImageMenu = () => {
-        
+
         this.setState((prevState) => ({
             imageMenu: !prevState.colorMenu,
+            menuTitle: !prevState.imageMenu ? 'Photos' : 'Change Background'
         }))
         this.props.handleBackgroundImage();
-        
     }
 
-    // updateMenuTitle() {
-    //     if (this.state.menuTitle === 'Menu') {
-    //         this.setState({
-    //             menuTitle: 'Change Background'
-    //         })
-    //     } else if (this.state.menuTitle === 'Change Background') {
-    //         this.setState({
-    //             menuTitle: 'Colors'
-    //         })
-    //     } else if (!this.state.imageMenu) {
-    //         this.setState({
-    //             menuTitle: 'Photos'
-    //         })
-    //     } 
-    // }
-
+    // updateMenuTitle = () => {
+       
+    // };
 
 
     render = () => {
         return (
             <div className={this.props.MMisOpen ? "main-menu__wrapper" : "main-menu__wrapper--hide"}>
-                <div className={this.props.MMisOpen ? "main-menu main-menu--show" : "main-menu "}>
+                <div className={this.props.MMisOpen ? "main-menu main-menu--show" : "main-menu main-menu--hide "}>
                     <BackgroundType
                         changeBackground={this.state.changeBackground}
                         toggleOptionsMenu={this.toggleOptionsMenu}
@@ -118,14 +106,14 @@ class MainMenu extends React.Component {
 
                     <div className="main-menu__section">
                         <ul className="options__list">
-                            <li className="option__item" onClick={this.toggleBackgroundMenu}><FontAwesomeIcon className="icon__item" icon={faBrush} size="sm" />Change Background</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFilter} size="sm" />Filter Cards</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faFill} size="sm" />Stickers</li>
-                            <li className="option__item"><FontAwesomeIcon className="icon__item" icon={faEllipsisH} size="sm" />More</li>
+                            <li className="option__item icon__item" onClick={this.toggleBackgroundMenu}><i className="fas fa-brush menu-icon"></i>Change Background</li>
+                            <li className="option__item icon__item"><i className="fas fa-filter menu-icon"></i>Filter Cards</li>
+                            <li className="option__item icon__item"><i className="fas fa-fill menu-icon"></i>Stickers</li>
+                            <li className="option__item icon__item"><i className="fas fa-ellipsis-h menu-icon"></i>More</li>
                         </ul>
                     </div>
                     <div className="main-menu__section">
-                        <h3 className="activity-menu__title"><FontAwesomeIcon className="icon__item" icon={faTasks} />Activity</h3>
+                        <h3 className="activity-menu__title icon__item"><i className="fas fa-tasks menu-icon"></i>Activity</h3>
                     </div>
 
                 </div>
