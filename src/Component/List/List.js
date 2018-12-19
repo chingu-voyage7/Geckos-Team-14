@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 import CardForm from "../Card/CardForm";
-
 import Card from "../Card/Card";
 
 class List extends Component {
@@ -75,7 +74,17 @@ class List extends Component {
     const { id, title } = this.props.list;
     const { handleTitleChange, cardList } = this.props;
     return (
-      <div className="list">
+    <Draggable
+      draggableId={this.props.listId}
+      index={this.props.index}
+    >
+      {(provided) => (
+      <div 
+        className="list"
+        {...provided.draggableProps}
+        ref={provided.innerRef}
+        {...provided.dragHandleProps}
+      >
         <div className="list--title">
           {// if form has not been submitted, show form. Also, show form if isEdit is true
           !isSubmitted || isEdit ? (
@@ -92,32 +101,38 @@ class List extends Component {
             <h3 onClick={this.toggleTitleForm}>{title}</h3>
           )}
         </div>
+        {provided.placeholder}
 
         {
-
-          <Droppable droppableId={this.props.listId}>
-            {provided => (
-              <ul
-                className="card-list"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
+              <Droppable 
+                droppableId={this.props.listId}
+                type="task"
               >
-                {cardList.map((card, index) => (
-                  <Card
-                    key={card.id}
-                    cardId={card.id}
-                    content={card.content}
-                    index={index}
-                    card={card}
-                    deleteCard={this.props.deleteCard}
-                    list={this.props.list}
-                    editCard={this.props.editCard}
-                  />
-                ))}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
+                {(provided) => (
+                  <ul
+                    className="card-list"
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {provided.placeholder}
+                    {cardList.map((card, index) => (
+                      <Card
+                        key={card.id}
+                        cardId={card.id}
+                        content={card.content}
+                        index={index}
+                        card={card}
+                        deleteCard={this.props.deleteCard}
+                        list={this.props.list}
+                        editCard={this.props.editCard}
+                      >
+                      {/* {provided.placeholder} */}
+                      </Card>
+                    ))}
+                  {/* </ul> */}
+                  </ul>
+                )}
+              </Droppable>
         }
 
         {// if showCardForm is true, show form
@@ -145,7 +160,9 @@ class List extends Component {
         >
           Delete List
         </button>
-      </div>
+      </div>)}
+
+      </Draggable>
     );
   }
 }
