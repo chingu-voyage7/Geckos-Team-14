@@ -28,7 +28,7 @@ class App extends Component {
         id: 'sample',
         dueDate: '',
         content: 'Sample CheckList',
-        checkListItems: [{item:'Do Laundry', complete:false}, {item:'Clean shoes', complete:false}]
+        checkListItems: []
       }},
       lists: {'test': {
         id: 'test',

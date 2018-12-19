@@ -25,7 +25,12 @@ export default class CardModal extends Component {
     }
     createNewCheckList = () => {
         console.log("create a list");
-        this.addCheckListItem({});
+        const newCheckList = [];
+        const editedCard = {
+            ...this.props.card,
+            checkListItems : newCheckList
+        } 
+        this.props.editCard(this.props.cardId, editedCard);
     }
 
     addCheckListItem = (itemToAdd) => {
