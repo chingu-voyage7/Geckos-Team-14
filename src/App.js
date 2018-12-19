@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -41,9 +41,23 @@ class App extends Component {
       },
       listOrder: ['test']
     };
-
-    this.onDragEnd = this.onDragEnd.bind(this);
   }
+
+
+  // addList = () => {
+  //   const { lists } = this.state;
+  //   const listId = uuid().replace(/-/g, "");
+  //   const newList = Object.assign(lists, {
+  //     [listId]: {
+  //       id: listId,
+  //       title: "",
+  //       taskIds: []
+  //     }
+  //   });
+  //   this.setState({
+  //     lists: newList
+  //   });
+  // console.log(lists);
 
   handleBackgroundColor = () => { this.setState({ backgroundType: 'Colors' }) }
 
@@ -53,6 +67,8 @@ class App extends Component {
     let styleType = ((this.state.backgroundType === 'Colors') ? { backgroundColor: `${newBackground}` } : { backgroundImage: `url(${newBackground})` })
     this.setState({ styleType })
   }
+  // console.log(lists);
+  // };
 
 
   addList = () => {
@@ -68,7 +84,7 @@ class App extends Component {
     this.setState({
       lists: newList
     });
-    console.log(lists);
+    // console.log(lists);
 
     // add the created list inside the listOrder array
     for (let list in lists) {
@@ -76,7 +92,7 @@ class App extends Component {
         listOrder: [...this.state.listOrder, list]
       });
     }
-    console.log(lists);
+    // console.log(lists);
   };
 
   // const newTaskIds = list.taskIds.filter(task => task !== cardName);
@@ -179,6 +195,7 @@ class App extends Component {
     })
   }
 
+
   //   deleteCard = (cardName, list) => {
   //     const newTaskIds = list.taskIds.filter(task => task !== cardName);
   //     const newCards = { ...this.state.cards };
@@ -211,8 +228,9 @@ class App extends Component {
     }
     this.setState({ cards: newCards, lists: list_copy });
   };
+
   onDragEnd = result => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
     if (!destination) {
       return;
@@ -223,19 +241,85 @@ class App extends Component {
     ) {
       return;
     }
+    if (type === 'column') {
+      const newListOrder = Array.from(this.state.listOrder);
+      newListOrder.splice(source.index, 1);
+      newListOrder.splice(destination.index, 0, draggableId);
 
-    const dropId = source.droppableId;
-    const list = this.state.lists[dropId];
-    var newCardIds = Array.from(list.taskIds);
-    newCardIds.splice(source.index, 1);
-    newCardIds.splice(destination.index, 0, draggableId);
-    let lists = this.state.lists;
-    lists[dropId].taskIds = newCardIds;
-    this.setState({
-      lists
-    })
+      const newState = {
+        ...this.state,
+        listOrder: newListOrder,
+      };
+      this.setState(newState);
+      return;
+    }
 
+    const home = this.state.lists[source.droppableId];
+    const foreign = this.state.lists[destination.droppableId];
+
+    if (home === foreign) {
+      const newCardIds = Array.from(home.taskIds);
+      newCardIds.splice(source.index, 1);
+      newCardIds.splice(destination.index, 0, draggableId);
+
+      const newList = {
+        ...home,
+        taskIds: newCardIds,
+      }
+
+      const newState = {
+        ...this.state,
+        lists: {
+          ...this.state.lists,
+          [newList.id]: newList,
+        },
+      };
+
+      this.setState(newState);
+      return;
+    }
+
+    // Moving from one list to another
+    const homeTaskIds = Array.from(home.taskIds);
+    homeTaskIds.splice(source.index, 1);
+
+    const newHome = {
+      ...home,
+      taskIds: homeTaskIds,
+    };
+
+    const foreignTaskIds = Array.from(foreign.taskIds);
+    foreignTaskIds.splice(destination.index, 0, draggableId);
+
+    const newForeign = {
+      ...foreign,
+      taskIds: foreignTaskIds,
+    };
+
+    const newState = {
+      ...this.state,
+      lists: {
+        ...this.state.lists,
+        [newHome.id]: newHome,
+        [newForeign.id]: newForeign,
+      },
+    };
+
+    this.setState(newState);
   }
+
+  //   const dropId = source.droppableId;
+  //   const list = this.state.lists[dropId];
+  //   var newCardIds = Array.from(list.taskIds);
+  //   newCardIds.splice(source.index, 1);
+  //   newCardIds.splice(destination.index, 0, draggableId);
+  //   let lists = this.state.lists;
+  //   lists[dropId].taskIds = newCardIds;
+  //   this.setState({
+  //     lists
+  //   })
+
+  // }
 
   render() {
 
@@ -247,34 +331,49 @@ class App extends Component {
           handleBackgroundChange={this.handleBackgroundChange}
           handleBackgroundColor={this.handleBackgroundColor}
           handleBackgroundImage={this.handleBackgroundImage} />
-        <header className="App-header">
-          {listOrder.map(listId => {
-            const list = lists[listId];
-            const cardList = list.taskIds.map(id => cards[id]);
-            return (
-              <DragDropContext onDragEnd={this.onDragEnd}>
-                <List
-                  key={list.id}
-                  listId={list.id}
-                  list={list}
-                  cardList={cardList}
-                  handleTitleChange={this.handleTitleChange}
-                  addCard={this.addCard}
-                  editCard={this.editCard}
-                  deleteCard={this.deleteCard}
-                  addCardDescription={this.addCardDescription}
-                  deleteList={this.deleteList}
-                />
-              </DragDropContext>
-            );
-          })}
+        <DragDropContext
+          onDragEnd={this.onDragEnd}
+        >
+          <Droppable
+            droppableId="all-columns"
+            direction="horizontal"
+            type="column"
+            key={lists.id}
+          >
+            {(provided) => (
+              <div className="App-header"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {listOrder.map((listId, index) => {
+                  const list = lists[listId];
+                  const cardList = list.taskIds.map(id => cards[id]);
+                  return (
+                    <List
+                      key={list.id}
+                      listId={list.id}
+                      list={list}
+                      cardList={cardList}
+                      handleTitleChange={this.handleTitleChange}
+                      addCard={this.addCard}
+                      deleteCard={this.deleteCard}
+                      deleteList={this.deleteList}
+                      addCardDescription={this.addCardDescription}
+                      index={index}
+                    >
+                      {provided.placeholder}
+                    </List>
+                  );
+                })}
 
-          <button className="add-list-btn" onClick={this.addList}>
-            + Add another list
+                <button className="add-list-btn" onClick={this.addList}>
+                  + Add another list
           </button>
-        </header>
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
-
     );
   }
 }

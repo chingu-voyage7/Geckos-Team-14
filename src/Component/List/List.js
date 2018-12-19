@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 import CardForm from "../Card/CardForm";
-
 import Card from "../Card/Card";
 
 class List extends Component {
@@ -75,78 +74,97 @@ class List extends Component {
     const { id, title } = this.props.list;
     const { handleTitleChange, cardList, addCardDescription } = this.props;
     return (
-      <div className="list">
-        <div className="list--title">
-          {// if form has not been submitted, show form. Also, show form if isEdit is true
-            !isSubmitted || isEdit ? (
-              <form onSubmit={this.saveListTitle}>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={e => handleTitleChange(id, e.target.value)}
-                />
-                {// if editing list title, no need to show "Add List" button
-                  !isEdit && <button>Add List</button>}
-              </form>
-            ) : (
-                <h3 onClick={this.toggleTitleForm}>{title}</h3>
-              )}
-        </div>
+      <Draggable
+        draggableId={this.props.listId}
+        index={this.props.index}
+      >
+        {(provided) => (
+          <div
+            className="list"
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+            {...provided.dragHandleProps}
+          >
+            <div className="list--title">
+              {// if form has not been submitted, show form. Also, show form if isEdit is true
+                !isSubmitted || isEdit ? (
+                  <form onSubmit={this.saveListTitle}>
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={e => handleTitleChange(id, e.target.value)}
+                    />
+                    {// if editing list title, no need to show "Add List" button
+                      !isEdit && <button>Add List</button>}
+                  </form>
+                ) : (
+                    <h3 onClick={this.toggleTitleForm}>{title}</h3>
+                  )}
+            </div>
+            {provided.placeholder}
 
-        {
-
-          <Droppable droppableId={this.props.listId}>
-            {provided => (
-              <ul
-                className="card-list"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
+            {
+              <Droppable
+                droppableId={this.props.listId}
+                type="task"
               >
-                {cardList.map((card, index) => (
-                  <Card
-                    key={card.id}
-                    cardId={card.id}
-                    content={card.content}
-                    index={index}
-                    card={card}
-                    deleteCard={this.props.deleteCard}
-                    list={this.props.list}
-                    editCard={this.props.editCard}
-                    addCardDescription={addCardDescription}
-                  />
-                ))}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        }
 
-        {// if showCardForm is true, show form
-          showCardForm && (
-            <CardForm
-              cardVal={cardVal}
-              handleCardValChange={this.handleCardValChange}
-              addToCard={this.addToCard}
-              toggleCardForm={this.toggleCardForm}
-            />
-          )}
+                {(provided) => (
+                  <ul
+                    className="card-list"
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {provided.placeholder}
+                    {cardList.map((card, index) => (
+                      <Card
+                        key={card.id}
+                        cardId={card.id}
+                        content={card.content}
+                        index={index}
+                        card={card}
+                        deleteCard={this.props.deleteCard}
+                        list={this.props.list}
+                        editCard={this.props.editCard}
+                        addCardDescription={addCardDescription}
+                      >
+                        {/* {provided.placeholder} */}
+                      </Card>
+                    ))}
+                    {/* </ul> */}
+                  </ul>
+                )}
+              </Droppable>
+            }
 
-        {// if isSubmitted is true, user can click "Add a card" to toggle form
-          isSubmitted && !showCardForm && (
-            <p className="add-card-btn" onClick={this.toggleCardForm}>
-              + <span>Add a card...</span>
-            </p>
-          )}
-        <button
-          className="btn btn--delete-list"
-          onClick={e => {
-            e.preventDefault();
-            this.props.deleteList(id);
-          }}
-        >
-          Delete List
+            {// if showCardForm is true, show form
+              showCardForm && (
+                <CardForm
+                  cardVal={cardVal}
+                  handleCardValChange={this.handleCardValChange}
+                  addToCard={this.addToCard}
+                  toggleCardForm={this.toggleCardForm}
+                />
+              )}
+
+            {// if isSubmitted is true, user can click "Add a card" to toggle form
+              isSubmitted && !showCardForm && (
+                <p className="add-card-btn" onClick={this.toggleCardForm}>
+                  + <span>Add a card...</span>
+                </p>
+              )}
+            <button
+              className="btn btn--delete-list"
+              onClick={e => {
+                e.preventDefault();
+                this.props.deleteList(id);
+              }}
+            >
+              Delete List
         </button>
-      </div>
+          </div>)}
+
+      </Draggable>
     );
   }
 }
