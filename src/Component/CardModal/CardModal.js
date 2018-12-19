@@ -23,6 +23,10 @@ export default class CardModal extends Component {
     onCalendarFocusChange = ({ focused }) => {
         this.setState(() => ({ calendarFocused : focused }));
     }
+    createNewCheckList = () => {
+        console.log("create a list");
+        this.addCheckListItem({});
+    }
 
     addCheckListItem = (itemToAdd) => {
         if (itemToAdd) {
@@ -33,6 +37,16 @@ export default class CardModal extends Component {
             }
             this.props.editCard(this.props.cardId, editedCard);
         }
+    }
+
+    editCheckListItem = (position, editedCheckList) => {
+        const newCheckList = this.props.card.checkListItems.map((checklistItem, index) => (index !== position ? checklistItem : editedCheckList ));
+        console.log(newCheckList);
+        const editedCard = {
+            ...this.props.card,
+            checkListItems : newCheckList
+        }
+        this.props.editCard(this.props.cardId, editedCard);
     }
 
     onChangeCheckListItem = itemClicked => {
@@ -97,12 +111,15 @@ export default class CardModal extends Component {
                                 onToggleCheckBox={this.onToggleCheckBox} 
                                 addCheckListItem={this.addCheckListItem}
                                 onDeleteCheckListItem={this.onDeleteCheckListItem}
+                                editCheckListItem={this.editCheckListItem}
                             />
                         )}
                     </section>
                     <aside className="col">
                         <p>add to card</p>
-                        <button><i className="fa fa-check-square"></i> <span>Checklist</span></button>
+                        <button
+                            onClick={this.createNewCheckList}
+                        ><i className="fa fa-check-square"></i> <span>Checklist</span></button>
            
                         <SingleDatePicker
                         placeholder={'Due Date'}

@@ -21,6 +21,7 @@ const CheckList = (props) => {
                         item={checklistItem.item}
                         complete={checklistItem.complete}
                         onToggleCheckBox={props.onToggleCheckBox}
+                        editCheckListItem={props.editCheckListItem}
                         onDeleteCheckListItem={props.onDeleteCheckListItem}
                     />)
                 }
