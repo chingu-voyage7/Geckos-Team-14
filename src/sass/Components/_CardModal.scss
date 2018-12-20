@@ -49,8 +49,19 @@
 .card-modal__content section {
   padding: 8px;
 }
+
+.description p {
+  font-size: 14px;
+}
 .description__title {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+.description__title span {
+  font-weight: 400;
+  text-decoration: underline;
+  margin-left: 5px;
+  cursor: pointer;
+  color: $slate-gray;
 }
 
 .description__form-textarea {
