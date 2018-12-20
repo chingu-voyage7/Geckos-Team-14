@@ -33,6 +33,14 @@ export default class CardModal extends Component {
         this.props.editCard(this.props.cardId, editedCard);
     }
 
+    deleteCheckList = () => {
+        const editedCard = {
+            ...this.props.card
+        }
+        delete editedCard.checkListItems;
+        this.props.editCard(this.props.cardId, editedCard);
+    }
+
     addCheckListItem = (itemToAdd) => {
         if (itemToAdd) {
             const newCheckList = [...this.props.card.checkListItems, itemToAdd];
@@ -117,6 +125,7 @@ export default class CardModal extends Component {
                                 addCheckListItem={this.addCheckListItem}
                                 onDeleteCheckListItem={this.onDeleteCheckListItem}
                                 editCheckListItem={this.editCheckListItem}
+                                deleteCheckList={this.deleteCheckList}
                             />
                         )}
                     </section>

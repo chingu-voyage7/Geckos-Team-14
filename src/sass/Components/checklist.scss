@@ -5,6 +5,11 @@
 background-color: $gray;
 }
 
+.checklist__heading {
+    display: flex;
+    justify-content: space-between;
+}
+
 .checklist__title {
     font-size: $standard-text;
 }
