@@ -24,11 +24,13 @@ export default class CardModal extends Component {
         this.setState(() => ({ calendarFocused : focused }));
     }
     createNewCheckList = () => {
-        console.log("create a list");
-        const newCheckList = [];
+        const newCheckList = {
+            title: "New CheckList",
+            tasks: []
+        }
         const editedCard = {
             ...this.props.card,
-            checkListItems : newCheckList
+            checkList : newCheckList
         } 
         this.props.editCard(this.props.cardId, editedCard);
     }
@@ -37,57 +39,67 @@ export default class CardModal extends Component {
         const editedCard = {
             ...this.props.card
         }
-        delete editedCard.checkListItems;
+        delete editedCard.checkList;
         this.props.editCard(this.props.cardId, editedCard);
     }
 
     addCheckListItem = (itemToAdd) => {
         if (itemToAdd) {
-            const newCheckList = [...this.props.card.checkListItems, itemToAdd];
+            const tasks = [...this.props.card.checkList.tasks, itemToAdd];
+            const newCheckList = {...this.props.card.checkList, tasks};
             const editedCard = {
                 ...this.props.card,
-                checkListItems : newCheckList
+                checkList : newCheckList
             }
             this.props.editCard(this.props.cardId, editedCard);
         }
     }
 
     editCheckListItem = (position, editedCheckList) => {
-        const newCheckList = this.props.card.checkListItems.map((checklistItem, index) => (index !== position ? checklistItem : editedCheckList ));
-        console.log(newCheckList);
+        const tasks = this.props.card.checkList.tasks.map((checklistItem, index) => (index !== position ? checklistItem : editedCheckList ));
+        
         const editedCard = {
             ...this.props.card,
-            checkListItems : newCheckList
+            checkList : {
+                title : this.props.card.checkList.title,
+                tasks
+            }
         }
         this.props.editCard(this.props.cardId, editedCard);
     }
 
-    onChangeCheckListItem = itemClicked => {
-        this.props.onChangeCheckListItem(this.props.cardId, itemClicked);
-    }
+    // onChangeCheckListItem = itemClicked => {
+    //     this.props.onChangeCheckListItem(this.props.cardId, itemClicked);
+    // }
 
     onDeleteCheckListItem = index => {
-        const editedCheckList = this.props.card.checkListItems.filter((item, currIndex) => currIndex !== index);
+        const tasks = this.props.card.checkList.tasks.filter((item, currIndex) => currIndex !== index);
         const editedCard = {
           ...this.props.card,
-          checkListItems : editedCheckList
-          }
-        this.props.editCard(this.props.cardId, editedCard);
-        console.log(editedCheckList); 
+            checkList : {
+                title: this.props.card.checkList.title,
+                tasks
+            }
+        }
+        console.log(editedCard);
+        this.props.editCard(this.props.cardId, editedCard); 
     }
 
     onToggleCheckBox = index => {
-        const toggledCheckListItem = this.props.card.checkListItems[index];
+        const toggledCheckListItem = this.props.card.checkList.tasks[index];
         const editedCheckListItem = {item: toggledCheckListItem.item, complete: !toggledCheckListItem.complete};
-        const editedCheckList = this.props.card.checkListItems.map((item, currIndex) =>{
+        const tasks = this.props.card.checkList.tasks.map((item, currIndex) =>{
             return (currIndex === index ? editedCheckListItem : item);
         });
         const editedCard = {
             ...this.props.card,
-            checkListItems : editedCheckList
+            checkList : {
+                title: this.props.card.checkList.title,
+                tasks
             }
-        this.props.editCard(this.props.cardId, editedCard);
         }
+        this.props.editCard(this.props.cardId, editedCard);
+    }
 
     render () {
         const currentDate = moment();
