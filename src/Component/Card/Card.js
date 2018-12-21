@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Draggable } from 'react-beautiful-dnd';
-import CheckList from './CheckList';
 import { faTextHeight } from "@fortawesome/free-solid-svg-icons";
 import CardModal from "../CardModal/CardModal"
 import { fstat } from "fs";

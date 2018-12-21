@@ -39,6 +39,12 @@ background-color: $gray;
     margin: 0;
 }
 
+.add-new-checkList__placeholder {
+    font-size: $standard-text;
+    margin: $menu-horizontal;
+    cursor: pointer;
+}
+
 .progress-bar {
 
 }
@@ -47,4 +53,9 @@ background-color: $gray;
     width: 0%;
     background-color:$light-green;
     transition: 0.5s all;
+}
+
+.btn--checklist-delete {
+    margin-left: auto;
+    color: $slate-gray;
 }
