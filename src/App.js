@@ -356,6 +356,7 @@ class App extends Component {
                       handleTitleChange={this.handleTitleChange}
                       addCard={this.addCard}
                       deleteCard={this.deleteCard}
+                      editCard={this.editCard}
                       deleteList={this.deleteList}
                       addCardDescription={this.addCardDescription}
                       index={index}

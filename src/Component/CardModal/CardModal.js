@@ -27,6 +27,7 @@ export default class CardModal extends Component {
         this.setState(() => ({ calendarFocused: focused }));
     }
     createNewCheckList = () => {
+        console.log('clicked');
         const newCheckList = {
             title: "New CheckList",
             tasks: []
@@ -181,7 +182,7 @@ export default class CardModal extends Component {
                         </section>
                         <aside className="col">
                             <p>add to card</p>
-                            <button><i className="fa fa-check-square"></i> <span>Checklist</span></button>
+                            <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
 
                             <SingleDatePicker
                                 placeholder={'Due Date'}

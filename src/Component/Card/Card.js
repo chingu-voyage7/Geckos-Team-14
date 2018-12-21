@@ -46,7 +46,7 @@ export default class Card extends React.Component {
                     )}
                     
                 </Draggable>
-                <CardModal card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
+                <CardModal card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} cardId={cardId} editCard={editCard} addCardDescription={addCardDescription} />
             </Fragment>
         )
     }
