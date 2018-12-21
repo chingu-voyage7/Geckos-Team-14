@@ -9,19 +9,21 @@ const _calculatePercent =(items) => {
 }
 
 const CheckList = (props) => {
-    let progressPct = props.items.length !==0 ? _calculatePercent(props.items) : false;
+    const { checkList } = props
+    const checkListExists = (checkList && checkList.tasks);
+    let progressPct = checkList.tasks.length !==0 ? _calculatePercent(checkList.tasks) : false;
     let percentageComplete = progressPct ? { width: `${progressPct}%` } : {};
     return (
         <div className="checklist">
             <div className="checklist__heading">
-                <h2 className="checklist__title">CheckList Title</h2>
+                <h2 className="checklist__title">{checkList.title}</h2>
                 <button class="btn" onClick={props.deleteCheckList}>X</button>
             </div>
             {progressPct && <div className="progress-bar">
                  <div class="progress-bar__inner" style={percentageComplete}>{progressPct}</div>
             </div>}
             <ul className="checklist__items">
-                {props.items && props.items.map((checklistItem, index) => <ListItem 
+                {checkListExists && checkList.tasks.map((checklistItem, index) => <ListItem 
                         key={index}
                         index={index}
                         checklistItem={checklistItem}

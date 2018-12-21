@@ -28,7 +28,10 @@ class App extends Component {
         id: 'sample',
         dueDate: '',
         content: 'Sample CheckList',
-        checkListItems: []
+        checkList: {
+          title: 'This is a new title',
+          tasks: [{item: 'Clean house', complete: false}]
+        }
       }},
       lists: {'test': {
         id: 'test',

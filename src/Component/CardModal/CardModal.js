@@ -118,9 +118,9 @@ export default class CardModal extends Component {
                                     className="description__form-textarea"></textarea>
                             </form>
                         </div>
-                        {card.checkListItems && (
+                        {card.checkList && (
                             <CheckList 
-                                items={card.checkListItems} 
+                                checkList={card.checkList} 
                                 onToggleCheckBox={this.onToggleCheckBox} 
                                 addCheckListItem={this.addCheckListItem}
                                 onDeleteCheckListItem={this.onDeleteCheckListItem}
