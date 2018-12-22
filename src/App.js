@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import SimpleStorage from "react-simple-storage";
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -326,6 +327,7 @@ class App extends Component {
     const { lists, cards, listOrder, styleType } = this.state;
     return (
       <div className="App" style={styleType}>
+        <SimpleStorage parent={this} />
         <TrelloNav />
         <BoardNav
           handleBackgroundChange={this.handleBackgroundChange}
@@ -356,6 +358,7 @@ class App extends Component {
                       cardList={cardList}
                       handleTitleChange={this.handleTitleChange}
                       addCard={this.addCard}
+                      editCard={this.editCard}
                       deleteCard={this.deleteCard}
                       deleteList={this.deleteList}
                       addCardDescription={this.addCardDescription}
