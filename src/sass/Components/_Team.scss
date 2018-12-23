@@ -1,0 +1,16 @@
+.team-member {
+    display: inline-block;
+    background-color: $gray;
+    color: $dark-blue;
+    border-radius: 20rem;
+    padding: .5rem 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    height: 2.8rem;
+    width: 2.8rem;
+}
+
+.full-team-members {
+    display: inline-block;
+}

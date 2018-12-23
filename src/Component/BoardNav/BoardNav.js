@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import BoardTitleMenu from './BoardTitleMenu.js';
 import MainMenu from "../MainMenu.js";
+import Team from "../Team.js";
 
 class BoardNav extends Component {
   state = {
     BoardName: "Add Board Name",
     showNameMenu: false,
+    inviteMember: false,
 
     MMisOpen: false,
     starColor: 'white',
+
+    team: [{ name: 'Natalie Roode', initials: 'NR', score: 0 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }]
   };
 
   // -- handle main menu --
@@ -28,6 +32,15 @@ class BoardNav extends Component {
     });
   };
 
+// -- update member invite menu ---
+  handleInviteMember = () => {
+    const { inviteMember } = this.state;
+    this.setState({
+      inviteMember: !inviteMember
+    });
+  };
+
+
   handleNameSubmit = e => {
     e.preventDefault();
     const newName = e.target.elements.name.value
@@ -39,7 +52,7 @@ class BoardNav extends Component {
         BoardName: newName,
         showNameMenu: false,
       });
-    } 
+    }
   }
 
   toggleYellow = () => {
@@ -48,8 +61,13 @@ class BoardNav extends Component {
     }));
   };
 
+  //split name into array
+  // const abbr = this.state.team[0].name.split(' ');
+  // console.log(abbr)
+  //take the first letter of each item in the array
+
   render() {
-    const { showNameMenu, BoardName } = this.state;
+    const { showNameMenu, BoardName, inviteMember } = this.state;
     return (
       <div className="board-nav-wrapper">
         <MainMenu
@@ -67,11 +85,32 @@ class BoardNav extends Component {
               className="btn board-nav--title">
               {BoardName}
             </button>
-            <button 
-              className="btn board-star" onClick={this.toggleYellow} style={{color: `${this.state.starColor}`}}>
+            <button
+              className="btn board-star" onClick={this.toggleYellow} style={{ color: `${this.state.starColor}` }}>
               <i className="far fa-star"></i>
             </button>
+            <div className="full-team">
+            
+              <Team
+                teamMembers={this.state.team} />
+              <div className="team-size">
+                {this.state.team.length}
+              </div>
+
+              <button className="invite-btn" onClick={this.handleInviteMember}><i className="fas fa-user-plus"></i>Invite</button>
+            
+              {
+                inviteMember && (
+                  <BoardTitleMenu
+                    handleShowMenu={this.handleShowMenu}
+                    handleNameSubmit={this.handleNameSubmit}
+                    BoardName={BoardName}
+                  />
+                )}
+
+              </div>
           </div>
+
           <button className="btn board-nav--menu" onClick={this.toggleCloseButton}><i className="fas fa-ellipsis-h"></i>Show Menu</button>
           {
             showNameMenu && (
@@ -81,6 +120,7 @@ class BoardNav extends Component {
                 BoardName={BoardName}
               />
             )}
+
         </div>
       </div>
     )
@@ -88,3 +128,8 @@ class BoardNav extends Component {
 }
 
 export default BoardNav;
+
+// {this.state.team.map((member)=>
+//   <Team
+//     teamMembers={this.state.team} key={member.name}/>
+//   )}  

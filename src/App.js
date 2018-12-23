@@ -39,7 +39,9 @@ class App extends Component {
           taskIds: ['sample']
         }
       },
-      listOrder: ['test']
+      listOrder: ['test'],
+
+      team: [{ name: 'Natalie Roode', score: 0}, { name: 'Juan Garcia', score: 2}]
     };
   }
 
