@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BoardTitleMenu from './BoardTitleMenu.js';
 import MainMenu from "../MainMenu.js";
+import SimpleStorage from "react-simple-storage";
 
 class BoardNav extends Component {
   state = {
@@ -52,6 +53,7 @@ class BoardNav extends Component {
     const { showNameMenu, BoardName } = this.state;
     return (
       <div className="board-nav-wrapper">
+        <SimpleStorage parent={this} />
         <MainMenu
           menuState={false}
           MMisOpen={this.state.MMisOpen}
