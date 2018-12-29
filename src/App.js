@@ -25,21 +25,20 @@ class App extends Component {
       styleType: { backgroundImage: `url(${Dragon})` },
       backgroundType: '',
 
-      cards: {
-        'sample': {
-          id: 'sample',
-          dueDate: '',
-          content: 'Sample CheckList',
-          checkListItems: [{ item: 'Do Laundry', complete: false }, { item: 'Clean shoes', complete: false }]
+      cards: {'sample': {
+        id: 'sample',
+        dueDate: '',
+        content: 'Sample CheckList',
+        checkList: {
+          title: 'This is a new title',
+          tasks: [{item: 'Clean house', complete: false}]
         }
-      },
-      lists: {
-        'test': {
-          id: 'test',
-          title: 'Testing checklists',
-          taskIds: ['sample']
-        }
-      },
+      }},
+      lists: {'test': {
+        id: 'test',
+        title: 'Testing checklists',
+        taskIds:['sample']
+      }},
       listOrder: ['test']
     };
   }
@@ -360,6 +359,7 @@ class App extends Component {
                       addCard={this.addCard}
                       editCard={this.editCard}
                       deleteCard={this.deleteCard}
+                      editCard={this.editCard}
                       deleteList={this.deleteList}
                       addCardDescription={this.addCardDescription}
                       index={index}

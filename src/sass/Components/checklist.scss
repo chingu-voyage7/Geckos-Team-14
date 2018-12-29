@@ -5,6 +5,15 @@
 background-color: $gray;
 }
 
+.checklist__heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checklist__title {
+    font-size: $standard-text;
+}
+
 .checklist__items {
     list-style: none;
     padding: 0;
@@ -30,6 +39,12 @@ background-color: $gray;
     margin: 0;
 }
 
+.add-new-checkList__placeholder {
+    font-size: $standard-text;
+    margin: $menu-horizontal;
+    cursor: pointer;
+}
+
 .progress-bar {
 
 }
@@ -38,4 +53,9 @@ background-color: $gray;
     width: 0%;
     background-color:$light-green;
     transition: 0.5s all;
+}
+
+.btn--checklist-delete {
+    margin-left: auto;
+    color: $slate-gray;
 }
