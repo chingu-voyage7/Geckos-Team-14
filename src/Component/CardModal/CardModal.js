@@ -51,7 +51,7 @@ export default class CardModal extends Component {
 
     render() {
         const currentDate = moment();
-        const { card, isModalOpen, toggleModal } = this.props;
+        const { card, isModalOpen, toggleModal, cardId, list, deleteCard, content } = this.props;
         const { description, isSubmitted, isEdit } = this.state
         return (
             <div className="card-modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
@@ -106,7 +106,13 @@ export default class CardModal extends Component {
                                 isOutsideRange={() => false}
                             />
                             <p>actions</p>
-                            <button><i className="fa fa-trash"></i> <span>Delete</span></button>
+                            <button onClick={() => {
+                                if(window.confirm("Delete " + content + "?")) {
+                                    deleteCard(cardId, list);
+                                }
+                            }
+
+                            }><i className="fa fa-trash"></i> <span>Delete</span></button>
                         </aside>
                     </div>
                 </div>

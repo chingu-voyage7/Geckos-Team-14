@@ -8,7 +8,7 @@ class List extends Component {
     isEdit: false,
     isSubmitted: false,
     showCardForm: false,
-    cardVal: ""
+    cardVal: "",
   };
 
   toggleTitleForm = () => {
@@ -59,6 +59,9 @@ class List extends Component {
         cardVal: ""
       });
     }
+    this.setState({
+      showCardForm: !this.state.showCardForm
+    })
   };
 
   // WILL USE FUNCTION INSIDE OF MODAL TO DELETE CARD
@@ -96,9 +99,11 @@ class List extends Component {
                     />
                     {// if editing list title, no need to show "Add List" button
                       !isEdit && <button>Add List</button>}
+                      {
+                      isEdit && <button>Edit List</button>}
                   </form>
                 ) : (
-                    <h3 onClick={this.toggleTitleForm}>{title}</h3>
+                    <h3> {title} <i onClick={this.toggleTitleForm} className="fas fa-pen"></i></h3>
                   )}
             </div>
             {provided.placeholder}
@@ -157,7 +162,11 @@ class List extends Component {
               className="btn btn--delete-list"
               onClick={e => {
                 e.preventDefault();
-                this.props.deleteList(id);
+                if(window.confirm('Are you sure you want to delete ' + title + '?')) {
+                  alert("List " + title + " deleted.");
+                  this.props.deleteList(id);
+                } else {}
+                // this.props.deleteList(id);
               }}
             >
               Delete List

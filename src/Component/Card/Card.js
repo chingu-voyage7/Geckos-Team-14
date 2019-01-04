@@ -75,7 +75,13 @@ export default class Card extends React.Component {
                             {content}
                             <button
                                 className="btn btn--delete-card"
-                                onClick={() => deleteCard(cardId, list)}
+                                onClick={e => {
+                                    if(window.confirm("Delete " + content + "?")) {
+                                        deleteCard(cardId, list);
+                                    } else {
+                                        e.stopPropagation();
+                                    }
+                                }}
                             >
                                 X
                       </button>
@@ -84,7 +90,7 @@ export default class Card extends React.Component {
                     )}
                     
                 </Draggable>
-                <CardModal card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
+                <CardModal content={content} deleteCard={deleteCard} cardId={cardId} list={list} card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
             </Fragment>
         )
     }
