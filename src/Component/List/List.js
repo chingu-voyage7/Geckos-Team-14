@@ -153,6 +153,15 @@ class List extends Component {
                   + <span>Add a card...</span>
                 </p>
               )}
+            <button 
+              className="btn"
+              onClick={e => {
+                e.preventDefault();
+                this.props.copyList(id);
+              }}
+            >
+                Copy List
+            </button>
             <button
               className="btn btn--delete-list"
               onClick={e => {

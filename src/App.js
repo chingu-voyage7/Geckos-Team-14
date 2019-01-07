@@ -84,7 +84,6 @@ class App extends Component {
       lists: newList
     });
     // console.log(lists);
-
     // add the created list inside the listOrder array
     for (let list in lists) {
       this.setState({
@@ -93,6 +92,18 @@ class App extends Component {
     }
     // console.log(lists);
   };
+
+
+  copyList = (idToCopy) => {
+    const id = uuid().replace(/-/g, "");
+    const listCopy = {id, ...this.state.lists[idToCopy]};
+    const index = this.state.listOrder.indexOf(idToCopy);
+    console.log(listCopy, index);
+    const lists = {...this.state.lists, [id]:listCopy};
+    const listOrder = this.state.listOrder.slice(0, index+1).concat(id).concat(this.state.listOrder.slice(index+1));
+    console.log(listOrder);
+    this.setState({ lists, listOrder });
+  }
 
   // const newTaskIds = list.taskIds.filter(task => task !== cardName);
   //   const newCards = { ...this.state.cards };
@@ -352,6 +363,7 @@ class App extends Component {
                       key={list.id}
                       listId={list.id}
                       list={list}
+                      copyList={this.copyList}
                       cardList={cardList}
                       handleTitleChange={this.handleTitleChange}
                       addCard={this.addCard}
