@@ -116,7 +116,7 @@ class List extends Component {
                     {...provided.droppableProps}
                   >
                     {provided.placeholder}
-                    {cardList && cardList !== undefined && cardList.map((card, index) => (
+                    {cardList.map((card, index) => (
                       <Card
                         key={card.id}
                         cardId={card.id}
