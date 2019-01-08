@@ -94,10 +94,11 @@ class App extends Component {
     // console.log(lists);
   };
 
-
+  //We need to make copies of the cards from the original List, and add those to the list copy.
   copyList = (idToCopy) => {
     const id = uuid().replace(/-/g, "");
-    const listCopy = {id, ...this.state.lists[idToCopy]};
+    const listCopy = {...this.state.lists[idToCopy]};
+    listCopy.id = id;
     const index = this.state.listOrder.indexOf(idToCopy);
     console.log(listCopy, index);
     const lists = {...this.state.lists, [id]:listCopy};
