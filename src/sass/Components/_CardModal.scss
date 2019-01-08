@@ -18,6 +18,7 @@
     height: 85%;
     border-radius: 4px;
     padding: 10px;
+    overflow:scroll;
   }
 }
 
@@ -133,8 +134,11 @@
 }
 
 
-
 @media(min-width: 800px) {
+  .card-modal__content {
+    max-width: 768px;
+  }
+
   .col {
     flex: 1;
   }

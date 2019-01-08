@@ -4,6 +4,7 @@ import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import '../CardModal/datepicker.css';
 import moment from 'moment';
+import CheckList from '../Card/CheckList';
 
 export default class CardModal extends Component {
 
@@ -24,6 +25,95 @@ export default class CardModal extends Component {
 
     onCalendarFocusChange = ({ focused }) => {
         this.setState(() => ({ calendarFocused: focused }));
+    }
+    createNewCheckList = () => {
+        const newCheckList = {
+            title: "New CheckList",
+            tasks: []
+        }
+        const editedCard = {
+            ...this.props.card,
+            checkList : newCheckList
+        } 
+        this.props.editCard(this.props.cardId, editedCard);
+    }
+
+    deleteCheckList = () => {
+        const editedCard = {
+            ...this.props.card
+        }
+        delete editedCard.checkList;
+        this.props.editCard(this.props.cardId, editedCard);
+    }
+
+    addCheckListItem = (itemToAdd) => {
+        if (itemToAdd) {
+            const tasks = [...this.props.card.checkList.tasks, itemToAdd];
+            const newCheckList = {...this.props.card.checkList, tasks};
+            const editedCard = {
+                ...this.props.card,
+                checkList : newCheckList
+            }
+            this.props.editCard(this.props.cardId, editedCard);
+        }
+    }
+
+    changeCheckListTitle = (title) => {
+        const checkList = {
+            ...this.props.card.checkList,
+            title
+        }
+        const editedCard = {
+            ...this.props.card,
+            checkList
+        }
+        this.props.editCard(this.props.cardId, editedCard);
+    }
+
+    editCheckListItem = (position, editedCheckList) => {
+        const tasks = this.props.card.checkList.tasks.map((checklistItem, index) => (index !== position ? checklistItem : editedCheckList ));
+        
+        const editedCard = {
+            ...this.props.card,
+            checkList : {
+                title : this.props.card.checkList.title,
+                tasks
+            }
+        }
+        this.props.editCard(this.props.cardId, editedCard);
+    }
+
+    // onChangeCheckListItem = itemClicked => {
+    //     this.props.onChangeCheckListItem(this.props.cardId, itemClicked);
+    // }
+
+    onDeleteCheckListItem = index => {
+        const tasks = this.props.card.checkList.tasks.filter((item, currIndex) => currIndex !== index);
+        const editedCard = {
+          ...this.props.card,
+            checkList : {
+                title: this.props.card.checkList.title,
+                tasks
+            }
+        }
+        this.props.editCard(this.props.cardId, editedCard); 
+    }
+
+
+    onToggleCheckBox = index => {
+        const toggledCheckListItem = this.props.card.checkList.tasks[index];
+        const editedCheckListItem = {item: toggledCheckListItem.item, complete: !toggledCheckListItem.complete};
+        const tasks = this.props.card.checkList.tasks.map((item, currIndex) =>{
+            return (currIndex === index ? editedCheckListItem : item);
+        });
+        const editedCard = {
+            ...this.props.card,
+            checkList : {
+                title: this.props.card.checkList.title,
+                tasks
+            }
+        }
+        this.props.editCard(this.props.cardId, editedCard);
     }
 
     handleDescriptionChange = e => {
@@ -90,10 +180,21 @@ export default class CardModal extends Component {
                                     isSubmitted && <p>{description}</p>
                                 }
                             </div>
+                            {card.checkList && (
+                            <CheckList 
+                                checkList={card.checkList} 
+                                onToggleCheckBox={this.onToggleCheckBox} 
+                                addCheckListItem={this.addCheckListItem}
+                                onDeleteCheckListItem={this.onDeleteCheckListItem}
+                                editCheckListItem={this.editCheckListItem}
+                                deleteCheckList={this.deleteCheckList}
+                                changeCheckListTitle={this.changeCheckListTitle}
+                            />
+                        )}
                         </section>
                         <aside className="col">
                             <p>add to card</p>
-                            <button><i className="fa fa-check-square"></i> <span>Checklist</span></button>
+                            <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
 
                             <SingleDatePicker
                                 placeholder={'Due Date'}

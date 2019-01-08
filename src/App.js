@@ -24,7 +24,6 @@ class App extends Component {
     this.state = {
       styleType: { backgroundImage: `url(${Scene1})` },
       backgroundType: '',
-
       cards: {
         // 'sample': {
         //   id: 'sample',
@@ -358,6 +357,7 @@ class App extends Component {
                       handleTitleChange={this.handleTitleChange}
                       addCard={this.addCard}
                       deleteCard={this.deleteCard}
+                      editCard={this.editCard}
                       deleteList={this.deleteList}
                       addCardDescription={this.addCardDescription}
                       index={index}
