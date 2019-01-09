@@ -25,21 +25,9 @@ class App extends Component {
       styleType: { backgroundImage: `url(${Dragon})` },
       backgroundType: '',
 
-      cards: {'sample': {
-        id: 'sample',
-        dueDate: '',
-        content: 'Sample CheckList',
-        checkList: {
-          title: 'This is a new title',
-          tasks: [{item: 'Clean house', complete: false}]
-        }
-      }},
-      lists: {'test': {
-        id: 'test',
-        title: 'Testing checklists',
-        taskIds:['sample']
-      }},
-      listOrder: ['test']
+      cards: {},
+      lists: {},
+      listOrder: []
     };
   }
 
@@ -95,16 +83,29 @@ class App extends Component {
   };
 
   //We need to make copies of the cards from the original List, and add those to the list copy.
+  copyCards = (cardsToCopy) => {
+    const cards = {...this.state.cards};
+    const taskIds= [];
+    cardsToCopy.forEach(card => {
+      console.log(card);
+      const id = uuid().replace(/-/g, "");
+      cards[id] = {...cards[card]};
+      cards[id].id = id;
+      taskIds.push(id);
+    });
+    return {cards, taskIds};
+  }
+
   copyList = (idToCopy) => {
     const id = uuid().replace(/-/g, "");
     const listCopy = {...this.state.lists[idToCopy]};
     listCopy.id = id;
     const index = this.state.listOrder.indexOf(idToCopy);
-    console.log(listCopy, index);
     const lists = {...this.state.lists, [id]:listCopy};
+    const {cards, taskIds} = this.copyCards(listCopy.taskIds);
+    lists[id].taskIds = taskIds;
     const listOrder = this.state.listOrder.slice(0, index+1).concat(id).concat(this.state.listOrder.slice(index+1));
-    console.log(listOrder);
-    this.setState({ lists, listOrder });
+    this.setState({ cards, lists, listOrder });
   }
 
   // const newTaskIds = list.taskIds.filter(task => task !== cardName);
