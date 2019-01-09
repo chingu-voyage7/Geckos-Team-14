@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import SimpleStorage from "react-simple-storage";
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -355,6 +356,7 @@ class App extends Component {
                       cardList={cardList}
                       handleTitleChange={this.handleTitleChange}
                       addCard={this.addCard}
+                      editCard={this.editCard}
                       deleteCard={this.deleteCard}
                       editCard={this.editCard}
                       deleteList={this.deleteList}
