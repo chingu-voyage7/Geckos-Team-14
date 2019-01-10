@@ -1,0 +1,32 @@
+.SingleDatePickerInput,
+.DateInput {
+    border: none;
+    background: none;
+    width: 100%;
+    color: #193345;
+    font-weight: bold;
+}
+
+.DateInput_input {
+    color: #193345;
+    font-weight: bold;
+    background: #dcdfe3;
+    text-align: left;
+    padding: 10px 8px;
+    margin: 0px 0px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 14px;
+    width: 100%;
+  }
+
+  .DateInput_input:hover {
+      background: #ccd2d7;
+  }
+
+  @media(min-width: 800px) {
+    .DateInput_input {
+      width: 80%;
+    }
+  }
