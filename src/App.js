@@ -29,7 +29,12 @@ class App extends Component {
           id: 'sample',
           dueDate: '',
           content: 'Sample CheckList',
-          checkListItems: [{ item: 'Do Laundry', complete: false }, { item: 'Clean shoes', complete: false }]
+          checkList: {
+            title: 'This is a new title',
+            tasks: [{ item: 'Clean house', complete: false }]
+          },
+
+
         }
       },
       lists: {
@@ -40,8 +45,7 @@ class App extends Component {
         }
       },
       listOrder: ['test'],
-
-      team: [{ name: 'Natalie Roode', score: 0}, { name: 'Juan Garcia', score: 2}]
+      team: [{ name: 'Natalie Roode', score: 0 }, { name: 'Juan Garcia', score: 2 }]
     };
   }
 
@@ -359,6 +363,7 @@ class App extends Component {
                       handleTitleChange={this.handleTitleChange}
                       addCard={this.addCard}
                       deleteCard={this.deleteCard}
+                      editCard={this.editCard}
                       deleteList={this.deleteList}
                       addCardDescription={this.addCardDescription}
                       index={index}

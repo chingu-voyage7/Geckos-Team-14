@@ -6,11 +6,14 @@ import Team from "../Team.js";
 class BoardNav extends Component {
   state = {
     BoardName: "Add Board Name",
+
     showNameMenu: false,
     inviteMember: false,
 
     MMisOpen: false,
     starColor: 'white',
+
+    inviteMember: "Enter name",
 
     team: [{ name: 'Natalie Roode', initials: 'NR', score: 0 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }]
   };
@@ -24,7 +27,7 @@ class BoardNav extends Component {
     }))
   }
 
-  // -- update name menu --
+  // -- update board name menu --
   handleShowMenu = () => {
     const { showNameMenu } = this.state;
     this.setState({
@@ -32,15 +35,7 @@ class BoardNav extends Component {
     });
   };
 
-// -- update member invite menu ---
-  handleInviteMember = () => {
-    const { inviteMember } = this.state;
-    this.setState({
-      inviteMember: !inviteMember
-    });
-  };
-
-
+  // -- handle board name submission --
   handleNameSubmit = e => {
     e.preventDefault();
     const newName = e.target.elements.name.value
@@ -55,16 +50,54 @@ class BoardNav extends Component {
     }
   }
 
+// -- update member invite menu ---
+  handleInviteMember = () => {
+    const { inviteMember } = this.state;
+    this.setState({
+      inviteMember: !inviteMember
+    });
+  };
+
+  // -- handle member add submission --
+  handleMemberSubmit = e => {
+    e.preventDefault();
+    var newMember = e.target.elements.name.value
+    const inputLength = newMember.length;
+    if (inputLength === 0) {
+        alert('please enter a name')
+      } else if (inputLength !== 0) {
+        this.abbreviate(newMember);
+        // let updateTeam = []
+        
+      }
+  }
+
+  abbreviate = (newMember) => {
+    let nameArr = newMember.split(' ').map((name)=> name.charAt(0));
+    let nameAbbr = nameArr.join(' ');
+    console.log(nameAbbr);
+    this.handleMemberAdd(newMember, nameAbbr)
+    }
+  
+  handleMemberAdd = (newMember, nameAbbr) => {
+    
+    let memberAdd = {name: newMember, initials: nameAbbr};
+    let updateTeam = this.state.team.push(memberAdd);
+    this.setState({
+          team: updateTeam,
+
+          inviteMember: false,
+        });
+  }
+     
+
+
   toggleYellow = () => {
     this.setState((prevState) => ({
       starColor: (prevState.starColor === '#f2d600' ? 'white' : '#f2d600')
     }));
   };
 
-  //split name into array
-  // const abbr = this.state.team[0].name.split(' ');
-  // console.log(abbr)
-  //take the first letter of each item in the array
 
   render() {
     const { showNameMenu, BoardName, inviteMember } = this.state;
@@ -102,9 +135,14 @@ class BoardNav extends Component {
               {
                 inviteMember && (
                   <BoardTitleMenu
-                    handleShowMenu={this.handleShowMenu}
-                    handleNameSubmit={this.handleNameSubmit}
-                    BoardName={BoardName}
+                    handleShowMenu={this.handleInviteMember}
+                    handleNameSubmit={this.handleMemberSubmit}
+
+                    title={"Add a Member"}
+                    inputLabel={"Name"}
+                    placeholder={"Enter name"}
+                    buttonLabel={"Add"}
+
                   />
                 )}
 
@@ -117,7 +155,11 @@ class BoardNav extends Component {
               <BoardTitleMenu
                 handleShowMenu={this.handleShowMenu}
                 handleNameSubmit={this.handleNameSubmit}
-                BoardName={BoardName}
+
+                title={"Rename Board"}
+                inputLabel={"Name"}
+                placeholder={BoardName}
+                buttonLabel={"Rename"}
               />
             )}
 
