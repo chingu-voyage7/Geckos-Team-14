@@ -31,8 +31,9 @@
   position: absolute;
   z-index: 2;
   top: 100%;
-  left: -5px;
+  left: 85%;
   width: 100%;
+  border: solid 1px $light-gray;
   border-radius: 4px;
   overflow: hidden;
   &__header {
