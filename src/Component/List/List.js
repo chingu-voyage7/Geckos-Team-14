@@ -63,17 +63,12 @@ class List extends Component {
     }
   };
 
-  openListMenu = () => {
+  toggleListMenu = () => {
     this.setState({
-      listMenuOpen: true
+      listMenuOpen: !this.state.listMenuOpen
     })
   }
 
-  closeListMenu = () => {
-    this.setState({
-      listMenuOpen: false
-    })
-  }
 
   // WILL USE FUNCTION INSIDE OF MODAL TO DELETE CARD
   // deleteCard = id => {
@@ -114,11 +109,11 @@ class List extends Component {
                 ) : (
                     <Fragment>
                       <h3 onClick={this.toggleTitleForm}>{title}</h3>
-                      <button className="open-list-menu-btn" onClick={this.openListMenu}><i className="fas fa-ellipsis-h fa-sm"></i></button>
+                      <button className="open-list-menu-btn" onClick={this.toggleListMenu}><i className="fas fa-ellipsis-h fa-sm"></i></button>
                       {
                         listMenuOpen &&
                         <ListMenu
-                          closeListMenu={this.closeListMenu}
+                          toggleListMenu={this.toggleListMenu}
                           deleteList={this.props.deleteList}
                           listId={id}
                         />
