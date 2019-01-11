@@ -46,7 +46,8 @@ class App extends Component {
         }
       },
       listOrder: ['test'],
-      team: [{ name: 'Natalie Roode', score: 0 }, { name: 'Juan Garcia', score: 2 }]
+      
+      
     };
   }
 

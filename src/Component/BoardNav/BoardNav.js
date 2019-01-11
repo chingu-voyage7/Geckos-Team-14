@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BoardTitleMenu from './BoardTitleMenu.js';
 import MainMenu from "../MainMenu.js";
 import Team from "../Team.js";
+import uuid from "uuid";
 import SimpleStorage from "react-simple-storage";
 
 class BoardNav extends Component {
@@ -16,7 +17,21 @@ class BoardNav extends Component {
 
     inviteMember: "Enter name",
 
-    team: [{ name: 'Natalie Roode', initials: 'NR', score: 0 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }]
+    team: [
+      {
+        id: 'test',
+        name: 'Natalie Roode',
+        initials: 'NR'
+      },
+      {
+        id: 'minnie',
+        name: 'Minnie Mouse',
+        initials: 'MM'
+      },
+
+    ],
+
+    // team: [{ name: 'Natalie Roode', initials: 'NR', score: 0 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }]
   };
 
   // -- handle main menu --
@@ -51,7 +66,7 @@ class BoardNav extends Component {
     }
   }
 
-// -- update member invite menu ---
+  // -- update member invite menu ---
   handleInviteMember = () => {
     const { inviteMember } = this.state;
     this.setState({
@@ -65,33 +80,55 @@ class BoardNav extends Component {
     var newMember = e.target.elements.name.value
     const inputLength = newMember.length;
     if (inputLength === 0) {
-        alert('please enter a name')
-      } else if (inputLength !== 0) {
-        this.abbreviate(newMember);
-        // let updateTeam = []
-        
-      }
+      alert('please enter a name')
+    } else if (inputLength !== 0) {
+      this.abbreviate(newMember);
+      // let updateTeam = []
+
+    }
   }
 
   abbreviate = (newMember) => {
-    let nameArr = newMember.split(' ').map((name)=> name.charAt(0));
+    let nameArr = newMember.split(' ').map((name) => name.charAt(0));
     let nameAbbr = nameArr.join(' ');
     console.log(nameAbbr);
     this.handleMemberAdd(newMember, nameAbbr)
-    }
-  
-  handleMemberAdd = (newMember, nameAbbr) => {
-    
-    let memberAdd = {name: newMember, initials: nameAbbr};
-    let updateTeam = this.state.team.push(memberAdd);
-    this.setState({
-          team: updateTeam,
-
-          inviteMember: false,
-        });
   }
-     
 
+  // handleMemberAdd = (newMember, nameAbbr) => {
+
+  //   let memberAdd = {name: newMember, initials: nameAbbr};
+  //   let updateTeam = this.state.team.push(memberAdd);
+  //   this.setState({
+  //         team: updateTeam,
+
+  //         inviteMember: false,
+  //       });
+  // }
+
+  //---------- example code ---------------------
+  handleMemberAdd = (newMember, nameAbbr) => {
+    const { team } = this.state;
+    // generate member id
+    const memId = uuid().replace(/-/g, "");
+    // add a new member
+    const newMem = {
+      id: memId,
+      name: newMember,
+      initials: nameAbbr 
+    };
+
+    // add the new member inside the team object
+    // Object.assign(team, newMem);
+
+    this.setState({
+      team
+    });
+  };
+
+
+
+  
 
   toggleYellow = () => {
     this.setState((prevState) => ({
@@ -124,7 +161,7 @@ class BoardNav extends Component {
               <i className="far fa-star"></i>
             </button>
             <div className="full-team">
-            
+
               <Team
                 teamMembers={this.state.team} />
               <div className="team-size">
@@ -132,7 +169,7 @@ class BoardNav extends Component {
               </div>
 
               <button className="invite-btn" onClick={this.handleInviteMember}><i className="fas fa-user-plus"></i>Invite</button>
-            
+
               {
                 inviteMember && (
                   <BoardTitleMenu
@@ -147,7 +184,7 @@ class BoardNav extends Component {
                   />
                 )}
 
-              </div>
+            </div>
           </div>
 
           <button className="btn board-nav--menu" onClick={this.toggleCloseButton}><i className="fas fa-ellipsis-h"></i>Show Menu</button>
