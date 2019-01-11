@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import CardForm from "../Card/CardForm";
 import Card from "../Card/Card";
+import ListMenu from "./ListMenu";
 
 class List extends Component {
   state = {
@@ -9,6 +10,7 @@ class List extends Component {
     isSubmitted: false,
     showCardForm: false,
     cardVal: "",
+    listMenuOpen: false
   };
 
   toggleTitleForm = () => {
@@ -64,6 +66,13 @@ class List extends Component {
     })
   };
 
+  toggleListMenu = () => {
+    this.setState({
+      listMenuOpen: !this.state.listMenuOpen
+    })
+  }
+
+
   // WILL USE FUNCTION INSIDE OF MODAL TO DELETE CARD
   // deleteCard = id => {
   //   const filteredCards = this.state.cards.filter(card => card.id !== id);
@@ -73,7 +82,7 @@ class List extends Component {
   // };
 
   render() {
-    const { isEdit, isSubmitted, showCardForm, cardVal } = this.state;
+    const { isEdit, isSubmitted, showCardForm, cardVal, listMenuOpen } = this.state;
     const { id, title } = this.props.list;
     const { handleTitleChange, cardList, addCardDescription } = this.props;
     return (
@@ -103,7 +112,19 @@ class List extends Component {
                       isEdit && <button>Edit List</button>}
                   </form>
                 ) : (
-                    <h3> {title} <i onClick={this.toggleTitleForm} className="fas fa-pen"></i></h3>
+                    <Fragment>
+                      <h3 onClick={this.toggleTitleForm}>{title}</h3>
+                      <button className="open-list-menu-btn" onClick={this.toggleListMenu}><i className="fas fa-ellipsis-h fa-sm"></i></button>
+                      {
+                        listMenuOpen &&
+                        <ListMenu
+                          toggleListMenu={this.toggleListMenu}
+                          deleteList={this.props.deleteList}
+                          listId={id}
+                        />
+                      }
+
+                    </Fragment>
                   )}
             </div>
             {provided.placeholder}
@@ -158,7 +179,7 @@ class List extends Component {
                   + <span>Add a card...</span>
                 </p>
               )}
-            <button
+            {/* <button
               className="btn btn--delete-list"
               onClick={e => {
                 e.preventDefault();
@@ -170,7 +191,7 @@ class List extends Component {
               }}
             >
               Delete List
-        </button>
+        </button> */}
           </div>)}
 
       </Draggable>
