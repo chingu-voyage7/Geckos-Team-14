@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BoardTitleMenu from './BoardTitleMenu.js';
 import MainMenu from "../MainMenu.js";
 import Team from "../Team.js";
+import SimpleStorage from "react-simple-storage";
 
 class BoardNav extends Component {
   state = {
