@@ -50,6 +50,17 @@
     background-color: rgba(255, 255, 255, 0);
 }
 
+.divider{
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    height: 1.6rem;
+}
+
+.group {
+    color: rgba(255, 255, 255, 0.795);
+    font-size: 1.4rem;
+    padding: .8rem 1.2rem;
+}
+
 .full-team {
     display: inline-block;
     margin-left: .5rem;

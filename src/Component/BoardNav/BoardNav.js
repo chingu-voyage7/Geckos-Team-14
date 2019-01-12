@@ -140,6 +140,9 @@ class BoardNav extends Component {
               className="btn board-star" onClick={this.toggleYellow} style={{ color: `${this.state.starColor}` }}>
               <i className="far fa-star"></i>
             </button>
+            <span className="divider"></span>
+            <span className="group">Chingu</span>
+            <span className="divider"></span>
             <div className="full-team">
 
               <Team
