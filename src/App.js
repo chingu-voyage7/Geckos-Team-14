@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import SimpleStorage from "react-simple-storage";
+import SimpleStorage, { clearStorage } from "react-simple-storage";
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -96,10 +96,13 @@ class App extends Component {
     return {cards, taskIds};
   }
 
-  copyList = (idToCopy) => {
+  copyList = (idToCopy, title="") => {
     const id = uuid().replace(/-/g, "");
     const listCopy = {...this.state.lists[idToCopy]};
     listCopy.id = id;
+    if (title) {
+      listCopy.title = title;
+    }
     const index = this.state.listOrder.indexOf(idToCopy);
     const lists = {...this.state.lists, [id]:listCopy};
     const {cards, taskIds} = this.copyCards(listCopy.taskIds);
@@ -339,6 +342,7 @@ class App extends Component {
     const { lists, cards, listOrder, styleType } = this.state;
     return (
       <div className="App" style={styleType}>
+        <SimpleStorage parent={this} prefix={"TrelloClone"} />
         <TrelloNav />
         <BoardNav
           handleBackgroundChange={this.handleBackgroundChange}
