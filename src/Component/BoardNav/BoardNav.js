@@ -15,8 +15,6 @@ class BoardNav extends Component {
     MMisOpen: false,
     starColor: 'white',
 
-    inviteMember: "Enter name",
-
     team: [
       {
         id: 'test',
@@ -30,8 +28,6 @@ class BoardNav extends Component {
       },
 
     ],
-
-    // team: [{ name: 'Natalie Roode', initials: 'NR', score: 0 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }, { name: 'Minnie Mouse', initials: 'MM', score: 2 }]
   };
 
   // -- handle main menu --
@@ -90,23 +86,11 @@ class BoardNav extends Component {
 
   abbreviate = (newMember) => {
     let nameArr = newMember.split(' ').map((name) => name.charAt(0));
-    let nameAbbr = nameArr.join(' ');
+    let nameAbbr = nameArr.join('');
     console.log(nameAbbr);
     this.handleMemberAdd(newMember, nameAbbr)
   }
 
-  // handleMemberAdd = (newMember, nameAbbr) => {
-
-  //   let memberAdd = {name: newMember, initials: nameAbbr};
-  //   let updateTeam = this.state.team.push(memberAdd);
-  //   this.setState({
-  //         team: updateTeam,
-
-  //         inviteMember: false,
-  //       });
-  // }
-
-  //---------- example code ---------------------
   handleMemberAdd = (newMember, nameAbbr) => {
     const { team } = this.state;
     // generate member id
@@ -118,17 +102,13 @@ class BoardNav extends Component {
       initials: nameAbbr 
     };
 
-    // add the new member inside the team object
-    // Object.assign(team, newMem);
-
+    team.push(newMem);
     this.setState({
-      team
+      team,
+      inviteMember: false,
     });
   };
 
-
-
-  
 
   toggleYellow = () => {
     this.setState((prevState) => ({
