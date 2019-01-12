@@ -114,6 +114,7 @@ class List extends Component {
                         listMenuOpen &&
                         <ListMenu
                           toggleListMenu={this.toggleListMenu}
+                          copyList={this.props.copyList}
                           deleteList={this.props.deleteList}
                           listId={id}
                         />
