@@ -15,6 +15,7 @@ import List from "./Component/List/List";
 //import BackgroundSelection from "./Component/Background/BackgroundSelection";
 
 import Dragon from './sass/images/dragon.jpg';
+import Scene1 from './Component/Background/images/scene1.jpg';
 //import { faImages } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
@@ -22,24 +23,24 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      styleType: { backgroundImage: `url(${Dragon})` },
+      styleType: { backgroundImage: `url(${Scene1})` },
       backgroundType: '',
-
-      cards: {'sample': {
-        id: 'sample',
-        dueDate: '',
-        content: 'Sample CheckList',
-        checkList: {
-          title: 'This is a new title',
-          tasks: [{item: 'Clean house', complete: false}]
-        }
-      }},
-      lists: {'test': {
-        id: 'test',
-        title: 'Testing checklists',
-        taskIds:['sample']
-      }},
-      listOrder: ['test']
+      cards: {
+        // 'sample': {
+        //   id: 'sample',
+        //   dueDate: '',
+        //   content: 'Sample CheckList',
+        //   checkListItems: [{ item: 'Do Laundry', complete: false }, { item: 'Clean shoes', complete: false }]
+        // }
+      },
+      lists: {
+        // 'test': {
+        //   id: 'test',
+        //   title: 'Testing checklists',
+        //   taskIds: ['sample']
+        // }
+      },
+      listOrder: []//['test']
     };
   }
 
