@@ -7,13 +7,16 @@ class ListMenu extends Component {
     titleName: ''
   }
 
+  componentDidMount = () => {
+    this.setState({ titleName:this.props.title });
+  }
   
   displayCopyList = () => {
     this.setState({ menuDisplay : 'copyList' });
   }
 
   onCopyTitleChange = (titleName) => {
-    this.setState({ titleName });
+    this.setState({ titleName }); 
   }
 
   render = () => {
@@ -33,12 +36,14 @@ class ListMenu extends Component {
                 <textarea 
                   onChange={(e)=>{ this.onCopyTitleChange(e.target.value) }}
                   className="title-input__text" 
-                  value={this.state.titleName || this.props.title}/>
+                  // value={this.state.titleName || this.props.title}/>
+                  value={this.state.titleName}/>
               </div>
               <button 
                 onClick={()=>{
                   let title = this.state.titleName || this.props.title;
-                  this.props.copyList(listId, title) 
+                  this.props.copyList(listId, title);
+                  toggleListMenu(); 
                   }}
                 className="btn--menu btn--submit btn--copy-memu">
                   Create List

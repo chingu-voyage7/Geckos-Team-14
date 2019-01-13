@@ -13,6 +13,12 @@ class List extends Component {
     listMenuOpen: false
   };
 
+  componentDidMount = () => {
+    if(this.props.list.title != "") {
+      this.setState({ isSubmitted: true });
+    }
+  }
+
   toggleTitleForm = () => {
     const { isEdit } = this.state;
     this.setState({

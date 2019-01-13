@@ -3,6 +3,7 @@
   background: $gray;
   width: 250px;
   margin: 8px;
+  position: relative;
   display: inline-block;
   vertical-align: top;
 }
@@ -26,13 +27,11 @@
 }
 .list--title i {
   opacity: 0;
-  float: right;
   font-size: 15px;
+  display: inline-block;
 }
 .list--title:hover i {
-  opacity: 0.5;
-  display: inline-block;
-  width: 80%;
+  opacity: 1;
 }
 .list--title h3:hover ~ i {
   opacity: 0.4;
@@ -40,14 +39,16 @@
   width: 80%;
 }
 .list--title form {
-  width: 73%;
-  height: 100%;
+  width: 100%;
+  overflow: hidden;
 
   input {
-    margin: 0 1px 0 0;
+    width: 80%;
     border-radius: 10px;
   }
   button {
+    float: right;
+    margin-top: 3px;
     height: 80%;
   }
 }
@@ -64,13 +65,13 @@
 .list-menu {
   background: #fff;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 100%;
   left: 85%;
   width: 100%;
   border: solid 1px $light-gray;
   border-radius: 4px;
-  overflow: hidden;
+  //overflow: hidden;
   &__header {
     display: flex;
     padding: 10px 15px;

@@ -6,6 +6,11 @@ import '../CardModal/datepicker.css';
 import moment from 'moment';
 import CheckList from '../Card/CheckList';
 
+const dateStyle = {
+    width: '75px',
+    height: '30px'
+}
+
 export default class CardModal extends Component {
 
     constructor(props) {
@@ -162,7 +167,7 @@ export default class CardModal extends Component {
                     <div className="row">
                         <section className="col double-col">
                             <div className="description">
-                                <h5 className="description__title">Description {
+                                <h5 className="description__title"><i className="fa fa-paperclip"></i>&nbsp;Description {
                                     // show edit button when isSubmited is false and isEdit is true
                                     !isSubmitted || isEdit && (<span onClick={this.editDescription}>Edit</span>)}</h5>
                                 {// if isSubmitted is false, show form. Else, hide form and show description
@@ -182,6 +187,7 @@ export default class CardModal extends Component {
                             </div>
                             {card.checkList && (
                             <CheckList 
+                                style={dateStyle}
                                 checkList={card.checkList} 
                                 onToggleCheckBox={this.onToggleCheckBox} 
                                 addCheckListItem={this.addCheckListItem}

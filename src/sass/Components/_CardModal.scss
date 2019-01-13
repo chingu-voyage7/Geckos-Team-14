@@ -20,7 +20,7 @@
     padding: 10px;
     overflow:scroll;
   }
-  z-index: 2;
+  z-index: 3;
 }
 
 .card-modal__content-title {
@@ -28,6 +28,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  padding: 2px 0 0 5px;
+  font-size: 20px;
   button {
     background: none;
     border: none;
@@ -57,6 +59,8 @@
 }
 .description__title {
   margin-bottom: 15px;
+  //padding-left: 10px;
+  font-size: 15px;
 }
 .description__title span {
   font-weight: 400;
@@ -66,11 +70,19 @@
   color: $slate-gray;
 }
 
-.description__form-textarea {
-  width: 100%;
-  border: none;
-  border-radius: 3px;
-  padding: 5px 8px;
+.description__form {
+  &-textarea {
+    margin: 0 0 8px 8px;
+    width: 95%;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 8px;
+  }
+  button {
+    float: right;
+    margin-right: 19px;
+  }
+
 }
 
 .card-modal__content aside {
@@ -78,12 +90,14 @@
   p {
     font-size: 14px;
     text-transform: uppercase;
-    margin: 10px 0;
+    margin: 10px 0 0px 0;
   }
   button {
     background: $gray;
     text-align: left;
-    padding: 10px 8px;
+    width: 95%;
+    height: 30px;
+    padding: 8px;
     margin: 8px 0px;
     border: none;
     border-radius: 3px;
