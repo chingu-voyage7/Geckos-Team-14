@@ -7,11 +7,19 @@ import ListMenu from "./ListMenu";
 class List extends Component {
   state = {
     isEdit: false,
-    isSubmitted: false,
+    isSubmitted: true,
     showCardForm: false,
     cardVal: "",
     listMenuOpen: false
   };
+
+  componentDidMount = (prevProps) => {
+    if (prevProps !== this.props) {
+      if (this.props.isEdit) {
+        this.setState({ isEdit: this.props.isEdit });
+      }
+    }
+  }
 
   toggleTitleForm = () => {
     const { isEdit } = this.state;
