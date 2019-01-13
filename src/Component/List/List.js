@@ -15,8 +15,9 @@ class List extends Component {
 
   componentDidMount = (prevProps) => {
     if (prevProps !== this.props) {
-      if (this.props.isEdit) {
-        this.setState({ isEdit: this.props.isEdit });
+      if (!this.props.isSubmitted) {
+        console.log("setting List Form Up");
+        this.setState({  isSubmitted: false });
       }
     }
   }

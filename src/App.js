@@ -380,7 +380,7 @@ class App extends Component {
                   const cardList = list.taskIds.map(id => cards[id]);
                   return (
                     <List
-                      isEdit={list.title==="" ? true : false }
+                      isSubmitted={list.title==="" ? false : true }
                       key={list.id}
                       listId={list.id}
                       list={list}
