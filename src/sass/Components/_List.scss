@@ -3,13 +3,91 @@
   background: $gray;
   width: 250px;
   margin: 8px;
+  display: inline-block;
+  vertical-align: top;
 }
+.list--title {
+  text-align: left;
+}
+
+.list--title {
+  position: relative;
+}
+
 .list--title h3 {
   color: $dark-blue;
   font-size: 18px;
   margin: 8px;
   cursor: pointer;
+  text-align: left;
+  padding: 0px 3px;
+  width: 93%;
 }
+.list--title h3 i {
+  display: none;
+  float: right;
+  font-size: 15px;
+  padding-top: 3px;
+}
+.list--title h3:hover i {
+  display: block;
+  opacity: 0.4;
+  display: inline-block;
+  width: 80%;
+}
+.open-list-menu-btn {
+  display: inline-block;
+  background: none;
+  text-align: right;
+  border: 0;
+  color: $slate-gray;
+}
+
+// LIST MENU
+.list-menu {
+  background: #fff;
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 85%;
+  width: 100%;
+  border: solid 1px $light-gray;
+  border-radius: 4px;
+  overflow: hidden;
+  &__header {
+    display: flex;
+    padding: 10px 15px;
+    margin: 0 10px 5px;
+    border-bottom: solid 1px $light-gray;
+    &-title {
+      margin: auto;
+      font-size: 15px;
+      color: $slate-gray;
+    }
+    &-close-btn {
+      background: none;
+      border: 0;
+      color: $slate-gray;
+      outline: 0;
+    }
+  }
+}
+
+.action-list__btn {
+  background: none;
+  border: 0;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  color: $dark-blue;
+  &:hover {
+    background: #298fca;
+    color: #fff;
+  }
+}
+
 .list form {
   padding: 4px 8px 5px;
 }
@@ -32,6 +110,10 @@
 }
 
 .add-list-btn {
+  vertical-align: top;
+  margin: 8px;
+  width: 250px;
+  height: 35px;
   padding: 10px 25px;
   border: none;
   border-radius: 4px;
