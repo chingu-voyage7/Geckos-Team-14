@@ -21,19 +21,35 @@
   cursor: pointer;
   text-align: left;
   padding: 0px 3px;
-  width: 93%;
+  display: inline-block;
+  width: 80%;
 }
-.list--title h3 i {
-  display: none;
+.list--title i {
+  opacity: 0;
   float: right;
   font-size: 15px;
-  padding-top: 3px;
 }
-.list--title h3:hover i {
-  display: block;
+.list--title:hover i {
+  opacity: 0.5;
+  display: inline-block;
+  width: 80%;
+}
+.list--title h3:hover ~ i {
   opacity: 0.4;
   display: inline-block;
   width: 80%;
+}
+.list--title form {
+  width: 73%;
+  height: 100%;
+
+  input {
+    margin: 0 1px 0 0;
+    border-radius: 10px;
+  }
+  button {
+    height: 80%;
+  }
 }
 .open-list-menu-btn {
   display: inline-block;
@@ -41,6 +57,7 @@
   text-align: right;
   border: 0;
   color: $slate-gray;
+  vertical-align: middle;
 }
 
 // LIST MENU
@@ -136,4 +153,32 @@
 }
 .add-card-btn:hover span {
   text-decoration: underline !important;
+}
+
+
+/*** COPY LIST MENU ***/
+
+.copy-list__title {
+  font-size: 1.4rem;
+  color: $dark-blue;
+  padding: 5px 10px 0px;
+  text-align: left;
+}
+
+.copy-menu__title-input {
+  width: 100%;
+  padding: 10px 10px 5px 10px;
+}
+
+.btn--copy-memu {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.title-input__text {
+  width: 100%;
+  height: 60px;
+  padding: 3px 8px;
+  font-size: 2.2rem;
 }

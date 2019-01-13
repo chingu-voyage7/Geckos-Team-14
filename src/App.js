@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import SimpleStorage from "react-simple-storage";
+import SimpleStorage, { clearStorage } from "react-simple-storage";
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -25,22 +25,10 @@ class App extends Component {
     this.state = {
       styleType: { backgroundImage: `url(${Scene1})` },
       backgroundType: '',
-      cards: {
-        // 'sample': {
-        //   id: 'sample',
-        //   dueDate: '',
-        //   content: 'Sample CheckList',
-        //   checkListItems: [{ item: 'Do Laundry', complete: false }, { item: 'Clean shoes', complete: false }]
-        // }
-      },
-      lists: {
-        // 'test': {
-        //   id: 'test',
-        //   title: 'Testing checklists',
-        //   taskIds: ['sample']
-        // }
-      },
-      listOrder: []//['test']
+
+      cards: {},
+      lists: {},
+      listOrder: []
     };
   }
 
@@ -86,7 +74,6 @@ class App extends Component {
       lists: newList
     });
     // console.log(lists);
-
     // add the created list inside the listOrder array
     for (let list in lists) {
       this.setState({
@@ -95,6 +82,35 @@ class App extends Component {
     }
     // console.log(lists);
   };
+
+  //We need to make copies of the cards from the original List, and add those to the list copy.
+  copyCards = (cardsToCopy) => {
+    const cards = {...this.state.cards};
+    const taskIds= [];
+    cardsToCopy.forEach(card => {
+      console.log(card);
+      const id = uuid().replace(/-/g, "");
+      cards[id] = {...cards[card]};
+      cards[id].id = id;
+      taskIds.push(id);
+    });
+    return {cards, taskIds};
+  }
+
+  copyList = (idToCopy, title="") => {
+    const id = uuid().replace(/-/g, "");
+    const listCopy = {...this.state.lists[idToCopy]};
+    listCopy.id = id;
+    if (title) {
+      listCopy.title = title;
+    }
+    const index = this.state.listOrder.indexOf(idToCopy);
+    const lists = {...this.state.lists, [id]:listCopy};
+    const {cards, taskIds} = this.copyCards(listCopy.taskIds);
+    lists[id].taskIds = taskIds;
+    const listOrder = this.state.listOrder.slice(0, index+1).concat(id).concat(this.state.listOrder.slice(index+1));
+    this.setState({ cards, lists, listOrder });
+  }
 
   // const newTaskIds = list.taskIds.filter(task => task !== cardName);
   //   const newCards = { ...this.state.cards };
@@ -327,6 +343,7 @@ class App extends Component {
     const { lists, cards, listOrder, styleType } = this.state;
     return (
       <div className="App" style={styleType}>
+        <SimpleStorage parent={this} prefix={"TrelloClone"} />
         <TrelloNav />
         <BoardNav
           handleBackgroundChange={this.handleBackgroundChange}
@@ -354,6 +371,7 @@ class App extends Component {
                       key={list.id}
                       listId={list.id}
                       list={list}
+                      copyList={this.copyList}
                       cardList={cardList}
                       handleTitleChange={this.handleTitleChange}
                       addCard={this.addCard}

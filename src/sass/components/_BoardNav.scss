@@ -15,7 +15,9 @@
     display: flex;
     justify-content: space-between;
     padding: .8rem;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    margin: 44px 0 0 0;
     
     
     &--title {
@@ -34,6 +36,7 @@
 
     &-wrapper {
         transition: transform 5s !important;
+        position: fixed;
     }
     
     

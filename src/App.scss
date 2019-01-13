@@ -6,6 +6,15 @@
   background-attachment: fixed;
   background-size: cover;
   height: 100vh;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+input {
+  font-family: 'Slabo 27px';
+  font-size: 15px;
+}
+.App-header {
+  padding-top: 100px;
 }
 
 // .App-logo {
