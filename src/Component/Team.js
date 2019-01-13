@@ -13,7 +13,7 @@ class Team extends Component {
             <div className="full-team-members">
 
                 {this.props.teamMembers.map((member) =>
-                    <div className="team-member" key={member.name}>
+                    <div className="team-member" key={member.id} onClick={() => this.props.deleteMember(member.id)}>
                         {member.initials}
                     </div>
                 )}

@@ -6,6 +6,7 @@ import uuid from "uuid";
 import SimpleStorage from "react-simple-storage";
 
 class BoardNav extends Component {
+
   state = {
     BoardName: "Add Board Name",
 
@@ -29,6 +30,8 @@ class BoardNav extends Component {
 
     ],
   };
+
+
 
   // -- handle main menu --
 
@@ -99,7 +102,7 @@ class BoardNav extends Component {
     const newMem = {
       id: memId,
       name: newMember,
-      initials: nameAbbr 
+      initials: nameAbbr
     };
 
     team.push(newMem);
@@ -109,6 +112,18 @@ class BoardNav extends Component {
     });
   };
 
+  // ------ delete member -------
+  deleteMember = id => {
+    const { team } = this.state;
+    const willDelete = window.confirm('Remove this team member?')
+
+    if (willDelete) {
+      const newMembers = team.filter(member => member.id !== id);
+      console.log(newMembers);
+      this.setState({ team: newMembers });
+    }
+
+  }
 
   toggleYellow = () => {
     this.setState((prevState) => ({
@@ -146,7 +161,8 @@ class BoardNav extends Component {
             <div className="full-team">
 
               <Team
-                teamMembers={this.state.team} />
+                teamMembers={this.state.team}
+                deleteMember={this.deleteMember} />
               <div className="team-size">
                 {this.state.team.length}
               </div>
