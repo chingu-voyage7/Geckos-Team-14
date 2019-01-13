@@ -18,14 +18,24 @@ class BoardNav extends Component {
 
     team: [
       {
-        id: 'test',
+        id: 'nr',
         name: 'Natalie Roode',
         initials: 'NR'
       },
       {
-        id: 'minnie',
-        name: 'Minnie Mouse',
-        initials: 'MM'
+        id: 'cf',
+        name: 'Carlos Fins',
+        initials: 'CF'
+      },
+      {
+        id: 'jg',
+        name: 'Juan Garcia',
+        initials: 'JG'
+      },
+      {
+        id: 'ph',
+        name: 'Paul Hong',
+        initials: 'PH'
       },
 
     ],

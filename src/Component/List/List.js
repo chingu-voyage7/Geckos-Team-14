@@ -61,6 +61,9 @@ class List extends Component {
         cardVal: ""
       });
     }
+    this.setState({
+      showCardForm: !this.state.showCardForm
+    })
   };
 
   toggleListMenu = () => {
@@ -105,6 +108,8 @@ class List extends Component {
                     />
                     {// if editing list title, no need to show "Add List" button
                       !isEdit && <button>Add List</button>}
+                      {
+                      isEdit && <button>Edit List</button>}
                   </form>
                 ) : (
                     <Fragment>
@@ -178,7 +183,11 @@ class List extends Component {
               className="btn btn--delete-list"
               onClick={e => {
                 e.preventDefault();
-                this.props.deleteList(id);
+                if(window.confirm('Are you sure you want to delete ' + title + '?')) {
+                  alert("List " + title + " deleted.");
+                  this.props.deleteList(id);
+                } else {}
+                // this.props.deleteList(id);
               }}
             >
               Delete List

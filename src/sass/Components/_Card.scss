@@ -2,7 +2,7 @@
   list-style: none;
   // border: solid 1px red;
   padding: 0 8px 5px;
-  min-height: 55px;
+  //min-height: 55px;
 }
 .card {
   background: $white;
@@ -15,4 +15,9 @@
 .card:hover {
   background: $light-gray;
   cursor: pointer;
+}
+
+.btn--delete-card {
+  color: black;
+  float: right;
 }

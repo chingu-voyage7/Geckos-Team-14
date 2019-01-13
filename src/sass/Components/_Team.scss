@@ -10,6 +10,10 @@
     height: 2.8rem;
     width: 2.8rem;
     text-transform: uppercase;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .full-team-members {
