@@ -66,13 +66,13 @@
 .list-menu {
   background: #fff;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 100%;
   left: 85%;
   width: 100%;
   border: solid 1px $light-gray;
   border-radius: 4px;
-  overflow: hidden;
+  // overflow: hidden;
 
   &__header {
     display: flex;
@@ -82,7 +82,7 @@
 
     &-title {
       margin: auto;
-      font-size: 15px;
+      font-size: 14px;
       color: $slate-gray;
     }
     &-close-btn {
@@ -90,6 +90,7 @@
       border: 0;
       color: $slate-gray;
       outline: 0;
+      font-size: 1.5rem;
     }
   }
 }
@@ -101,8 +102,10 @@
   display: block;
   width: 100%;
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   color: $dark-blue;
+  font-size: 1.4rem;
+
   &:hover {
     background: #298fca;
     color: #fff;
@@ -176,6 +179,8 @@
 }
 .add-card-btn:hover {
   background: $dark-gray;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 .add-card-btn:hover span {
   text-decoration: underline !important;
