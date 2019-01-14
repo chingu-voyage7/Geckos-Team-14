@@ -122,11 +122,11 @@
   box-shadow: 0 1px 0 $med-gray2;
   margin-bottom: .5rem;
   color: $dark-blue;
-  box-sizing: border-box;
+  outline: none;
 
   &:focus {
     outline: none;
-    border-radius: 5px;
+    border-radius: 3px;
     border: 2px solid $med-blue;
   }
 
