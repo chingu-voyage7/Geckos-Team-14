@@ -34,18 +34,6 @@ export default class Card extends React.Component {
                         >
                             {provided.placeholder}
                             {content}
-                            <button
-                                className="btn btn--delete-card"
-                                onClick={e => {
-                                    if(window.confirm("Delete " + content + "?")) {
-                                        deleteCard(cardId, list);
-                                    } else {
-                                        e.stopPropagation();
-                                    }
-                                }}
-                            >
-                                X
-                      </button>
                         {/* </li> */}
                         </li>
                     )}
