@@ -15,7 +15,7 @@ import List from "./Component/List/List";
 //import BackgroundSelection from "./Component/Background/BackgroundSelection";
 
 import Dragon from './sass/images/dragon.jpg';
-import Scene1 from './Component/Background/images/scene1.jpg';
+import Scene3 from './Component/Background/images/scene3.jpg';
 //import { faImages } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      styleType: { backgroundImage: `url(${Scene1})` },
+      styleType: { backgroundImage: `url(${Scene3})` },
       backgroundType: '',
       cards: {
         // 'sample': {
