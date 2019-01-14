@@ -2,7 +2,7 @@
 
 .checklist {
 /*** TEMP SETTING FOR TESTING/DEV PURPOSES***/
-background-color: $gray;
+
 }
 
 .checklist__heading {
@@ -13,6 +13,8 @@ background-color: $gray;
 .checklist__title {
     font-size: $standard-text;
 }
+
+.checklist
 
 .checklist__items {
     list-style: none;

@@ -28,7 +28,7 @@ export default class CardModal extends Component {
     }
     createNewCheckList = () => {
         const newCheckList = {
-            title: "New CheckList",
+            title: "CheckList",
             tasks: []
         }
         const editedCard = {

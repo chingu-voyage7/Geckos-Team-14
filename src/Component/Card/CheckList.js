@@ -53,7 +53,7 @@ class CheckList extends Component {
                     (<h2 
                     className="checklist__title"
                     onClick={this.toggleCheckListTitle}
-                    >{checkList.title}</h2>) :
+                    ><i className="fa fa-list-alt checklist-title__icon"></i>{checkList.title}</h2>) :
                     (<form onSubmit={(e)=> {
                         e.preventDefault();
                         this.handleTitleSubmitForm();
