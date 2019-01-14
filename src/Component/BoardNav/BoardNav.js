@@ -146,6 +146,7 @@ class BoardNav extends Component {
     const { showNameMenu, BoardName, inviteMember } = this.state;
     return (
       <div className="board-nav-wrapper">
+        <SimpleStorage parent={this} prefix={"TrelloClone"} />
         <MainMenu
           menuState={false}
           MMisOpen={this.state.MMisOpen}
