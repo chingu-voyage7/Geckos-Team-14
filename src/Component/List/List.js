@@ -7,15 +7,23 @@ import ListMenu from "./ListMenu";
 class List extends Component {
   state = {
     isEdit: false,
-    isSubmitted: false,
+    isSubmitted: true,
     showCardForm: false,
     cardVal: "",
     listMenuOpen: false
   };
 
-  componentDidMount = () => {
-    if(this.props.list.title != "") {
-      this.setState({ isSubmitted: true });
+  // componentDidMount = () => {
+  //   if(this.props.list.title != "") {
+  //     this.setState({ isSubmitted: true });
+  //   }
+  // }
+  componentDidMount = (prevProps) => {
+    if (prevProps !== this.props) {
+      if (!this.props.isSubmitted) {
+        console.log("setting List Form Up");
+        this.setState({  isSubmitted: false });
+      }
     }
   }
 
@@ -106,9 +114,11 @@ class List extends Component {
             <div className="list--title">
               {// if form has not been submitted, show form. Also, show form if isEdit is true
                 !isSubmitted || isEdit ? (
-                  <form onSubmit={this.saveListTitle}>
+                  <form onSubmit={this.saveListTitle} className="list--form" >
                     <input
                       type="text"
+                      className="list--form-input"
+                      autofocus="true"
                       value={title}
                       onChange={e => handleTitleChange(id, e.target.value)}
                     />

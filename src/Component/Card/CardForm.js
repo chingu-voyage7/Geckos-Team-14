@@ -14,9 +14,9 @@ const CardForm = ({
       placeholder="Enter a title for this card..."
     />
     <button type="submit">Add Card</button>
-    <button className="cancel-btn" onClick={toggleCardForm}>
-      X
-    </button>
+    <span className="cancel-btn" onClick={toggleCardForm}>
+    <i className="fas fa-times"></i>
+    </span>
   </form>
 );
 
