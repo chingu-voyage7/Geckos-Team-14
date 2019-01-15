@@ -18,6 +18,7 @@ class List extends Component {
   //     this.setState({ isSubmitted: true });
   //   }
   // }
+  
   componentDidMount = (prevProps) => {
     if (prevProps !== this.props) {
       if (!this.props.isSubmitted) {

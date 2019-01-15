@@ -43,6 +43,10 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+
+  aside {
+    //position: ;
+  }
 }
 .col {
   display: flex;
@@ -56,27 +60,37 @@
 
 .description p {
   font-size: 14px;
+  margin: 15px 0 0 17px;
+  background-color: $dark-gray;
+  width: 93%;
+  padding: 3px 8px;
+  border-radius: 6px;
+  min-height: 100px;
 }
 .description__title {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   //padding-left: 10px;
   font-size: 15px;
+  width: 95%;
 }
 .description__title span {
   font-weight: 400;
+  font-size: 13px;
   text-decoration: underline;
-  margin-left: 5px;
+  padding-top: 2px;
+  margin-left: 10px;
   cursor: pointer;
   color: $slate-gray;
+  float: right;
 }
 
 .description__form {
   &-textarea {
-    margin: 0 0 8px 8px;
-    width: 95%;
+    margin: 0 0 8px 20px;
+    width: 93%;
     border: none;
     border-radius: 3px;
-    padding: 5px 8px;
+    padding: 5px;
   }
   button {
     float: right;
@@ -124,11 +138,15 @@
   border-radius: 3px;
   width: 20%;
   min-width: 110px;
+  padding-left: 22px;
+  margin-bottom: 10px;
 }
 
 .due-date {
-  
+
   &__title {
+    padding-left: 5px;
+    font-weight: bold;
     color: $slate-gray;
     text-transform: uppercase;
     text-align: left;
