@@ -109,9 +109,11 @@ class List extends Component {
             <div className="list--title">
               {// if form has not been submitted, show form. Also, show form if isEdit is true
                 !isSubmitted || isEdit ? (
-                  <form onSubmit={this.saveListTitle}>
+                  <form onSubmit={this.saveListTitle} className="list--form" >
                     <input
                       type="text"
+                      className="list--form-input"
+                      autofocus="true"
                       value={title}
                       onChange={e => handleTitleChange(id, e.target.value)}
                     />
