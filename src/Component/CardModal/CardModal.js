@@ -154,7 +154,7 @@ export default class CardModal extends Component {
                         {card.dueDate && (
                             <div className="card__due-date">
                                 <h3 className="due-date__title">Due Date</h3>
-                                <p className={(card.dueDate > currentDate ? "due-date__date" : "due-date__date due-date__date--overdue")}>
+                                <p className={(currentDate.isBefore(card.dueDate) ? "due-date__date" : "due-date__date due-date__date--overdue")}>
                                     {moment(card.dueDate).format('MMM Do YYYY')}
                                 </p>
                             </div>)}
@@ -198,6 +198,7 @@ export default class CardModal extends Component {
 
                             <SingleDatePicker
                                 placeholder={'Due Date'}
+                                readOnly={true}
                                 date={this.state.createdAt}
                                 onDateChange={this.onDateChange}
                                 focused={this.state.calendarFocused}
