@@ -2,32 +2,42 @@
   border-radius: 3px;
   background: $gray;
   width: 250px;
-  margin: 8px;
+  margin: 8px 0px 8px 8px;
   display: inline-block;
   vertical-align: top;
-}
-.list--title {
-  text-align: left;
+  // overflow: hidden;
+  box-sizing: border-box;
+  z-index: 1;
+  
 }
 
+// .list-form {
+//   padding: .4rem;
+// }
+
 .list--title {
+  text-align: left;
   position: relative;
 }
 
 .list--title h3 {
   color: $dark-blue;
-  font-size: 18px;
-  margin: 8px;
+  // margin: 8px;
   cursor: pointer;
   text-align: left;
-  padding: 0px 3px;
-  width: 93%;
+  padding: 1.2rem;
+  width: 20.5rem;
+  display: inline-block;
+
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 .list--title h3 i {
   display: none;
   float: right;
-  font-size: 15px;
-  padding-top: 3px;
+  font-size: 2rem;
+  display: inline-block;
+  
 }
 .list--title h3:hover i {
   display: block;
@@ -38,30 +48,41 @@
 .open-list-menu-btn {
   display: inline-block;
   background: none;
-  text-align: right;
   border: 0;
+  border-radius: .3rem;
   color: $slate-gray;
+  font-size: 1.5rem;
+  padding: .25rem .1rem;
+  margin: .5rem;
+  float: right;
+
+
+  &:hover {
+    background-color: #b3c2ccc4;
+  }
 }
 
 // LIST MENU
 .list-menu {
   background: #fff;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 100%;
   left: 85%;
   width: 100%;
   border: solid 1px $light-gray;
   border-radius: 4px;
-  overflow: hidden;
+  // overflow: hidden;
+
   &__header {
     display: flex;
     padding: 10px 15px;
     margin: 0 10px 5px;
     border-bottom: solid 1px $light-gray;
+
     &-title {
       margin: auto;
-      font-size: 15px;
+      font-size: 14px;
       color: $slate-gray;
     }
     &-close-btn {
@@ -69,6 +90,7 @@
       border: 0;
       color: $slate-gray;
       outline: 0;
+      font-size: 1.5rem;
     }
   }
 }
@@ -80,59 +102,85 @@
   display: block;
   width: 100%;
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   color: $dark-blue;
+  font-size: 1.4rem;
+
   &:hover {
     background: #298fca;
     color: #fff;
   }
 }
 
-.list form {
-  padding: 4px 8px 5px;
+.list--form {
+  padding: .5rem;
+  width: 100%;
+
 }
+
 .list form input {
   width: 100%;
-  padding: 7px 5px;
-  // margin: 0 8px;
-  border: solid 2px $gray;
+  padding: .8rem 1.2rem;
+  border: 2px solid $med-blue;
   border-radius: 3px;
+  font-size: 1.4rem;
+  box-shadow: 0 1px 0 $med-gray2;
+  margin-bottom: .5rem;
+  color: $dark-blue;
+  outline: none;
+
+  &:focus {
+    outline: none;
+    border-radius: 3px;
+    border: 2px solid $med-blue;
+  }
+
 }
 
 .list form button {
-  background: $dark-green;
+  background: $light-green;
   color: $white;
   border: none;
   padding: 8px 10px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 3px;
+  box-shadow: 0 1px 0 $dark-green;
+
+  &:hover {
+    background: $green;
+  }
 }
 
 .add-list-btn {
   vertical-align: top;
   margin: 8px;
   width: 250px;
-  height: 35px;
-  padding: 10px 25px;
+  // height: 35px;
+  padding: 1.2rem 1.5rem;
   border: none;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.5);
-  color: $white;
+  background: rgba(0, 0, 0, 0.25);
+  color: $light-gray;
   outline: none;
-}
-.add-list-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
+  text-align: left;
+  font-size: 1.4rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .add-card-btn {
-  font-size: 15px;
-  padding: 5px 8px;
+  font-size: 1.4rem;
+  padding: 8px;
   color: $slate-gray;
   cursor: pointer;
 }
 .add-card-btn:hover {
   background: $dark-gray;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 .add-card-btn:hover span {
   text-decoration: underline !important;
