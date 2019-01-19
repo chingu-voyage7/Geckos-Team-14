@@ -25,10 +25,15 @@ class List extends Component {
     if (this.node.contains(e.target)) {
       return;
     }
-    this.setState({
-      isEdit: false,
-      isSubmitted: true
-    })
+    // if empty, list will be deleted when user clicks outside out if
+    if (!this.props.list.title) {
+      this.props.deleteList(this.props.list.id)
+    } else {
+      this.setState({
+        isEdit: false,
+        isSubmitted: true
+      })
+    }
   }
 
   componentDidMount = (prevProps) => {
@@ -124,11 +129,12 @@ class List extends Component {
             ref={provided.innerRef}
             {...provided.dragHandleProps}
           >
-            <div className="list--title"
-              ref={node => this.node = node}>
+            <div className="list--title" ref={node => this.node = node}>
               {// if form has not been submitted, show form. Also, show form if isEdit is true
                 !isSubmitted || isEdit ? (
-                  <form onSubmit={this.saveListTitle} className="list--form" >
+                  <form
+                    onSubmit={this.saveListTitle}
+                    className="list--form" >
                     <input
                       type="text"
                       className="list--form-input"
