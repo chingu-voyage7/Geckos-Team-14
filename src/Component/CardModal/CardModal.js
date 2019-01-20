@@ -19,7 +19,7 @@ export default class CardModal extends Component {
             calendarFocused: false,
             isSubmitted: false,
             isEdit: false,
-            descripton: ""
+            descripton: "",
         }
     }
 
@@ -151,76 +151,84 @@ export default class CardModal extends Component {
         return (
             <div className="card-modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
                 <div className="card-modal__content">
-                    <div className="card-modal__content-title">
-                        <h4>{card.content}</h4>
+                    <div className="card-modal__content-title modal-elements">
+                        <h4><i className="fa fa-list-ul left-side-icons"></i><span>{card.content}</span></h4>
                         <button onClick={toggleModal}>x</button>
                     </div>
-                    <div className="card__details">
-                        {card.dueDate && (
-                            <div className="card__due-date">
-                                <h3 className="due-date__title">Due Date</h3>
-                                <p className={(card.dueDate > currentDate ? "due-date__date" : "due-date__date due-date__date--overdue")}>
-                                    {moment(card.dueDate).format('MMM Do YYYY')}
-                                </p>
-                            </div>)}
-                    </div>
                     <div className="row">
-                        <section className="col double-col">
-                            <div className="description">
-                                <h5 className="description__title"><i className="fa fa-paperclip"></i>&nbsp;Description {
-                                    // show edit button when isSubmited is false and isEdit is true
-                                    !isSubmitted || isEdit && (<span onClick={this.editDescription}>EDIT</span>)}</h5>
-                                {// if isSubmitted is false, show form. Else, hide form and show description
-                                    !isSubmitted && <form className="description__form" onSubmit={this.submitDescription}>
-                                        <textarea
-                                            rows="5"
-                                            className="description__form-textarea"
-                                            value={description}
-                                            onChange={this.handleDescriptionChange}
-                                        ></textarea>
-                                        <button>Add Description</button>
-                                    </form>
-                                }
-                                {
-                                    isSubmitted && <p>{description}</p>
-                                }
+                        <div className="left-col">
+                            <div className="card__details">
+                                {card.dueDate && (
+                                    <div className="card__due-date">
+                                        <h3 className="due-date__title"><i className="fa fa-calendar left-side-icons"></i>Due Date</h3>
+                                        <p className={(card.dueDate > currentDate ? "due-date__date" : "due-date__date due-date__date--overdue")}>
+                                            {moment(card.dueDate).format('MMM Do YYYY')}
+                                        </p>
+                                    </div>)}
                             </div>
-                            {card.checkList && (
-                            <CheckList 
-                                style={dateStyle}
-                                checkList={card.checkList} 
-                                onToggleCheckBox={this.onToggleCheckBox} 
-                                addCheckListItem={this.addCheckListItem}
-                                onDeleteCheckListItem={this.onDeleteCheckListItem}
-                                editCheckListItem={this.editCheckListItem}
-                                deleteCheckList={this.deleteCheckList}
-                                changeCheckListTitle={this.changeCheckListTitle}
-                            />
-                        )}
-                        </section>
-                        <aside className="col">
-                            <p>add to card</p>
-                            <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
+                            {/* <div className="row"> */}
+                                <section className="col double-col">
+                                    <div className="description">
+                                        <h5 className="modal-elements description__title">
+                                        <i className="fa fa-paperclip left-side-icons"></i>
+                                        Description {
+                                            // show edit button when isSubmited is false and isEdit is true
+                                            !isSubmitted || isEdit && (<span onClick={this.editDescription}>EDIT</span>)}</h5>
+                                        {// if isSubmitted is false, show form. Else, hide form and show description
+                                            !isSubmitted && <form className="description__form" onSubmit={this.submitDescription}>
+                                                <textarea
+                                                    rows="5"
+                                                    className="description__form-textarea"
+                                                    value={description}
+                                                    onChange={this.handleDescriptionChange}
+                                                ></textarea>
+                                                <button>Add Description</button>
+                                            </form>
+                                        }
+                                        {
+                                            isSubmitted && <p>{description}</p>
+                                        }
+                                    </div>
+                                    {card.checkList && (
+                                    <CheckList 
+                                        style={dateStyle}
+                                        checkList={card.checkList} 
+                                        onToggleCheckBox={this.onToggleCheckBox} 
+                                        addCheckListItem={this.addCheckListItem}
+                                        onDeleteCheckListItem={this.onDeleteCheckListItem}
+                                        editCheckListItem={this.editCheckListItem}
+                                        deleteCheckList={this.deleteCheckList}
+                                        changeCheckListTitle={this.changeCheckListTitle}
+                                    />
+                                )}
+                                </section>
+                            </div>
+                            
+                            <div className="right-col">
+                                <aside className="col">
+                                    <p>add to card</p>
+                                    <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
 
-                            <SingleDatePicker
-                                placeholder={'Due Date'}
-                                date={this.state.createdAt}
-                                onDateChange={this.onDateChange}
-                                focused={this.state.calendarFocused}
-                                onFocusChange={this.onCalendarFocusChange}
-                                hideKeyboardShortcutsPanel={true}
-                                numberOfMonths={1}
-                                isOutsideRange={() => false}
-                            />
-                            <p>actions</p>
-                            <button onClick={() => {
-                                if(window.confirm("Delete " + content + "?")) {
-                                    deleteCard(cardId, list);
-                                }
-                            }
+                                    <SingleDatePicker
+                                        placeholder={'Due Date'}
+                                        date={this.state.createdAt}
+                                        onDateChange={this.onDateChange}
+                                        focused={this.state.calendarFocused}
+                                        onFocusChange={this.onCalendarFocusChange}
+                                        hideKeyboardShortcutsPanel={true}
+                                        numberOfMonths={1}
+                                        isOutsideRange={() => false}
+                                    />
+                                    <p>actions</p>
+                                    <button onClick={() => {
+                                        if(window.confirm("Delete " + content + "?")) {
+                                            deleteCard(cardId, list);
+                                        }
+                                    }
 
-                            }><i className="fa fa-trash"></i> <span>Delete</span></button>
-                        </aside>
+                                    }><i className="fa fa-trash"></i> <span>Delete</span></button>
+                                </aside>
+                            </div>
                     </div>
                 </div>
             </div>

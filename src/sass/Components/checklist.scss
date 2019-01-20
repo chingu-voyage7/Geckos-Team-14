@@ -1,19 +1,25 @@
 /*** CHECKLIST ***/
 
 .checklist {
+    width: 100%;
+    margin: 6px 0 4px -8px;
+}
+
+.checklist-content {
 /*** TEMP SETTING FOR TESTING/DEV PURPOSES***/
-    background-color: $gray;
-    margin: 10px 0 10px 18px;
-    width: 93%;
-    border-radius: 5px;
+    // background-color: $gray;
+    // margin: 10px 0 10px 18px;
+    // width: 93%;
+    // border-radius: 5px;
 }
 
 .checklist__heading {
+    
     display: flex;
     justify-content: space-between;
-    margin: 5px 8px;
-    width: 93%;
-    padding: 8px 0 0 3px;
+    // margin: 5px 8px;
+    width: 100%;
+    padding: 8px 0 0 0;
 
     .btn--checklist-delete {
         margin-left: 0;
@@ -27,6 +33,7 @@
     }
     form input {
         height: 25px;
+        padding: 0;
         margin: 0;
     }
 }
@@ -34,12 +41,13 @@
 .checklist__title {
     // font-size: $standard-text;
     font-size: 18px;
-    padding-left: 8px;
+    // padding-left: 8px;
     margin: 3px 0;
 }
 
 .checklist__items {
     list-style: none;
+    margin-left: -8px;
     padding: 0;
     text-align: left;
 }
@@ -47,16 +55,16 @@
 .checklist__item {
     display: flex;
     align-items: center;
-    width: 92%;
-    margin: 5px 0 5px 13px;
-    padding: 3px 0 1px 3px;
+    width: 100%;
+    margin: 5px 0 5px 0px;
+    padding: 3px 0 1px 0px;
 }
 
 .checklist__complete {
     border: 1px solid $slate-gray;
     width: 20px;
     height: 20px;
-    margin: 0 $menu-horizontal;
+    margin: 0 10px 0 20px;
 }
 
 .checklist__name {
@@ -76,6 +84,7 @@
     }
     button {
         height: 32px;
+        margin-left: 35px;
     }
 }
 
@@ -84,12 +93,12 @@
     font-size: 12px;
     margin: $menu-horizontal;
     cursor: pointer;
-    padding-left: 6px;
+    margin-left: 40px;
 }
 
 .progress-bar {
-    width: 91%;
-    margin: 2px 0 5px 13px;
+    width: 89%;
+    margin: 10px 0 10px 35px;
     padding-left: 4px;
     text-align: center;
     font-weight: bold;

@@ -10,7 +10,8 @@ class List extends Component {
     isSubmitted: true,
     showCardForm: false,
     cardVal: "",
-    listMenuOpen: false
+    listMenuOpen: false,
+    isModalOpen: false,
   };
 
   // componentDidMount = () => {
@@ -18,6 +19,12 @@ class List extends Component {
   //     this.setState({ isSubmitted: true });
   //   }
   // }
+  toggleModal = () => {
+    const { isModalOpen } = this.state
+    this.setState({
+        isModalOpen: !isModalOpen
+    })
+  }
   
   componentDidMount = (prevProps) => {
     if (prevProps !== this.props) {
@@ -97,13 +104,14 @@ class List extends Component {
   // };
 
   render() {
-    const { isEdit, isSubmitted, showCardForm, cardVal, listMenuOpen } = this.state;
+    const { isEdit, isSubmitted, showCardForm, cardVal, listMenuOpen, isModalOpen } = this.state;
     const { id, title } = this.props.list;
     const { handleTitleChange, cardList, addCardDescription } = this.props;
     return (
       <Draggable
         draggableId={this.props.listId}
         index={this.props.index}
+        isDragDisabled={isModalOpen}
       >
         {(provided) => (
           <div
@@ -173,6 +181,8 @@ class List extends Component {
                         list={this.props.list}
                         editCard={this.props.editCard}
                         addCardDescription={addCardDescription}
+                        toggleModal={this.toggleModal}
+                        isModalOpen={this.state.isModalOpen}
                       >
                         {/* {provided.placeholder} */}
                       </Card>
