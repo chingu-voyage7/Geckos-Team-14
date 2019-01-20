@@ -14,11 +14,6 @@ class List extends Component {
     isModalOpen: false,
   };
 
-  // componentDidMount = () => {
-  //   if(this.props.list.title != "") {
-  //     this.setState({ isSubmitted: true });
-  //   }
-  // }
   toggleModal = () => {
     const { isModalOpen } = this.state
     this.setState({
@@ -26,11 +21,33 @@ class List extends Component {
     })
   }
   
+  UNSAFE_componentWillMount() {
+    document.addEventListener("mousedown", this.handleSaveTitle, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleSaveTitle, false);
+  }
+
+  handleSaveTitle = e => {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    // if empty, list will be deleted when user clicks outside out if
+    if (!this.props.list.title) {
+      this.props.deleteList(this.props.list.id)
+    } else {
+      this.setState({
+        isEdit: false,
+        isSubmitted: true
+      })
+    }
+  }
   componentDidMount = (prevProps) => {
     if (prevProps !== this.props) {
       if (!this.props.isSubmitted) {
         console.log("setting List Form Up");
-        this.setState({  isSubmitted: false });
+        this.setState({ isSubmitted: false });
       }
     }
   }
@@ -120,20 +137,22 @@ class List extends Component {
             ref={provided.innerRef}
             {...provided.dragHandleProps}
           >
-            <div className="list--title">
+            <div className="list--title" ref={node => this.node = node}>
               {// if form has not been submitted, show form. Also, show form if isEdit is true
                 !isSubmitted || isEdit ? (
-                  <form onSubmit={this.saveListTitle} className="list--form" >
+                  <form
+                    onSubmit={this.saveListTitle}
+                    className="list--form" >
                     <input
                       type="text"
                       className="list--form-input"
-                      autofocus="true"
+                      autoFocus={true}
                       value={title}
                       onChange={e => handleTitleChange(id, e.target.value)}
                     />
                     {// if editing list title, no need to show "Add List" button
                       !isEdit && <button>Add List</button>}
-                      {
+                    {
                       isEdit && <button>Edit List</button>}
                   </form>
                 ) : (
