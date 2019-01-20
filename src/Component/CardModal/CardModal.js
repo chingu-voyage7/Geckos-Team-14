@@ -33,7 +33,7 @@ export default class CardModal extends Component {
     }
     createNewCheckList = () => {
         const newCheckList = {
-            title: "New CheckList",
+            title: "To-Do",
             tasks: []
         }
         const editedCard = {
@@ -145,6 +145,7 @@ export default class CardModal extends Component {
     }
 
     render() {
+        
         const currentDate = moment();
         const { card, isModalOpen, toggleModal, cardId, list, deleteCard, content } = this.props;
         const { description, isSubmitted, isEdit } = this.state
@@ -152,8 +153,8 @@ export default class CardModal extends Component {
             <div className="card-modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
                 <div className="card-modal__content">
                     <div className="card-modal__content-title modal-elements">
-                        <h4><i className="fa fa-list-ul left-side-icons"></i><span>{card.content}</span></h4>
-                        <button onClick={toggleModal}>x</button>
+                        <h4><i className="far fa-window-maximize left-side-icons"></i><span>{card.content}</span></h4>
+                        <button onClick={toggleModal}><i className="fas fa-times close-modal"></i></button>
                     </div>
                     <div className="row">
                         <div className="left-col">
@@ -170,7 +171,7 @@ export default class CardModal extends Component {
                                 <section className="col double-col">
                                     <div className="description">
                                         <h5 className="modal-elements description__title">
-                                        <i className="fa fa-paperclip left-side-icons"></i>
+                                        <i className="fas fa-align-left left-side-icons"></i>
                                         Description {
                                             // show edit button when isSubmited is false and isEdit is true
                                             !isSubmitted || isEdit && (<span onClick={this.editDescription}>EDIT</span>)}</h5>
@@ -180,9 +181,10 @@ export default class CardModal extends Component {
                                                     rows="5"
                                                     className="description__form-textarea"
                                                     value={description}
+                                                    placeholder="Add a more detailed description..."
                                                     onChange={this.handleDescriptionChange}
                                                 ></textarea>
-                                                <button>Add Description</button>
+                                                <button>Save</button>
                                             </form>
                                         }
                                         {
@@ -206,10 +208,12 @@ export default class CardModal extends Component {
                             
                             <div className="right-col">
                                 <aside className="col">
-                                    <p>add to card</p>
+                                    <p className="modal-aside-title">add to card</p>
                                     <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
-
+                                     
+                                     
                                     <SingleDatePicker
+                                        
                                         placeholder={'Due Date'}
                                         readOnly={true}
                                         date={this.state.createdAt}
@@ -220,7 +224,9 @@ export default class CardModal extends Component {
                                         numberOfMonths={1}
                                         isOutsideRange={() => false}
                                     />
-                                    <p>actions</p>
+                                      
+                                    
+                                    <p className="modal-aside-title">actions</p>
                                     <button onClick={() => {
                                         if(window.confirm("Delete " + content + "?")) {
                                             deleteCard(cardId, list);

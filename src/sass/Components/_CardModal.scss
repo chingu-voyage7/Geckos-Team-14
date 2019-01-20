@@ -1,6 +1,6 @@
 .card-modal {
   color: $dark-blue;
-  background: rgba(0,0,0,.7);
+  background: rgba(0, 0, 0, 0.356);
   position: fixed;
   top: 0;
   left: 0;
@@ -29,7 +29,7 @@
   align-items: center;
   margin-bottom: 40px;
   padding: 2px 0 0 0px;
-  font-size: 15px;
+  font-size: 20px;
   button {
     background: none;
     border: none;
@@ -39,6 +39,10 @@
   }
 }
 
+.left-side-icons {
+  font-size: 1.6rem;
+}
+
 .row {
   display: flex;
   width: 100%;
@@ -46,6 +50,7 @@
 
   .left-col {
     width: 75%;
+    
   } 
 }
 .col {
@@ -95,33 +100,71 @@
   &-textarea {
     margin: 0 0 8px 35px;
     width: 90%;
-    border: none;
+    border: 2px solid rgba(0, 0, 255, 0);
     border-radius: 3px;
-    padding: 5px;
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    color: $slate-gray;
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+
+    &:focus {
+      border: 2px solid #0079bf;
+    }
   }
   button {
-    float: right;
-    margin-right: 19px;
+    // float: right;
+    margin-left: 35px;
   }
 
 }
 
+div.SingleDatePicker.SingleDatePicker_1 {
+  color: $dark-blue !important;
+  background-color: green;
+  font-size: 24px;
+
+  div div.SingleDatePickerInput.SingleDatePickerInput_1.SingleDatePickerInput__withBorder.SingleDatePickerInput__withBorder_2 {
+    
+    div.DateInput.DateInput_1 {
+
+      input.DateInput_input.DateInput_input_1.DateInput_input__readOnly.DateInput_input__readOnly_2 {
+        color: $dark-blue !important;
+      }
+      
+    }
+    
+  } 
+}
+
+input.DateInput_input.DateInput_input_1.DateInput_input__readOnly.DateInput_input__readOnly_2, .DateInput .DateInput_1 {
+  color: $dark-blue !important;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+}
+
+
+
 .card-modal__content aside {
   padding: 8px 0;
   p {
-    font-size: 14px;
+    font-size: 1.2rem;
     text-transform: uppercase;
     margin: 10px 0 0px 0;
+    color: $slate-gray;
   }
+
   button {
     background: $gray;
     text-align: left;
     width: 95%;
     height: 30px;
-    padding: 8px;
+    padding: 6px 12px;
     margin: 8px 0px;
     border: none;
     border-radius: 3px;
+    font-size: 1.4rem;
+    
     i {
       margin-right: 8px;
       color: $slate-gray;
@@ -133,6 +176,18 @@
     &:hover {
       background: $dark-gray;
     }
+  }
+}
+
+.close-modal {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 10rem;
+  line-height: 4rem;
+  font-size: 2rem;
+  &:hover {
+    background-color: #70848f30;
+    color: $dark-blue;
   }
 }
 
@@ -198,5 +253,7 @@
 .left-side {
   &-icons {
     margin: 0 $menu-horizontal;
+    color: $slate-gray;
+
   }
 }
