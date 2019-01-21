@@ -11,9 +11,10 @@ class List extends Component {
     showCardForm: false,
     cardVal: "",
     listMenuOpen: false,
+    // MOVED ISMODALOPEN FROM CARD TO LIST
     isModalOpen: false,
   };
-
+  // MOVED TOGGALMODAL FROM CARD TO LIST
   toggleModal = () => {
     const { isModalOpen } = this.state
     this.setState({

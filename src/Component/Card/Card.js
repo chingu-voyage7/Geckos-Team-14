@@ -6,6 +6,10 @@ import { fstat } from "fs";
 
 export default class Card extends React.Component {
 
+
+    /* MOVED ISMODALOPEN AND TOGGLEMODAL FROM CARD TO LIST FOR THE MODAL DRAGGABLE ISSUE */
+
+    
     // state = {
     //     isModalOpen: false
     // }
