@@ -137,10 +137,12 @@ div.SingleDatePicker.SingleDatePicker_1 {
   } 
 }
 
-input.DateInput_input.DateInput_input_1.DateInput_input__readOnly.DateInput_input__readOnly_2, .DateInput .DateInput_1 {
+input .DateInput_input .DateInput_input_1 .DateInput_input__readOnly .DateInput_input__readOnly_2, .DateInput .DateInput_1 {
   color: $dark-blue !important;
   width: 100%;
   font-family: "Open Sans", sans-serif;
+  padding: 6px 12px;
+  height: 30px;
 }
 
 
