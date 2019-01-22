@@ -119,34 +119,6 @@
 
 }
 
-div.SingleDatePicker.SingleDatePicker_1 {
-  color: $dark-blue !important;
-  background-color: green;
-  font-size: 24px;
-
-  div div.SingleDatePickerInput.SingleDatePickerInput_1.SingleDatePickerInput__withBorder.SingleDatePickerInput__withBorder_2 {
-    
-    div.DateInput.DateInput_1 {
-
-      input.DateInput_input.DateInput_input_1.DateInput_input__readOnly.DateInput_input__readOnly_2 {
-        color: $dark-blue !important;
-      }
-      
-    }
-    
-  } 
-}
-
-input .DateInput_input .DateInput_input_1 .DateInput_input__readOnly .DateInput_input__readOnly_2, .DateInput .DateInput_1 {
-  color: $dark-blue !important;
-  width: 100%;
-  font-family: "Open Sans", sans-serif;
-  padding: 6px 12px;
-  height: 30px;
-}
-
-
-
 .card-modal__content aside {
   padding: 8px 0;
   p {
