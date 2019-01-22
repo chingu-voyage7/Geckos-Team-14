@@ -174,7 +174,7 @@ export default class CardModal extends Component {
                                         <i className="fas fa-align-left left-side-icons"></i>
                                         Description {
                                             // show edit button when isSubmited is false and isEdit is true
-                                            !isSubmitted || isEdit && (<span onClick={this.editDescription}>EDIT</span>)}</h5>
+                                            !isSubmitted || isEdit && (<span onClick={this.editDescription}>Edit</span>)}</h5>
                                         {// if isSubmitted is false, show form. Else, hide form and show description
                                             !isSubmitted && <form className="description__form" onSubmit={this.submitDescription}>
                                                 <textarea

@@ -21,11 +21,18 @@
     width: 100%;
     padding: 8px 0 0 0;
 
-    .btn--checklist-delete {
+    button.btn--checklist-delete {
         margin-left: 0;
         float: right;
         
+        i {
+            &:hover {
+            background-color: rgba(0, 0, 0, 0);
+            color: $dark-blue;
+            }
+        }
     }
+    
     .btn--checklist-edit {
         margin-left: auto;
     }
@@ -100,7 +107,7 @@
     margin-left: 3.5rem;
 
     input {
-        height: 5.5rem;
+        // height: 5.5rem;
         line-height: 2rem;
         font-family: "Open Sans", sans-serif;
 

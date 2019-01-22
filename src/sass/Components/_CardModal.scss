@@ -76,7 +76,7 @@
   background-color: $dark-gray;
   width: 92%;
   padding: 3px 8px;
-  border-radius: 6px;
+  border-radius: 3px;
   min-height: 100px;
 }
 .description__title {
@@ -89,19 +89,20 @@
 }
 .description__title span {
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: underline;
   padding-top: 2px;
   margin-left: 10px;
   cursor: pointer;
   color: $slate-gray;
-  float: right;
+  // float: right;
 }
 
 .description__form {
   &-textarea {
     margin: 0 0 8px 35px;
-    width: 90%;
+    width: 93%;
+    box-sizing: border-box;
     border: 2px solid rgba(0, 0, 255, 0);
     border-radius: 3px;
     padding: 8px 12px;
