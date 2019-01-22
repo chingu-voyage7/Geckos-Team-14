@@ -6,21 +6,25 @@ import { fstat } from "fs";
 
 export default class Card extends React.Component {
 
-    state = {
-        isModalOpen: false
-    }
+
+    /* MOVED ISMODALOPEN AND TOGGLEMODAL FROM CARD TO LIST FOR THE MODAL DRAGGABLE ISSUE */
+
+    
+    // state = {
+    //     isModalOpen: false
+    // }
     
 
-    toggleModal = () => {
-        const { isModalOpen } = this.state
-        this.setState({
-            isModalOpen: !isModalOpen
-        })
-    }
+    // toggleModal = () => {
+    //     const { isModalOpen } = this.state
+    //     this.setState({
+    //         isModalOpen: !isModalOpen
+    //     })
+    // }
 
     render() {
-        const { isModalOpen } = this.state
-        const { content, editCard, deleteCard, cardId, list, card, addCardDescription } = this.props;
+        // const { isModalOpen } = this.props
+        const { toggleModal, isModalOpen, content, editCard, deleteCard, cardId, list, card, addCardDescription } = this.props;
         return (
             <Fragment>
                 <Draggable draggableId={this.props.cardId} index={this.props.index}>
@@ -30,7 +34,7 @@ export default class Card extends React.Component {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
-                            onClick={this.toggleModal}
+                            onClick={toggleModal}
                         >
                             {provided.placeholder}
                             {content}
@@ -39,7 +43,7 @@ export default class Card extends React.Component {
                     )}
                     
                 </Draggable>
-                <CardModal content={content} deleteCard={deleteCard} cardId={cardId} list={list} card={card} toggleModal={this.toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
+                <CardModal disableInteractiveElementBlocking={true} isDragDisabled={isModalOpen ? false : true} draggableProps={null} dragHandleProps={null} content={content} deleteCard={deleteCard} cardId={cardId} list={list} card={card} toggleModal={toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
             </Fragment>
         )
     }

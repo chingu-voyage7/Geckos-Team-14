@@ -15,7 +15,10 @@
     display: flex;
     justify-content: space-between;
     padding: .8rem;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    margin: 44px 0 0 0;
+    z-index: 3;
     
     
     &--title {
@@ -28,12 +31,11 @@
         font-size: 1.4rem;
         text-decoration: underline;
         padding-right: .8rem;
-        
-        
     }
 
     &-wrapper {
         transition: transform 5s !important;
+        z-index: 2;
     }
     
     

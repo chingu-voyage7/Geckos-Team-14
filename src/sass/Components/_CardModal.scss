@@ -20,6 +20,7 @@
     border-radius: 4px;
     padding: 10px;
   }
+  z-index: 3;
 }
 
 .card-modal__content-title {
@@ -27,6 +28,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  padding: 2px 0 0 0px;
+  font-size: 15px;
   button {
     background: none;
     border: none;
@@ -40,36 +43,67 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+
+  .left-col {
+    width: 75%;
+  } 
 }
 .col {
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
+  align-items: flex-start;
 }
 
 .card-modal__content section {
   padding: 8px;
 }
+.description {
+  width: 100%;
+  margin-left: -8px;
+}
 
 .description p {
   font-size: 14px;
+  margin: 15px 0 0 35px;
+  background-color: $dark-gray;
+  width: 92%;
+  padding: 3px 8px;
+  border-radius: 6px;
+  min-height: 100px;
 }
 .description__title {
-  margin-bottom: 15px;
+  margin-left: 0;
+  margin-bottom: 5px;
+  //padding-left: 10px;
+  font-size: 15px;
+  color: $dark-blue;
+  width: 98%;
 }
 .description__title span {
   font-weight: 400;
+  font-size: 13px;
   text-decoration: underline;
-  margin-left: 5px;
+  padding-top: 2px;
+  margin-left: 10px;
   cursor: pointer;
   color: $slate-gray;
+  float: right;
 }
 
-.description__form-textarea {
-  width: 100%;
-  border: none;
-  border-radius: 3px;
-  padding: 5px 8px;
+.description__form {
+  &-textarea {
+    margin: 0 0 8px 35px;
+    width: 90%;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+  }
+  button {
+    float: right;
+    margin-right: 19px;
+  }
+
 }
 
 .card-modal__content aside {
@@ -77,12 +111,14 @@
   p {
     font-size: 14px;
     text-transform: uppercase;
-    margin: 10px 0;
+    margin: 10px 0 0px 0;
   }
   button {
     background: $gray;
     text-align: left;
-    padding: 10px 8px;
+    width: 95%;
+    height: 30px;
+    padding: 8px;
     margin: 8px 0px;
     border: none;
     border-radius: 3px;
@@ -109,22 +145,31 @@
   border-radius: 3px;
   width: 20%;
   min-width: 110px;
+  // padding-left: 22px;
+  margin-bottom: 10px;
 }
 
 .due-date {
-  
+
   &__title {
+    // padding-left: 5px;
+    margin: 0;
+    font-weight: bold;
     color: $slate-gray;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     text-align: left;
-    font-size: 1.2rem;
+    font-size: 15px;
+    color: $dark-blue;
     margin-bottom: 4px;
   }
 
   &__date {
     background-color: $gray;
     font-size: 1.4rem;
+    width: 100%;
+    border-radius: 3px;
     padding: 4px 8px;
+    margin-left: 35px;
 
     &--overdue {
       color: $gray;
@@ -147,5 +192,11 @@
   }
   aside > button {
     width: 80%;
+  }
+}
+
+.left-side {
+  &-icons {
+    margin: 0 $menu-horizontal;
   }
 }

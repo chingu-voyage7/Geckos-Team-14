@@ -32,7 +32,7 @@
     }
 
     &--input {
-        width: 100%;
+        width: 60%;
         height: 2rem;
         padding: 1.5rem .8rem;
         
@@ -41,7 +41,7 @@
         background-color: #ebeef0;
         border: 1px solid #dfe3e6;
         border-radius: .3rem;
-        margin: .4rem 0 2rem 0;
+        margin: .4rem 0.5rem 2rem 0.5rem;
 
         &:hover {
             border: 1px solid $med-gray;
@@ -60,8 +60,8 @@ label {
 .button-green {
     background-color: $light-green;
     color: white;
-    width: 10rem;
-    height: 3.5rem;
+    width: 7rem;
+    height: 3.1rem;
     border-radius: 3px;
     font-size: 1.4rem;
     font-weight: 700;

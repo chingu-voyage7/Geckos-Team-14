@@ -25,22 +25,9 @@ class App extends Component {
     this.state = {
       styleType: { backgroundImage: `url(${Scene3})` },
       backgroundType: '',
-      cards: {
-        // 'sample': {
-        //   id: 'sample',
-        //   dueDate: '',
-        //   content: 'Sample CheckList',
-        //   checkListItems: [{ item: 'Do Laundry', complete: false }, { item: 'Clean shoes', complete: false }]
-        // }
-      },
-      lists: {
-        // 'test': {
-        //   id: 'test',
-        //   title: 'Testing checklists',
-        //   taskIds: ['sample']
-        // }
-      },
-      listOrder: []//['test']
+      cards: {},
+      lists: {},
+      listOrder: []
     };
   }
 

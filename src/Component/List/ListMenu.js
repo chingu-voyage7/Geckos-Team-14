@@ -25,14 +25,13 @@ class ListMenu extends Component {
   componentDidMount = () => {
     this.setState({ titleName: this.props.title });
   }
-
-
+  
   displayCopyList = () => {
     this.setState({ menuDisplay: 'copyList' });
   }
 
   onCopyTitleChange = (titleName) => {
-    this.setState({ titleName });
+    this.setState({ titleName }); 
   }
 
   render = () => {

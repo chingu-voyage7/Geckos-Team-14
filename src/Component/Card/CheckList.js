@@ -52,8 +52,8 @@ class CheckList extends Component {
                     {!this.state.editingTitle ? 
                     (<h2 
                     className="checklist__title"
-                    onClick={this.toggleCheckListTitle}
-                    >{checkList.title}</h2>) :
+                    // onClick={this.toggleCheckListTitle}
+                    ><i className="fa fa-check-circle left-side-icons"></i>{checkList.title}</h2>) :
                     (<form onSubmit={(e)=> {
                         e.preventDefault();
                         this.handleTitleSubmitForm();
@@ -64,46 +64,56 @@ class CheckList extends Component {
                         onChange={(e)=> {
                             e.preventDefault();
                             this.onChangeTitleForm(e.target.value);
+                            console.log(this.state.checkListTitle);
                         }}
                         />
                     </form>)
                     }
-                    <button className="btn btn--checklist-delete" onClick={deleteCheckList}>X</button>
+                    <button className="btn btn--checklist-edit" onClick={this.toggleCheckListTitle}><i className="fa fa-edit"></i></button>
+                    <button className="btn btn--checklist-delete" onClick={deleteCheckList}><i className="fa fa-trash"></i></button>
                 </div>
-                {progressPct && <div className="progress-bar">
-                    <div class="progress-bar__inner" style={percentageComplete}>{progressPct}</div>
-                </div>}
-                <ul className="checklist__items">
-                    {checkListExists && checkList.tasks.map((checklistItem, index) => <ListItem 
-                            key={index}
-                            index={index}
-                            checklistItem={checklistItem}
-                            item={checklistItem.item}
-                            complete={checklistItem.complete}
-                            onToggleCheckBox={onToggleCheckBox}
-                            editCheckListItem={editCheckListItem}
-                            onDeleteCheckListItem={onDeleteCheckListItem}
-                        />)
+                <div className="checklist-content">
+                    {
+                        // progressPct != 0 && 
+                        <div className="progress-bar">
+                            <div class="progress-bar__inner" style={percentageComplete}>
+                                {progressPct == 0 ? "\xa0" : progressPct}
+                            </div>
+                        </div>
                     }
-                </ul>
-                {!this.state.addingNewItem ? (
-                    <p 
-                    className="add-new-checkList__placeholder"
-                    onClick={this.toggleNewItem}
-                    >Add CheckList Item...</p>
-                ) :
-                (<form 
-                className="add-new-checkList"
-                placeholder="Add CheckList Item..."
-                onSubmit={(e)=>{
-                    e.preventDefault();
-                    this.addNewCheckListItem(e.target.elements.addItem.value);
+                    <ul className="checklist__items">
+                        {checkListExists && checkList.tasks.map((checklistItem, index) => 
+                        <ListItem 
+                                key={index}
+                                index={index}
+                                checklistItem={checklistItem}
+                                item={checklistItem.item}
+                                complete={checklistItem.complete}
+                                onToggleCheckBox={onToggleCheckBox}
+                                editCheckListItem={editCheckListItem}
+                                onDeleteCheckListItem={onDeleteCheckListItem}
+                            />)
+                        }
+                    </ul>
+                    {!this.state.addingNewItem ? (
+                        <p 
+                        className="add-new-checkList__placeholder"
+                        onClick={this.toggleNewItem}
+                        >Add CheckList Item...</p>
+                    ) :
+                    (<form 
+                    className="add-new-checkList"
+                    placeholder="Add CheckList Item..."
+                    onSubmit={(e)=>{
+                        e.preventDefault();
+                        this.addNewCheckListItem(e.target.elements.addItem.value);
+                        }
+                    }>
+                        <input type="text" name="addItem"/>
+                        <button className="btn btn--submit">Add CheckList Item</button>
+                    </form>)
                     }
-                }>
-                    <input type="text" name="addItem"/>
-                    <button className="btn btn--submit">Add CheckList Item</button>
-                </form>)
-                }
+                </div>
             </div>
         );
     }

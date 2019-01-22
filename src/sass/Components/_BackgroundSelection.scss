@@ -16,6 +16,10 @@
         z-index: 3;
         margin-top: .8rem;
         position: absolute;
+        white-space: normal;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
 
         &-show {
             right: 0%;
