@@ -10,7 +10,7 @@ div.SingleDatePicker.SingleDatePicker_1 {
 }
 
 input[type=text].DateInput_input {
-  color: #193345;
+  color: #193345 !important;
 }
 .SingleDatePicker.SingleDatePicker_1 {
   width: 95%;
@@ -25,12 +25,12 @@ input[type=text].DateInput_input {
     border-radius: 0;
     background: none;
     width: 100%;
-    color: #193345;
+    color: #193345 !important;
     font-weight: bold;
 }
 
 .DateInput_input {
-    color: #193345;
+    color: #193345 !important;
     font-weight: bold;
     background: #dcdfe3;
     text-align: left;
