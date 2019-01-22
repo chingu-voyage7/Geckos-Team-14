@@ -21,18 +21,14 @@
     width: 100%;
     padding: 8px 0 0 0;
 
-    button.btn--checklist-delete {
+    .btn--checklist-delete {
         margin-left: 0;
         float: right;
         
-        i {
-            &:hover {
-            background-color: rgba(0, 0, 0, 0);
-            color: $dark-blue;
-            }
-        }
     }
-    
+
+   
+
     .btn--checklist-edit {
         margin-left: auto;
     }
@@ -41,6 +37,7 @@
         font-weight: 400;
         text-decoration: underline;
         font-size: 14px;
+        background: transparent;
         &:hover {
             background-color: rgba(0, 0, 0, 0);
             color: $dark-blue;
@@ -55,6 +52,21 @@
         display: block;
         width: 100%;
         font-family: "Open Sans", sans-serif;
+    }
+}
+
+.btn--checklist-delete {
+    margin-left: 0;
+    float: right;
+    background: transparent;
+    border: 0px;
+    border-radius: .3rem;
+    // background-color: rgba(255, 255, 255, 0);
+    color: white;
+    padding: 1rem;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.064);
     }
 }
 
@@ -78,7 +90,7 @@
     font-size: 1.4rem;
     // width: 100%;
     margin-left: 20px;
-    padding: 6px 0 6px 4px;
+    padding: 0px 0 0px 4px;
 
     &:hover {
         background-color: #70848f30;
