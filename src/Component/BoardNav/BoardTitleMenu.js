@@ -35,7 +35,7 @@ const BoardTitleMenu = ({
             name="name"
             placeholder={placeholder}
           />
-          <button className="button-green">{buttonLabel}</button>
+          <button className="menu-btn button-green">{buttonLabel}</button>
         </form>
       </div>
     </div>
