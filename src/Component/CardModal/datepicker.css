@@ -1,18 +1,40 @@
-.SingleDatePickerInput,
-.DateInput {
+.SingleDatePickerInput__withBorder {
+  border: none;
+}
+
+div.SingleDatePicker.SingleDatePicker_1 {
+  background-color: transparent;
+}
+.SingleDatePickerInput {
+  background-color: transparent;
+}
+
+input[type=text].DateInput_input {
+  color: #193345 !important;
+}
+.SingleDatePicker.SingleDatePicker_1 {
+  width: 95%;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+
+.DateInput.DateInput_1 {
     border: none;
+    border-radius: 0;
     background: none;
     width: 100%;
-    color: #193345;
+    color: #193345 !important;
     font-weight: bold;
 }
 
 .DateInput_input {
-    color: #193345;
+    color: #193345 !important;
     font-weight: bold;
     background: #dcdfe3;
     text-align: left;
-    padding: 10px 8px;
+    padding: 6px 12px;
     margin: 0px 0px;
     border: none;
     border-radius: 3px;
@@ -25,8 +47,3 @@
       background: #ccd2d7;
   }
 
-  @media(min-width: 800px) {
-    .DateInput_input {
-      width: 80%;
-    }
-  }

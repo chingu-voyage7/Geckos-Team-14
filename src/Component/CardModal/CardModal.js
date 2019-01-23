@@ -33,13 +33,13 @@ export default class CardModal extends Component {
     }
     createNewCheckList = () => {
         const newCheckList = {
-            title: "New CheckList",
+            title: "To-Do",
             tasks: []
         }
         const editedCard = {
             ...this.props.card,
-            checkList : newCheckList
-        } 
+            checkList: newCheckList
+        }
         this.props.editCard(this.props.cardId, editedCard);
     }
 
@@ -54,10 +54,10 @@ export default class CardModal extends Component {
     addCheckListItem = (itemToAdd) => {
         if (itemToAdd) {
             const tasks = [...this.props.card.checkList.tasks, itemToAdd];
-            const newCheckList = {...this.props.card.checkList, tasks};
+            const newCheckList = { ...this.props.card.checkList, tasks };
             const editedCard = {
                 ...this.props.card,
-                checkList : newCheckList
+                checkList: newCheckList
             }
             this.props.editCard(this.props.cardId, editedCard);
         }
@@ -76,12 +76,12 @@ export default class CardModal extends Component {
     }
 
     editCheckListItem = (position, editedCheckList) => {
-        const tasks = this.props.card.checkList.tasks.map((checklistItem, index) => (index !== position ? checklistItem : editedCheckList ));
-        
+        const tasks = this.props.card.checkList.tasks.map((checklistItem, index) => (index !== position ? checklistItem : editedCheckList));
+
         const editedCard = {
             ...this.props.card,
-            checkList : {
-                title : this.props.card.checkList.title,
+            checkList: {
+                title: this.props.card.checkList.title,
                 tasks
             }
         }
@@ -95,25 +95,25 @@ export default class CardModal extends Component {
     onDeleteCheckListItem = index => {
         const tasks = this.props.card.checkList.tasks.filter((item, currIndex) => currIndex !== index);
         const editedCard = {
-          ...this.props.card,
-            checkList : {
+            ...this.props.card,
+            checkList: {
                 title: this.props.card.checkList.title,
                 tasks
             }
         }
-        this.props.editCard(this.props.cardId, editedCard); 
+        this.props.editCard(this.props.cardId, editedCard);
     }
 
 
     onToggleCheckBox = index => {
         const toggledCheckListItem = this.props.card.checkList.tasks[index];
-        const editedCheckListItem = {item: toggledCheckListItem.item, complete: !toggledCheckListItem.complete};
-        const tasks = this.props.card.checkList.tasks.map((item, currIndex) =>{
+        const editedCheckListItem = { item: toggledCheckListItem.item, complete: !toggledCheckListItem.complete };
+        const tasks = this.props.card.checkList.tasks.map((item, currIndex) => {
             return (currIndex === index ? editedCheckListItem : item);
         });
         const editedCard = {
             ...this.props.card,
-            checkList : {
+            checkList: {
                 title: this.props.card.checkList.title,
                 tasks
             }
@@ -145,6 +145,7 @@ export default class CardModal extends Component {
     }
 
     render() {
+
         const currentDate = moment();
         const { card, isModalOpen, toggleModal, cardId, list, deleteCard, content } = this.props;
         const { description, isSubmitted, isEdit } = this.state
@@ -152,8 +153,8 @@ export default class CardModal extends Component {
             <div className="card-modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
                 <div className="card-modal__content">
                     <div className="card-modal__content-title modal-elements">
-                        <h4><i className="fa fa-list-ul left-side-icons"></i><span>{card.content}</span></h4>
-                        <button onClick={toggleModal}>x</button>
+                        <h4><i className="far fa-window-maximize left-side-icons"></i><span>{card.content}</span></h4>
+                        <button onClick={toggleModal}><i className="fas fa-times close-modal"></i></button>
                     </div>
                     <div className="row">
                         <div className="left-col">
@@ -167,33 +168,34 @@ export default class CardModal extends Component {
                                     </div>)}
                             </div>
                             {/* <div className="row"> */}
-                                <section className="col double-col">
-                                    <div className="description">
-                                        <h5 className="modal-elements description__title">
-                                        <i className="fa fa-paperclip left-side-icons"></i>
+                            <section className="col double-col">
+                                <div className="description">
+                                    <h5 className="modal-elements description__title">
+                                        <i className="fas fa-align-left left-side-icons"></i>
                                         Description {
                                             // show edit button when isSubmited is false and isEdit is true
-                                            !isSubmitted || isEdit && (<span onClick={this.editDescription}>EDIT</span>)}</h5>
-                                        {// if isSubmitted is false, show form. Else, hide form and show description
-                                            !isSubmitted && <form className="description__form" onSubmit={this.submitDescription}>
-                                                <textarea
-                                                    rows="5"
-                                                    className="description__form-textarea"
-                                                    value={description}
-                                                    onChange={this.handleDescriptionChange}
-                                                ></textarea>
-                                                <button>Add Description</button>
-                                            </form>
-                                        }
-                                        {
-                                            isSubmitted && <p>{description}</p>
-                                        }
-                                    </div>
-                                    {card.checkList && (
-                                    <CheckList 
+                                            !isSubmitted || isEdit && (<span onClick={this.editDescription}>Edit</span>)}</h5>
+                                    {// if isSubmitted is false, show form. Else, hide form and show description
+                                        !isSubmitted && <form className="description__form" onSubmit={this.submitDescription}>
+                                            <textarea
+                                                rows="5"
+                                                className="description__form-textarea"
+                                                value={description}
+                                                placeholder="Add a more detailed description..."
+                                                onChange={this.handleDescriptionChange}
+                                            ></textarea>
+                                            <button>Save</button>
+                                        </form>
+                                    }
+                                    {
+                                        isSubmitted && <p>{description}</p>
+                                    }
+                                </div>
+                                {card.checkList && (
+                                    <CheckList
                                         style={dateStyle}
-                                        checkList={card.checkList} 
-                                        onToggleCheckBox={this.onToggleCheckBox} 
+                                        checkList={card.checkList}
+                                        onToggleCheckBox={this.onToggleCheckBox}
                                         addCheckListItem={this.addCheckListItem}
                                         onDeleteCheckListItem={this.onDeleteCheckListItem}
                                         editCheckListItem={this.editCheckListItem}
@@ -201,35 +203,39 @@ export default class CardModal extends Component {
                                         changeCheckListTitle={this.changeCheckListTitle}
                                     />
                                 )}
-                                </section>
-                            </div>
-                            
-                            <div className="right-col">
-                                <aside className="col">
-                                    <p>add to card</p>
-                                    <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
+                            </section>
+                        </div>
 
-                                    <SingleDatePicker
-                                        placeholder={'Due Date'}
-                                        readOnly={true}
-                                        date={this.state.createdAt}
-                                        onDateChange={this.onDateChange}
-                                        focused={this.state.calendarFocused}
-                                        onFocusChange={this.onCalendarFocusChange}
-                                        hideKeyboardShortcutsPanel={true}
-                                        numberOfMonths={1}
-                                        isOutsideRange={() => false}
-                                    />
-                                    <p>actions</p>
-                                    <button onClick={() => {
-                                        if(window.confirm("Delete " + content + "?")) {
-                                            deleteCard(cardId, list);
-                                        }
+                        <div className="right-col">
+                            <aside className="col">
+                                <p className="modal-aside-title">add to card</p>
+                                <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
+
+
+                                <SingleDatePicker
+
+                                    placeholder={'Due Date'}
+                                    readOnly={true}
+                                    date={this.state.createdAt}
+                                    onDateChange={this.onDateChange}
+                                    focused={this.state.calendarFocused}
+                                    onFocusChange={this.onCalendarFocusChange}
+                                    hideKeyboardShortcutsPanel={true}
+                                    numberOfMonths={1}
+                                    isOutsideRange={() => false}
+                                />
+
+
+                                <p className="modal-aside-title">actions</p>
+                                <button onClick={() => {
+                                    if (window.confirm("Delete " + content + "?")) {
+                                        deleteCard(cardId, list);
                                     }
+                                }
 
-                                    }><i className="fa fa-trash"></i> <span>Delete</span></button>
-                                </aside>
-                            </div>
+                                }><i className="fa fa-trash"></i> <span>Delete</span></button>
+                            </aside>
+                        </div>
                     </div>
                 </div>
             </div>

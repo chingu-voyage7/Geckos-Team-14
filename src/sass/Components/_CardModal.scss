@@ -1,6 +1,6 @@
 .card-modal {
   color: $dark-blue;
-  background: rgba(0,0,0,.7);
+  background: rgba(0, 0, 0, 0.356);
   position: fixed;
   top: 0;
   left: 0;
@@ -9,6 +9,8 @@
   width: 100%;
   height: 100%;
   z-index: 10;
+  overflow: scroll;
+
   &__content {
     background: $menu-gray;
     position: absolute;
@@ -16,11 +18,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
-    height: 85%;
+    min-height: 85%;
     border-radius: 4px;
     padding: 10px;
   }
-  z-index: 3;
+  
 }
 
 .card-modal__content-title {
@@ -29,7 +31,7 @@
   align-items: center;
   margin-bottom: 40px;
   padding: 2px 0 0 0px;
-  font-size: 15px;
+  font-size: 20px;
   button {
     background: none;
     border: none;
@@ -39,6 +41,10 @@
   }
 }
 
+.left-side-icons {
+  font-size: 1.6rem;
+}
+
 .row {
   display: flex;
   width: 100%;
@@ -46,7 +52,13 @@
 
   .left-col {
     width: 75%;
+    
   } 
+
+  .right-col {
+    width: 25%;
+    
+  }
 }
 .col {
   display: flex;
@@ -69,7 +81,7 @@
   background-color: $dark-gray;
   width: 92%;
   padding: 3px 8px;
-  border-radius: 6px;
+  border-radius: 3px;
   min-height: 100px;
 }
 .description__title {
@@ -82,26 +94,35 @@
 }
 .description__title span {
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: underline;
   padding-top: 2px;
   margin-left: 10px;
   cursor: pointer;
   color: $slate-gray;
-  float: right;
+  // float: right;
 }
 
 .description__form {
   &-textarea {
     margin: 0 0 8px 35px;
-    width: 90%;
-    border: none;
+    width: 93%;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 255, 0);
     border-radius: 3px;
-    padding: 5px;
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    color: $slate-gray;
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+
+    &:focus {
+      border: 2px solid #0079bf;
+    }
   }
   button {
-    float: right;
-    margin-right: 19px;
+    // float: right;
+    margin-left: 35px;
   }
 
 }
@@ -109,19 +130,23 @@
 .card-modal__content aside {
   padding: 8px 0;
   p {
-    font-size: 14px;
+    font-size: 1.2rem;
     text-transform: uppercase;
     margin: 10px 0 0px 0;
+    color: $slate-gray;
   }
+
   button {
     background: $gray;
     text-align: left;
     width: 95%;
     height: 30px;
-    padding: 8px;
+    padding: 6px 12px;
     margin: 8px 0px;
     border: none;
     border-radius: 3px;
+    font-size: 1.4rem;
+    
     i {
       margin-right: 8px;
       color: $slate-gray;
@@ -133,6 +158,18 @@
     &:hover {
       background: $dark-gray;
     }
+  }
+}
+
+.close-modal {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 10rem;
+  line-height: 4rem;
+  font-size: 2rem;
+  &:hover {
+    background-color: #70848f30;
+    color: $dark-blue;
   }
 }
 
@@ -198,5 +235,7 @@
 .left-side {
   &-icons {
     margin: 0 $menu-horizontal;
+    color: $slate-gray;
+
   }
 }

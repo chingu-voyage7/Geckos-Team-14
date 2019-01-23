@@ -53,7 +53,7 @@ class CheckList extends Component {
                     (<h2 
                     className="checklist__title"
                     // onClick={this.toggleCheckListTitle}
-                    ><i className="fa fa-check-circle left-side-icons"></i>{checkList.title}</h2>) :
+                    ><i className="far fa-check-square left-side-icons"></i>{checkList.title}</h2>) :
                     (<form onSubmit={(e)=> {
                         e.preventDefault();
                         this.handleTitleSubmitForm();
@@ -69,16 +69,17 @@ class CheckList extends Component {
                         />
                     </form>)
                     }
-                    <button className="btn btn--checklist-edit" onClick={this.toggleCheckListTitle}><i className="fa fa-edit"></i></button>
-                    <button className="btn btn--checklist-delete" onClick={deleteCheckList}><i className="fa fa-trash"></i></button>
+                    <button className="btn btn--checklist-edit" onClick={this.toggleCheckListTitle}>Edit...</button>
+                    <button className="btn btn--checklist-delete" onClick={deleteCheckList}>Delete...</button>
                 </div>
                 <div className="checklist-content">
                     {
                         // progressPct != 0 && 
                         <div className="progress-bar">
-                            <div class="progress-bar__inner" style={percentageComplete}>
-                                {progressPct == 0 ? "\xa0" : progressPct}
+                            <div className="progress-bar__inner" style={percentageComplete}>
+                            <span className="progress-percent-display">{progressPct == 0 ? "\xa0" : progressPct + "%"}</span>
                             </div>
+                            
                         </div>
                     }
                     <ul className="checklist__items">
@@ -99,18 +100,18 @@ class CheckList extends Component {
                         <p 
                         className="add-new-checkList__placeholder"
                         onClick={this.toggleNewItem}
-                        >Add CheckList Item...</p>
+                        >Add an item...</p>
                     ) :
                     (<form 
                     className="add-new-checkList"
-                    placeholder="Add CheckList Item..."
+                    placeholder="Add an item..."
                     onSubmit={(e)=>{
                         e.preventDefault();
                         this.addNewCheckListItem(e.target.elements.addItem.value);
                         }
                     }>
                         <input type="text" name="addItem"/>
-                        <button className="btn btn--submit">Add CheckList Item</button>
+                        <button className="btn btn--submit">Add</button>
                     </form>)
                     }
                 </div>
