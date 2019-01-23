@@ -46,6 +46,9 @@ div.SingleDatePicker.SingleDatePicker_1 {
     color: #193345;
     font-weight: bold;
 }
+.DateInput_input::placeholder { 
+  color: #193345; 
+}
 
 .DateInput_input {
     font-family: 'Open Sans', sans-serif;
