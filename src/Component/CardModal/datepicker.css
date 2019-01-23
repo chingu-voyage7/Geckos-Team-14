@@ -19,6 +19,22 @@ input[type=text].DateInput_input {
   font-size: 1rem;
 }
 
+.DateInput_input {
+  font-weight: 200;
+  font-size: 19px;
+  line-height: 24px;
+  color: #484848;
+  background-color: #fff;
+  width: 100%;
+  padding: 11px 11px 9px;
+  border: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 2px solid transparent;
+  border-left: 0;
+  border-radius: 0
+}
+
 
 .DateInput.DateInput_1 {
     border: none;
@@ -30,7 +46,8 @@ input[type=text].DateInput_input {
 }
 
 .DateInput_input {
-    color: #193345 !important;
+    font-family: 'Open Sans', sans-serif;
+    color: #3dee46 !important;
     font-weight: bold;
     background: #dcdfe3;
     text-align: left;
