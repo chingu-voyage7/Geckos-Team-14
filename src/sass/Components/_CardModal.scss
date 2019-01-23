@@ -149,10 +149,10 @@
     
     i {
       margin-right: 8px;
-      color: $slate-gray;
+      color: #757575;
     }
     span {
-      color: $dark-blue;
+      color: #757575;
       font-weight: bold;
     }
     &:hover {
@@ -215,6 +215,19 @@
   }
 }
 
+.datePicker__wrapper {
+  position:relative;
+}
+
+.datePicker__icon {
+  position:absolute;
+  top: 5px;
+  left: 12px;
+  z-index: 10;
+  font-size: 1.4rem;
+  color: #757575;
+}
+
 
 @media(min-width: 800px) {
   .card-modal__content {
@@ -237,5 +250,30 @@
     margin: 0 $menu-horizontal;
     color: $slate-gray;
 
+  }
+}
+
+@media(max-width: 800px) {
+  .row .right-col {
+    margin-left: 20px;
+    width: 100%;
+  }
+  .row .left-col {
+    width: 100%;
+  }
+
+  .description__form-textarea {
+
+  }
+
+  button {
+    max-width: 215px;
+  }
+}
+
+@media(max-width: 450px) {
+  .description__form-textarea {
+    margin: 0;
+    width: 100%;
   }
 }

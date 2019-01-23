@@ -211,18 +211,22 @@ export default class CardModal extends Component {
                                 <p className="modal-aside-title">add to card</p>
                                 <button onClick={this.createNewCheckList} disabled={card.checkList}><i className="fa fa-check-square"></i> <span>Checklist</span></button>
 
-
-                                <SingleDatePicker
-                                    placeholder={"Due Date"}
-                                    readOnly={true}
-                                    date={this.state.createdAt}
-                                    onDateChange={this.onDateChange}
-                                    focused={this.state.calendarFocused}
-                                    onFocusChange={this.onCalendarFocusChange}
-                                    hideKeyboardShortcutsPanel={true}
-                                    numberOfMonths={1}
-                                    isOutsideRange={() => false}
-                                />
+                                <div className="datePicker__wrapper">
+                                    <div className="datePicker__icon">
+                                        <i className="fa fa-calendar-alt"></i>
+                                    </div>
+                                    <SingleDatePicker
+                                        placeholder={"Due Date"}
+                                        readOnly={true}
+                                        date={this.state.createdAt}
+                                        onDateChange={this.onDateChange}
+                                        focused={this.state.calendarFocused}
+                                        onFocusChange={this.onCalendarFocusChange}
+                                        hideKeyboardShortcutsPanel={true}
+                                        numberOfMonths={1}
+                                        isOutsideRange={() => false}
+                                    />
+                                </div>
 
 
                                 <p className="modal-aside-title">actions</p>
