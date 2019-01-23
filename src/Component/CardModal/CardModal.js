@@ -213,7 +213,7 @@ export default class CardModal extends Component {
 
 
                                 <SingleDatePicker
-                                    placeholder={'Due Date'}
+                                    placeholder={"Due Date"}
                                     readOnly={true}
                                     date={this.state.createdAt}
                                     onDateChange={this.onDateChange}
