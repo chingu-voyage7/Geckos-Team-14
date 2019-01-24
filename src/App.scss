@@ -6,6 +6,19 @@
   background-attachment: fixed;
   background-size: cover;
   height: 100vh;
+  white-space: nowrap;
+  overflow-x: scroll;
+  &-header > .list {
+    white-space: normal;
+  }
+  z-index: 1;
+}
+input {
+  font-family: 'Slabo 27px';
+  font-size: 15px;
+}
+.App-header {
+  padding-top: 100px;
 }
 
 // .App-logo {

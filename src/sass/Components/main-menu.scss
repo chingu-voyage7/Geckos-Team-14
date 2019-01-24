@@ -28,10 +28,10 @@
     width: 340px;
     height: 100vh;
     padding: 0px $menu-horizontal;
-    position: relative;
+    position: fixed;
     color: $dark-blue;
     transition: transform 5s !important;
-
+    z-index: 2;
     &--show {
         right: 0%; 
     }
@@ -96,7 +96,8 @@
     }
 
     &-hide {
-        left: -110%;
+        display: none;
+        //left: -110%;
     }
 }
 

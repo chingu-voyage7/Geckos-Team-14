@@ -146,6 +146,7 @@ class BoardNav extends Component {
     const { showNameMenu, BoardName, inviteMember } = this.state;
     return (
       <div className="board-nav-wrapper">
+        <SimpleStorage parent={this} prefix={"TrelloClone"} />
         <MainMenu
           menuState={false}
           MMisOpen={this.state.MMisOpen}
@@ -158,11 +159,11 @@ class BoardNav extends Component {
           <div className="menu-wrapper">
             <button
               onClick={this.handleShowMenu}
-              className="btn board-nav--title">
+              className="btn-nav board-nav--title">
               {BoardName}
             </button>
             <button
-              className="btn board-star" onClick={this.toggleYellow} style={{ color: `${this.state.starColor}` }}>
+              className="btn-nav board-star" onClick={this.toggleYellow} style={{ color: `${this.state.starColor}` }}>
               <i className="far fa-star"></i>
             </button>
             <span className="divider"></span>
@@ -196,7 +197,7 @@ class BoardNav extends Component {
             </div>
           </div>
 
-          <button className="btn board-nav--menu" onClick={this.toggleCloseButton}><i className="fas fa-ellipsis-h"></i>Show Menu</button>
+          <button className="btn-nav board-nav--menu" onClick={this.toggleCloseButton}><i className="fas fa-ellipsis-h"></i>Show Menu</button>
           {
             showNameMenu && (
               <BoardTitleMenu

@@ -59,7 +59,7 @@ class ListItem extends Component {
                 ) : (
                     <p className="checklist__name" onClick={()=> {this.onClickTextField(item)}}>{item}</p>
                 ))}
-                <button className="btn btn--checklist-delete" onClick={()=>onDeleteCheckListItem(index)}>X</button>
+                <button className="btn btn--checklist-delete" onClick={()=>onDeleteCheckListItem(index)}><i className="fas fa-times close-item"></i></button>
             </li>
         );
     }
