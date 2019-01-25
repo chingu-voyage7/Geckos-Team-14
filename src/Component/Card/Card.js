@@ -34,7 +34,7 @@ export default class Card extends React.Component {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
-                            onClick={toggleModal}
+                            onClick={()=> {toggleModal(this.props.cardId)}}
                         >
                             {provided.placeholder}
                             {content}
@@ -43,7 +43,7 @@ export default class Card extends React.Component {
                     )}
                     
                 </Draggable>
-                <CardModal disableInteractiveElementBlocking={true} isDragDisabled={isModalOpen ? false : true} draggableProps={null} dragHandleProps={null} content={content} deleteCard={deleteCard} cardId={cardId} list={list} card={card} toggleModal={toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
+                <CardModal disableInteractiveElementBlocking={true} isDragDisabled={isModalOpen !== '' ? false : true} draggableProps={null} dragHandleProps={null} content={content} deleteCard={deleteCard} cardId={cardId} list={list} card={card} toggleModal={toggleModal} isModalOpen={isModalOpen} editCard={editCard} addCardDescription={addCardDescription} />
             </Fragment>
         )
     }

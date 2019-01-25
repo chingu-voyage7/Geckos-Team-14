@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import SimpleStorage, { clearStorage } from "react-simple-storage";
+import 'normalize.css';
 import "./App.scss";
 
 // use uuid to generate random id's
