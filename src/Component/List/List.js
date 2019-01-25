@@ -12,14 +12,14 @@ class List extends Component {
     cardVal: "",
     listMenuOpen: false,
     // MOVED ISMODALOPEN FROM CARD TO LIST
-    isModalOpen: false,
+    isModalOpen: '',
   };
   // MOVED TOGGALMODAL FROM CARD TO LIST
-  toggleModal = () => {
-    const { isModalOpen } = this.state
-    this.setState({
-        isModalOpen: !isModalOpen
-    })
+  toggleModal = (cardId) => {
+    this.setState((prevState) =>{
+       return  {
+        isModalOpen: (prevState.isModalOpen === '' ?  cardId : '')
+    }});
   }
   
   UNSAFE_componentWillMount() {
