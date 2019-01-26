@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "395895296f2f8a00d2f9",
-    "url": "/Geckos-Team-14/static/css/main.bade06a7.chunk.css"
+    "revision": "33e89488d9daf4a616c3",
+    "url": "/Geckos-Team-14/static/css/main.87888fc1.chunk.css"
   },
   {
-    "revision": "395895296f2f8a00d2f9",
-    "url": "/Geckos-Team-14/static/js/main.39589529.chunk.js"
+    "revision": "33e89488d9daf4a616c3",
+    "url": "/Geckos-Team-14/static/js/main.33e89488.chunk.js"
   },
   {
-    "revision": "02926d1dbcfec3473370",
-    "url": "/Geckos-Team-14/static/css/1.7cb7a7dc.chunk.css"
+    "revision": "f7b76ffcfcb8c73732cb",
+    "url": "/Geckos-Team-14/static/css/1.40cd518b.chunk.css"
   },
   {
-    "revision": "02926d1dbcfec3473370",
-    "url": "/Geckos-Team-14/static/js/1.02926d1d.chunk.js"
+    "revision": "f7b76ffcfcb8c73732cb",
+    "url": "/Geckos-Team-14/static/js/1.f7b76ffc.chunk.js"
   },
   {
     "revision": "d59c64a73f93cd0b415e",
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/Geckos-Team-14/static/media/sunset.de0fc6d3.jpg"
   },
   {
-    "revision": "9e6814a1151d5e2d04bf0fd8f3c51c88",
+    "revision": "68aabb87ff5d49c1247203d13b7fbfca",
     "url": "/Geckos-Team-14/index.html"
   }
 ];
