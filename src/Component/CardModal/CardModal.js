@@ -150,7 +150,7 @@ export default class CardModal extends Component {
         const { card, isModalOpen, toggleModal, cardId, list, deleteCard, content } = this.props;
         const { description, isSubmitted, isEdit } = this.state
         return (
-            <div className="card-modal" style={{ display: isModalOpen ? 'block' : 'none' }}>
+            <div className="card-modal" style={{ display: isModalOpen === cardId ? 'block' : 'none' }}>
                 <div className="card-modal__content">
                     <div className="card-modal__content-title modal-elements">
                         <h4><i className="far fa-window-maximize left-side-icons"></i><span>{card.content}</span></h4>

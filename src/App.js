@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import SimpleStorage, { clearStorage } from "react-simple-storage";
+import 'normalize.css';
 import "./App.scss";
 
 // use uuid to generate random id's
@@ -25,9 +26,17 @@ class App extends Component {
     this.state = {
       styleType: { backgroundImage: `url(${Scene3})` },
       backgroundType: '',
-      cards: {},
-      lists: {},
-      listOrder: []
+      cards: {'sample_card': {
+        id: 'sample_card',
+        content: 'Sample Card'
+      }},
+      lists: {'sample_list':{
+        id: 'sample_list',
+        title: "Sample List",
+        taskIds: ['sample_card']
+        }
+      },
+      listOrder: ['sample_list']
     };
   }
 
@@ -342,7 +351,7 @@ class App extends Component {
     const { lists, cards, listOrder, styleType } = this.state;
     return (
       <div className="App" style={styleType}>
-        <SimpleStorage parent={this} prefix={"TrelloClone"} />
+        <SimpleStorage parent={this} prefix={"Geckos14_Trello_Clone"} />
         <TrelloNav />
         <BoardNav
           handleBackgroundChange={this.handleBackgroundChange}
