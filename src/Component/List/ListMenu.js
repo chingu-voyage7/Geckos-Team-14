@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { copyList, deleteList } from "../../actions/listActions";
 
 class ListMenu extends Component {
-
   state = {
-    menuDisplay: 'default',
-    titleName: ''
-  }
+    menuDisplay: "default",
+    titleName: ""
+  };
 
   UNSAFE_componentWillMount() {
     document.addEventListener("mousedown", this.handleToggleListMenu, false);
@@ -20,38 +21,46 @@ class ListMenu extends Component {
       return;
     }
     this.props.toggleListMenu();
-  }
+  };
 
   componentDidMount = () => {
     this.setState({ titleName: this.props.title });
-  }
-  
-  displayCopyList = () => {
-    this.setState({ menuDisplay: 'copyList' });
-  }
+  };
 
-  onCopyTitleChange = (titleName) => {
-    this.setState({ titleName }); 
-  }
+  displayCopyList = () => {
+    this.setState({ menuDisplay: "copyList" });
+  };
+
+  onCopyTitleChange = titleName => {
+    this.setState({ titleName });
+  };
 
   render = () => {
-    const { toggleListMenu, deleteList, listId } = this.props
+    const { toggleListMenu, deleteList, listId } = this.props;
 
     switch (this.state.menuDisplay) {
-      case 'copyList':
+      case "copyList":
         return (
-          <div className="list-menu" ref={node => this.node = node}>
+          <div className="list-menu" ref={node => (this.node = node)}>
             <header className="list-menu__header">
               <p className="list-menu__header-title">Copy List</p>
-              <button onClick={toggleListMenu} className="list-menu__header-close-btn"><i className="fas fa-times"></i></button>
+              <button
+                onClick={toggleListMenu}
+                className="list-menu__header-close-btn"
+              >
+                <i className="fas fa-times"></i>
+              </button>
             </header>
             <section className="action-list">
               <h4 className="copy-list__title">Name</h4>
               <div className="copy-menu__title-input">
                 <textarea
-                  onChange={(e) => { this.onCopyTitleChange(e.target.value) }}
+                  onChange={e => {
+                    this.onCopyTitleChange(e.target.value);
+                  }}
                   className="title-input__text"
-                  value={this.state.titleName} />
+                  value={this.state.titleName}
+                />
               </div>
               <button
                 onClick={() => {
@@ -59,34 +68,46 @@ class ListMenu extends Component {
                   this.props.copyList(listId, title);
                   toggleListMenu();
                 }}
-                className="btn--menu btn--submit btn--copy-memu">
+                className="btn--menu btn--submit btn--copy-memu"
+              >
                 Create List
-                </button>
+              </button>
             </section>
           </div>
-        )
+        );
         break;
       default:
         return (
-          <div className="list-menu" ref={node => this.node = node}>
+          <div className="list-menu" ref={node => (this.node = node)}>
             <header className="list-menu__header">
               <p className="list-menu__header-title">List Actions</p>
-              <button onClick={toggleListMenu} className="list-menu__header-close-btn"><i className="fas fa-times"></i></button>
+              <button
+                onClick={toggleListMenu}
+                className="list-menu__header-close-btn"
+              >
+                <i className="fas fa-times"></i>
+              </button>
             </header>
             <section className="action-list">
-              <button className="action-list__btn"
+              <button
+                className="action-list__btn"
                 onClick={this.displayCopyList}
-              >Copy List...</button>
-              <button className="action-list__btn"
+              >
+                Copy List...
+              </button>
+              <button
+                className="action-list__btn"
                 onClick={() => {
                   deleteList(listId);
                 }}
-              >Delete List...</button>
+              >
+                Delete List...
+              </button>
             </section>
           </div>
-        )
+        );
     }
-  }
+  };
 }
 
-export default ListMenu
+export default connect(null, { copyList, deleteList })(ListMenu);

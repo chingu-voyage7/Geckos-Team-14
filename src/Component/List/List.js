@@ -4,6 +4,10 @@ import CardForm from "../Card/CardForm";
 import Card from "../Card/Card";
 import ListMenu from "./ListMenu";
 
+import { connect } from "react-redux";
+import { deleteList, handleListTitleChange } from "../../actions/listActions";
+import { addCard } from "../../actions/cardActions";
+
 class List extends Component {
   state = {
     isEdit: false,
@@ -11,17 +15,17 @@ class List extends Component {
     showCardForm: false,
     cardVal: "",
     listMenuOpen: false,
-    // MOVED ISMODALOPEN FROM CARD TO LIST
-    isModalOpen: '',
+    isModalOpen: ""
   };
-  // MOVED TOGGALMODAL FROM CARD TO LIST
-  toggleModal = (cardId) => {
-    this.setState((prevState) =>{
-       return  {
-        isModalOpen: (prevState.isModalOpen === '' ?  cardId : '')
-    }});
-  }
-  
+
+  toggleModal = cardId => {
+    this.setState(prevState => {
+      return {
+        isModalOpen: prevState.isModalOpen === "" ? cardId : ""
+      };
+    });
+  };
+
   UNSAFE_componentWillMount() {
     document.addEventListener("mousedown", this.handleSaveTitle, false);
   }
@@ -35,23 +39,29 @@ class List extends Component {
       return;
     }
     // if empty, list will be deleted when user clicks outside out if
-    if (!this.props.list.title) {
-      this.props.deleteList(this.props.list.id)
+    if (!this.props.list.title && !this.props.list.taskIds.length) {
+      this.props.deleteList(this.props.list.id);
+    } else if (!this.props.list.title) {
+      alert("List title cannot be empty");
+      this.setState({
+        isEdit: true,
+        isSubmitted: false
+      });
     } else {
       this.setState({
         isEdit: false,
         isSubmitted: true
-      })
+      });
     }
-  }
-  componentDidMount = (prevProps) => {
+  };
+
+  componentDidMount = prevProps => {
     if (prevProps !== this.props) {
       if (!this.props.isSubmitted) {
-        console.log("setting List Form Up");
         this.setState({ isSubmitted: false });
       }
     }
-  }
+  };
 
   toggleTitleForm = () => {
     const { isEdit } = this.state;
@@ -64,7 +74,7 @@ class List extends Component {
     e.preventDefault();
     // if empty alert user
     if (!this.props.list.title) {
-      alert("List cannot be blank");
+      alert("List title cannot be blank");
     }
     // else set isEdit to false
     else {
@@ -103,87 +113,80 @@ class List extends Component {
     }
     this.setState({
       showCardForm: !this.state.showCardForm
-    })
+    });
   };
 
   toggleListMenu = () => {
     this.setState({
       listMenuOpen: !this.state.listMenuOpen
-    })
-  }
-
-
-  // WILL USE FUNCTION INSIDE OF MODAL TO DELETE CARD
-  // deleteCard = id => {
-  //   const filteredCards = this.state.cards.filter(card => card.id !== id);
-  //   this.setState({
-  //     cards: filteredCards
-  //   });
-  // };
+    });
+  };
 
   render() {
-    const { isEdit, isSubmitted, showCardForm, cardVal, listMenuOpen, isModalOpen } = this.state;
+    const {
+      isEdit,
+      isSubmitted,
+      showCardForm,
+      cardVal,
+      listMenuOpen,
+      isModalOpen
+    } = this.state;
     const { id, title } = this.props.list;
-    const { handleTitleChange, cardList, addCardDescription } = this.props;
+    const { cardList } = this.props;
     return (
       <Draggable
         draggableId={this.props.listId}
         index={this.props.index}
         isDragDisabled={isModalOpen}
       >
-        {(provided) => (
+        {provided => (
           <div
             className="list"
             {...provided.draggableProps}
             ref={provided.innerRef}
             {...provided.dragHandleProps}
           >
-            <div className="list--title" ref={node => this.node = node}>
+            <div className="list--title" ref={node => (this.node = node)}>
               {// if form has not been submitted, show form. Also, show form if isEdit is true
-                !isSubmitted || isEdit ? (
-                  <form
-                    onSubmit={this.saveListTitle}
-                    className="list--form" >
-                    <input
-                      type="text"
-                      className="list--form-input"
-                      autoFocus={true}
-                      value={title}
-                      onChange={e => handleTitleChange(id, e.target.value)}
+              !isSubmitted || isEdit ? (
+                <form onSubmit={this.saveListTitle} className="list--form">
+                  <input
+                    type="text"
+                    className="list--form-input"
+                    autoFocus={true}
+                    value={title}
+                    onChange={e =>
+                      this.props.handleListTitleChange(id, e.target.value)
+                    }
+                  />
+                  {// if editing list title, no need to show "Add List" button
+                  !isEdit && <button>Add List</button>}
+                  {isEdit && <button>Edit List</button>}
+                </form>
+              ) : (
+                <Fragment>
+                  <h3 onClick={this.toggleTitleForm}>{title}</h3>
+                  <button
+                    className="open-list-menu-btn"
+                    onClick={this.toggleListMenu}
+                  >
+                    <i className="fas fa-ellipsis-h fa-sm"></i>
+                  </button>
+                  {listMenuOpen && (
+                    <ListMenu
+                      toggleListMenu={this.toggleListMenu}
+                      listId={id}
+                      title={title}
                     />
-                    {// if editing list title, no need to show "Add List" button
-                      !isEdit && <button>Add List</button>}
-                    {
-                      isEdit && <button>Edit List</button>}
-                  </form>
-                ) : (
-                    <Fragment>
-                      <h3 onClick={this.toggleTitleForm}>{title}</h3>
-                      <button className="open-list-menu-btn" onClick={this.toggleListMenu}><i className="fas fa-ellipsis-h fa-sm"></i></button>
-                      {
-                        listMenuOpen &&
-                        <ListMenu
-
-                          toggleListMenu={this.toggleListMenu}
-                          copyList={this.props.copyList}
-                          deleteList={this.props.deleteList}
-                          listId={id}
-                          title={title}
-                        />
-                      }
-
-                    </Fragment>
                   )}
+                </Fragment>
+              )}
             </div>
             {provided.placeholder}
 
             {
-              <Droppable
-                droppableId={this.props.listId}
-                type="task"
-              >
-
-                {(provided) => (
+              <Droppable droppableId={this.props.listId} type="task">
+                {provided => (
                   <ul
                     className="card-list"
                     ref={provided.innerRef}
@@ -197,10 +200,8 @@ class List extends Component {
                         content={card.content}
                         index={index}
                         card={card}
-                        deleteCard={this.props.deleteCard}
                         list={this.props.list}
                         editCard={this.props.editCard}
-                        addCardDescription={addCardDescription}
                         toggleModal={this.toggleModal}
                         isModalOpen={this.state.isModalOpen}
                       >
@@ -214,39 +215,28 @@ class List extends Component {
             }
 
             {// if showCardForm is true, show form
-              showCardForm && (
-                <CardForm
-                  cardVal={cardVal}
-                  handleCardValChange={this.handleCardValChange}
-                  addToCard={this.addToCard}
-                  toggleCardForm={this.toggleCardForm}
-                />
-              )}
+            showCardForm && (
+              <CardForm
+                cardVal={cardVal}
+                handleCardValChange={this.handleCardValChange}
+                addToCard={this.addToCard}
+                toggleCardForm={this.toggleCardForm}
+              />
+            )}
 
             {// if isSubmitted is true, user can click "Add a card" to toggle form
-              isSubmitted && !showCardForm && (
-                <p className="add-card-btn" onClick={this.toggleCardForm}>
-                  + <span>Add a card...</span>
-                </p>
-              )}
-            {/* <button
-              className="btn btn--delete-list"
-              onClick={e => {
-                e.preventDefault();
-                if(window.confirm('Are you sure you want to delete ' + title + '?')) {
-                  alert("List " + title + " deleted.");
-                  this.props.deleteList(id);
-                } else {}
-                // this.props.deleteList(id);
-              }}
-            >
-              Delete List
-        </button> */}
-          </div>)}
-
+            isSubmitted && !showCardForm && (
+              <p className="add-card-btn" onClick={this.toggleCardForm}>
+                + <span>Add a card...</span>
+              </p>
+            )}
+          </div>
+        )}
       </Draggable>
     );
   }
 }
 
-export default List;
+export default connect(null, { deleteList, handleListTitleChange, addCard })(
+  List
+);
